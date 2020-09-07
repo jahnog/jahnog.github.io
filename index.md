@@ -1,6 +1,6 @@
 # Some of my work
 
-## Art Style transfer using different neural networks
+## Art Style transfer using different neural networks (A comparison between models)
 
 * [Towards Data Science publication](https://towardsdatascience.com/art-style-transfer-using-neural-networks-a28f5888746b)
 * [Art Copy & Paste sample web site](https://artcopypaste.com/)
@@ -9,7 +9,7 @@
 
 An Economic Performance comparison between Argentine Government Administrations using World Bank Development Indicators dataset.
 
-[Google Colaboratory](https://colab.research.google.com/github/jahnog/still-passing-the-buck/blob/master/Still_Passing_the_Buck.ipynb)
+[Google Colaboratory Notebook](https://colab.research.google.com/github/jahnog/still-passing-the-buck/blob/master/Still_Passing_the_Buck.ipynb)
 
 ## Global Warming analysis
 
