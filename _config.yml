@@ -19,8 +19,8 @@ locale                   : "en-US"
 title                    : "Some of my works"
 title_separator          : "-"
 subtitle                 : # site tagline that appears below site title in masthead
-name                     : "Javier"
-description              : "An amazing website."
+name                     : "Javier's github Page"
+description              : "Some of my works."
 url                      : "https://jahnog.github.io/" # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : jahnog/jahnog.gihub.io # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
@@ -85,7 +85,7 @@ social:
 
 # Analytics
 analytics:
-  provider               : "google-tag" # false (default), "google", "google-universal", "google-gtag", "custom"
+  provider               : "google-gtag" # false (default), "google", "google-universal", "google-gtag", "custom"
   google:
     tracking_id          : "G-C6611CGT5F"
     anonymize_ip         : # true, false (default)

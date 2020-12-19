@@ -1,5 +1,6 @@
 ---
 title:  "Install Tensorflow on 32 bits Linux"
+related_image: /assets/images/tensorflow.jpg
 ---
 ## Install Tensorflow on 32 bits Linux
 
