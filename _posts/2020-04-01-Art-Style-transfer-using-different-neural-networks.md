@@ -1,4 +1,9 @@
 ## Art Style transfer using different neural networks (A comparison between models)
 
+Art Style Transfer consists in the transformation of an image into a similar one that seems to have been painted by an artist.
+If we are Vincent van Gogh fans, and we love German Shepherds, we may like to get a picture of our favorite dog painted in van Gogh’s Starry Night fashion.
+
+![Art Styles](/assets/images/art.jpg)
+
 * [Towards Data Science publication](https://towardsdatascience.com/art-style-transfer-using-neural-networks-a28f5888746b)
-* [Art Copy & Paste sample web site](https://artcopypaste.com/)
+* [Art Copy & Paste sample web site to convert your photos](https://artcopypaste.com/)

@@ -1,5 +1,10 @@
+---
+title:  "Install Tensorflow on 32 bits Linux"
+---
 ## Install Tensorflow on 32 bits Linux
 
-Instructions to build and install
+![Tensorflow](/assets/images/tensorflow.jpg)
+
+Instructions to build and install Tensorflow in a 32 bits linux system, maybe just for fun.
 
 [Build & Install instructions](https://github.com/jahnog/tensorflow-32-bits-linux)

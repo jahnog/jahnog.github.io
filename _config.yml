@@ -19,7 +19,7 @@ locale                   : "en-US"
 title                    : "Some of my works"
 title_separator          : "-"
 subtitle                 : # site tagline that appears below site title in masthead
-name                     : "JahNog"
+name                     : "Javier"
 description              : "An amazing website."
 url                      : "https://jahnog.github.io/" # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
@@ -85,17 +85,17 @@ social:
 
 # Analytics
 analytics:
-  provider               : false # false (default), "google", "google-universal", "google-gtag", "custom"
+  provider               : "google-tag" # false (default), "google", "google-universal", "google-gtag", "custom"
   google:
-    tracking_id          :
+    tracking_id          : "G-C6611CGT5F"
     anonymize_ip         : # true, false (default)
 
 
 # Site Author
 author:
-  name             : "JahNog"
-  avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "Software Engineer" # "I am an **amazing** person."
+  name             : "Javier"
+  avatar           : /assets/images/the_scream_98x98.jpg # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
+  bio              : "Software engineer, deep learning enthusiast, entrepreneur, angel investor, amateur runner and cyclist and avid reader: www.linkedin.com/in/jntech/" # "I am an **amazing** person."
   location         : # "Somewhere"
   email            :
   links:
