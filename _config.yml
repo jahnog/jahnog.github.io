@@ -95,7 +95,7 @@ analytics:
 author:
   name             : "Javier"
   avatar           : /assets/images/the_scream_98x98.jpg # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "Software engineer, deep learning enthusiast, entrepreneur, angel investor, amateur runner and cyclist and avid reader: www.linkedin.com/in/jntech/" # "I am an **amazing** person."
+  bio              : "Software engineer, deep learning enthusiast, entrepreneur, angel investor, amateur runner and cyclist and avid reader." # "I am an **amazing** person."
   location         : # "Somewhere"
   email            :
   links:
@@ -117,6 +117,9 @@ author:
     - label: "Instagram"
       icon: "fab fa-fw fa-instagram"
       # url: "https://instagram.com/"
+    - label: "Linkedin"
+      icon: "fab fa-fw fa-linkedin"
+      url: "https://www.linkedin.com/in/jntech/"
 
 # Site Footer
 footer:
