@@ -16,11 +16,11 @@ minimal_mistakes_skin    : "dark" # "default" # "air", "aqua", "contrast", "dark
 
 # Site Settings
 locale                   : "en-US"
-title                    : "Some of my works"
+title                    : "Some of my personal works"
 title_separator          : "-"
 subtitle                 : # site tagline that appears below site title in masthead
 name                     : "Javier's github Page"
-description              : "Some of my works."
+description              : "Some of my personal works."
 url                      : "https://jahnog.github.io/" # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : jahnog/jahnog.gihub.io # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
@@ -88,7 +88,7 @@ analytics:
   #provider              : "google-gtag" # false (default), "google", "google-universal", "google-gtag", "custom"
   provider               : "custom" # false (default), "google", "google-universal", "google-gtag", "custom"
   google:
-    tracking_id          : "G-C6611CGT5F"
+    tracking_id          : #
     anonymize_ip         : # true, false (default)
 
 
