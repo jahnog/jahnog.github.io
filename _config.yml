@@ -91,12 +91,11 @@ analytics:
     tracking_id          : #
     anonymize_ip         : # true, false (default)
 
-
 # Site Author
 author:
   name             : "Javier"
   avatar           : /assets/images/the_scream_98x98.jpg # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "Software engineer, deep learning enthusiast, entrepreneur, angel investor, amateur runner and cyclist and avid reader." # "I am an **amazing** person."
+  bio              : "Software engineer, deep learning enthusiast, entrepreneur, investor, amateur runner and avid reader." # "I am an **amazing** person."
   location         : # "Somewhere"
   email            :
   links:
