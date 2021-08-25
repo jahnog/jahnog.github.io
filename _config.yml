@@ -93,9 +93,9 @@ analytics:
 
 # Site Author
 author:
-  name             : "Javier"
-  avatar           : /assets/images/the_scream_98x98.jpg # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "Software engineer, deep learning enthusiast, entrepreneur, investor, amateur runner and avid reader." # "I am an **amazing** person."
+  name             : "jahnog.github.io"
+  avatar           : /assets/images/the_scream_98x98.jpg # path of avatar image, e.g. "/assets/images/bio-photo.jpg" entrepreneur, investor,
+  bio              : "Software engineer, deep learning enthusiast, amateur runner and avid reader." # "I am an **amazing** person."
   location         : # "Somewhere"
   email            :
   links:
