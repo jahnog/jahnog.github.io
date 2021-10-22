@@ -16,4 +16,4 @@ The network also has one ore more Final Neurons that will take signals from prev
 
 #### You can read the rest of the article in the following Publication:
 
-* [Towards Data Science Publication](https://towardsdatascience.com/artificial-intelligence-beginnings-6f8937acdc6a?sk=9c5aa88dbc1ea081ef2c087e877ce00b)
+* [Towards Data Science Publication](https://towardsdatascience.com/artificial-intelligence-beginnings-6f8937acdc6a)
