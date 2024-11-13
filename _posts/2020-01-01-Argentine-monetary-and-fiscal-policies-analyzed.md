@@ -4,4 +4,4 @@ An Economic Performance comparison between Argentine Government Administrations 
 
 ![Presidents](/assets/images/presidents.jpg)
 
-[Google Colaboratory Notebook](https://colab.research.google.com/github/jahnog/still-passing-the-buck/blob/master/Still_Passing_the_Buck.ipynb)
+[Google Colaboratory Notebook](https://colab.research.google.com/drive/1aeUlzTORNi--JA1ei06VnQqccClo2JOK#scrollTo=ieEOuHcFpJ8f)
