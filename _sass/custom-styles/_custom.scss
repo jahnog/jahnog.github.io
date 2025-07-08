@@ -1,0 +1,53 @@
+/* Custom styles for the website */
+
+/* Centered image class */
+.centered-image {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Alternative centered image class with optional margin */
+.image-center {
+  display: block;
+  margin: 1rem auto;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Centered image with caption */
+.centered-figure {
+  text-align: center;
+  margin: 1rem auto;
+  
+  img {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    height: auto;
+  }
+  
+  figcaption {
+    font-style: italic;
+    font-size: 0.9em;
+    color: #666;
+    margin-top: 0.5rem;
+  }
+}
+
+/* Responsive centered image for different screen sizes */
+.responsive-centered-image {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
+  
+  @media (max-width: 768px) {
+    max-width: 95%;
+  }
+  
+  @media (max-width: 480px) {
+    max-width: 90%;
+  }
+}

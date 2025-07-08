@@ -12,9 +12,9 @@ The Network
 
 A Neural Network is one of the most commonly used computational models to apply Artificial Intelligence to real-world problems. It consists of sets of units, called neurons, connected to each other to transmit and process signals.
 
-![](https://miro.medium.com/v2/resize:fit:1050/1*jUydtMleiUS-6uQzVuttKw.png)
+![](https://miro.medium.com/v2/resize:fit:1050/1*jUydtMleiUS-6uQzVuttKw.png){: .centered-image}
 
-[Image by H3llkn0wz](https://es.wikipedia.org/wiki/Archivo:MultiLayerNeuralNetworkBigger_english.png) / [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/deed.es)
+[Image by H3llkn0wz](https://es.wikipedia.org/wiki/Archivo:MultiLayerNeuralNetworkBigger_english.png){: .centered-image} / [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/deed.es)
 
 Each neuron is connected to others by links. Through them, they receive information, evaluate it, and spread the outcome of that evaluation, which can be either a signal to highlight a feature or to attenuate it.
 
@@ -33,7 +33,7 @@ Finally, we will have an output layer, which will obtain the last hidden layer r
 
 The following image is an example of the connections between the neurons of the different layers:
 
-![](https://miro.medium.com/v2/resize:fit:1050/1*4fWb9Yg6AdrX24rIcGjGXg.jpeg)
+![](https://miro.medium.com/v2/resize:fit:1050/1*4fWb9Yg6AdrX24rIcGjGXg.jpeg){: .centered-image}
 
 Copyright 2021 Tensorflow: Usage authorized under [Apache License 2.0](https://github.com/tensorflow/playground/blob/master/LICENSE)
 
@@ -44,7 +44,7 @@ Each layer will be formed by several neurons, except the last layer, the output 
 
 Each of the network’s neurons will be represented by the following formula:
 
-![](https://miro.medium.com/v2/resize:fit:315/1*SrXim1paHol-DY55Rmhi2Q.jpeg)
+![](https://miro.medium.com/v2/resize:fit:315/1*SrXim1paHol-DY55Rmhi2Q.jpeg){: .centered-image}
 
 Image by author
 
@@ -54,9 +54,9 @@ Where **_X_** is a vector (one-dimensional matrix) with the information coming f
 
 **_b_** is a value that will apply an offset (BIAS) to the result and will also be optimized.
 
-![](https://miro.medium.com/v2/resize:fit:1050/1*QN7Ai6Iipsf8aPWLrLyd0Q.gif)
+![](https://miro.medium.com/v2/resize:fit:1050/1*QN7Ai6Iipsf8aPWLrLyd0Q.gif){: .centered-image}
 
-Image from: [_www.MLinGIFS.aqeel-anwar.com_](http://www.google.com/url?q=http%3A%2F%2Fwww.MLinGIFS.aqeel-anwar.com&sa=D&sntz=1&usg=AFQjCNFcazsCiM9CNyGnCkBq6cjLHCIpFQ) Author: [Aqeel Anwar](http://www.google.com/url?q=http%3A%2F%2Fwww.aqeel-anwar.com&sa=D&sntz=1&usg=AFQjCNHLwgfMupBQNoyk__gtpMtrJdmJLw) Usage authorized
+Image from: [_www.MLinGIFS.aqeel-anwar.com_](http://www.google.com/url?q=http%3A%2F%2Fwww.MLinGIFS.aqeel-anwar.com&sa=D&sntz=1&usg=AFQjCNFcazsCiM9CNyGnCkBq6cjLHCIpFQ){: .centered-image} Author: [Aqeel Anwar](http://www.google.com/url?q=http%3A%2F%2Fwww.aqeel-anwar.com&sa=D&sntz=1&usg=AFQjCNHLwgfMupBQNoyk__gtpMtrJdmJLw) Usage authorized
 
 Non-linear Activation
 ---------------------
@@ -65,13 +65,13 @@ The latter function is a linear one. If all the neurons were linear functions, t
 
 To solve this, a non-linear component is added to each neuron, called the activation function. In our case, we will use a commonly used activation function called ReLU (from Rectified Linear Unit), which is nothing more than:
 
-![](https://miro.medium.com/v2/resize:fit:515/1*7HmkKzlcMnL-nNqUoJFJZw.jpeg)
+![](https://miro.medium.com/v2/resize:fit:515/1*7HmkKzlcMnL-nNqUoJFJZw.jpeg){: .centered-image}
 
 Image by author
 
 So the complete formula of each neuron, except for that of the output layer, will be:
 
-![](https://miro.medium.com/v2/resize:fit:459/1*dgZSbHjW44uiWzrma4RALQ.jpeg)
+![](https://miro.medium.com/v2/resize:fit:459/1*dgZSbHjW44uiWzrma4RALQ.jpeg){: .centered-image}
 
 Image by author
 
@@ -82,7 +82,7 @@ As the goal is to predict a value (regression), instead of detecting or classify
 
 The formula of this neuron will be just:
 
-![](https://miro.medium.com/v2/resize:fit:336/1*acpRL-q7Lvqdcr9uNSPT7Q.jpeg)
+![](https://miro.medium.com/v2/resize:fit:336/1*acpRL-q7Lvqdcr9uNSPT7Q.jpeg){: .centered-image}
 
 Image by author
 
@@ -105,15 +105,15 @@ Then, repeat the following steps several times (we will call each iteration of t
 3.  Calculate the error (or difference) between the estimated value of the network and the car real value which we will call **_J(W, b)_** and will represent the Mean Squared Error in our example.
 4.  From the back to the beginning (a process called backward propagation), using the difference obtained, we will calculate the derivatives for the weights **_W_** and the offset **_b_** using the following formulas:
 
-![](https://miro.medium.com/v2/resize:fit:441/1*Nbm_BIFO4Rpnqov1gEybug.jpeg)
+![](https://miro.medium.com/v2/resize:fit:441/1*Nbm_BIFO4Rpnqov1gEybug.jpeg){: .centered-image}
 
 Image by author
 
-![](https://miro.medium.com/v2/resize:fit:1050/1*ejK6xybDkCTrS4ANO-f_iA.png)
+![](https://miro.medium.com/v2/resize:fit:1050/1*ejK6xybDkCTrS4ANO-f_iA.png){: .centered-image}
 
 5\. With the derivatives, we proceed to modify the weights to bring them closer to the point where the difference reaches a minimum. For this, we multiply the derivative by an **_α_** value (called Learning Rate) and we will subtract it to the corresponding weights:
 
-![](https://miro.medium.com/v2/resize:fit:462/1*sNLP1LeOBtleJTdPQ3N59Q.jpeg)
+![](https://miro.medium.com/v2/resize:fit:462/1*sNLP1LeOBtleJTdPQ3N59Q.jpeg){: .centered-image}
 
 Image by author
 
@@ -131,35 +131,35 @@ The Model
 
 We will define the structure (number of neurons in the first and second hidden layers) and create the model of our Neural Network:
 
-{% gist afe1847b57524d574b7e1be399cc802a %}
+{% gist afe1847b57524d574b7e1be399cc802a %}{: .centered-image}
 
 The forward propagation function
 --------------------------------
 
 It computes the network predictions
 
-{% gist 0b72d26ef661c547fa754b7a57d0865a %}
+{% gist 0b72d26ef661c547fa754b7a57d0865a %}{: .centered-image}
 
 The cost function
 -----------------
 
 It measures the difference between the network estimation and the real values:
 
-{% gist 5effe673c628f8cf1df98a03c6490ee2 %}
+{% gist 5effe673c628f8cf1df98a03c6490ee2 %}{: .centered-image}
 
 The backward propagation function
 ---------------------------------
 
 It calculates the derivatives of the network functions
 
-{% gist e1fdb6da53cbecda69c0e257de47325d %}
+{% gist e1fdb6da53cbecda69c0e257de47325d %}{: .centered-image}
 
 The update weights function
 ---------------------------
 
 It allows our network to get closer to the expected result
 
-{% gist 07702ddc5806226d75f990fbe701cde8 %}
+{% gist 07702ddc5806226d75f990fbe701cde8 %}{: .centered-image}
 
 The Data
 --------
@@ -168,11 +168,11 @@ With the model defined, now we will train the Neural Network with the classic [A
 
 It’s not the objective of this article to go into detail on how to pre-process the data to be fed in the Network. We will just say that the dataset is normalized and split in two, a training set used for the network optimization and a test set used to validate the trained network:
 
-{% gist 660ef8b993bb27e031cd6ec822fc0561 %}
+{% gist 660ef8b993bb27e031cd6ec822fc0561 %}{: .centered-image}
 
 And finally, the code to create and train the network, and evaluate its predictions:
 
-{% gist 04ab7c3aa1bf7abf43c69c2fb6672505 %}
+{% gist 04ab7c3aa1bf7abf43c69c2fb6672505 %}{: .centered-image}
 
 After training the Network finishes, we use it to predict the MPG for the cars in the test set and compare them with their real MPG values.
 
