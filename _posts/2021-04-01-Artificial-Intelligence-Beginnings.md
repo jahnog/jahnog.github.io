@@ -204,4 +204,4 @@ We hope that having seen that it is possible to start with a really simple imple
 
 To learn more about this field, two of the common starting point are the [Deep Learning and Neural Network](http://neuralnetworksanddeeplearning.com/index.html) book from Michael Nielsen and the [Deep Learning](https://www.deeplearningbook.org/) book from Ian Goodfellow.
 
-And, If you have some interest in the visual arts, this article about [Artistic Style transfer using AI](https://towardsdatascience.com/art-style-transfer-using-neural-networks-a28f5888746b) might also be worth reading.
+And, If you have some interest in the visual arts, this article about [Artistic Style transfer using AI]({% post_url 2020-04-01-Art-Style-transfer-using-different-neural-networks %}) might also be worth reading.
