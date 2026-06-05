@@ -16,15 +16,15 @@ minimal_mistakes_skin    : "dark" # "default" # "air", "aqua", "contrast", "dark
 
 # Site Settings
 locale                   : "en-US"
-title                    : "Some of my personal works"
+title                    : "Javier"
 title_separator          : "-"
-subtitle                 : # site tagline that appears below site title in masthead
-name                     : "Javier's github Page"
-description              : "Some of my personal works."
-url                      : "https://jahnog.github.io/" # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
+subtitle                 : "Software Engineer & Deep Learning Enthusiast" # site tagline that appears below site title in masthead
+name                     : "Javier"
+description              : "Javier — software engineer and deep learning enthusiast. A showcase of projects in machine learning, neural networks, simulations, and data analysis."
+url                      : "https://jahnog.github.io" # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
-repository               : jahnog/jahnog.gihub.io # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
-teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
+repository               : jahnog/jahnog.github.io # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
+teaser                   : /assets/images/800px-MultiLayerNeuralNetworkBigger_english.png # fallback teaser for posts without a specific image
 logo                     : /assets/images/the_scream_98x98.jpg # path of logo image to display in the masthead, e.g. "/assets/images/88x88.png"
 masthead_title           : # overrides the website title displayed in the masthead, use " " for no title
 # breadcrumbs            : false # true, false (default)
@@ -63,7 +63,7 @@ google:
   search_engine_id       : # YOUR_SEARCH_ENGINE_ID
   instant_search         : # false (default), true
 # SEO Related
-google_site_verification :
+google_site_verification : # paste your Google Search Console verification token here to enable indexing verification
 bing_site_verification   :
 yandex_site_verification :
 naver_site_verification  :
@@ -75,13 +75,15 @@ facebook:
   username               :
   app_id                 :
   publisher              :
-og_image                 : # Open Graph/Twitter default site image
+og_image                 : /assets/images/800px-MultiLayerNeuralNetworkBigger_english.png # Open Graph/Twitter default site image
 # For specifying social profiles
 # - https://developers.google.com/structured-data/customize/social-profiles
 social:
-  type                   : # Person or Organization (defaults to Person)
-  name                   : # If the user or organization name differs from the site's name
+  type                   : Person # Person or Organization (defaults to Person)
+  name                   : "Javier" # If the user or organization name differs from the site's name
   links: # An array of links to social media profiles
+    - "https://www.linkedin.com/in/jntech/"
+    - "https://github.com/jahnog"
 
 # Analytics
 analytics:
@@ -93,55 +95,28 @@ analytics:
 
 # Site Author
 author:
-  name             : "jahnog.github.io"
+  name             : "Javier"
   avatar           : /assets/images/the_scream_98x98.jpg # path of avatar image, e.g. "/assets/images/bio-photo.jpg" entrepreneur, investor,
-  bio              : "Software engineer, deep learning enthusiast, amateur runner and avid reader." # "I am an **amazing** person."
+  bio              : "Software engineer & deep learning enthusiast. I build projects in machine learning, simulations, and data analysis."
   location         : # "Somewhere"
   email            :
   links:
-    - label: "Email"
-      icon: "fas fa-fw fa-envelope-square"
-      # url: "mailto:your.name@email.com"
-    - label: "Website"
-      icon: "fas fa-fw fa-link"
-      url: "https://jahnog.github.io/"
-    - label: "Twitter"
-      icon: "fab fa-fw fa-twitter-square"
-      # url: "https://twitter.com/"
-    - label: "Facebook"
-      icon: "fab fa-fw fa-facebook-square"
-      # url: "https://facebook.com/"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/jahnog"
-    - label: "Instagram"
-      icon: "fab fa-fw fa-instagram"
-      # url: "https://instagram.com/"
-    - label: "Linkedin"
+    - label: "LinkedIn"
       icon: "fab fa-fw fa-linkedin"
       url: "https://www.linkedin.com/in/jntech/"
 
 # Site Footer
 footer:
   links:
-    - label: "Twitter"
-      icon: "fab fa-fw fa-twitter-square"
-      # url:
-    - label: "Facebook"
-      icon: "fab fa-fw fa-facebook-square"
-      # url:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      # url:
-    - label: "GitLab"
-      icon: "fab fa-fw fa-gitlab"
-      # url:
-    - label: "Bitbucket"
-      icon: "fab fa-fw fa-bitbucket"
-      # url:
-    - label: "Instagram"
-      icon: "fab fa-fw fa-instagram"
-      # url:
+      url: "https://github.com/jahnog"
+    - label: "LinkedIn"
+      icon: "fab fa-fw fa-linkedin"
+      url: "https://www.linkedin.com/in/jntech/"
 
 
 # Reading Files
@@ -175,6 +150,7 @@ exclude:
   - tmp
   - /docs # ignore Minimal Mistakes /docs
   - /test # ignore Minimal Mistakes /test
+  - openspec # planning artifacts, not part of the published site
 keep_files:
   - .git
   - .svn

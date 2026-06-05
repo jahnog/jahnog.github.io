@@ -1,3 +1,15 @@
+---
+title: "Build a Neural Network from Scratch"
+excerpt: "Implementing a neural network in pure Python to predict a car's fuel efficiency."
+header:
+  teaser: /assets/images/backprop.png
+tags:
+  - machine-learning
+  - neural-networks
+  - python
+  - from-scratch
+---
+
 ## Build a Neural Network from scratch in Python
 
 Objective

@@ -1,3 +1,15 @@
+---
+title: "Neural Art Style Transfer"
+excerpt: "A tour of neural-network models that repaint photos in the style of famous artworks."
+header:
+  teaser: /assets/images/art.jpg
+tags:
+  - deep-learning
+  - machine-learning
+  - computer-vision
+  - python
+---
+
 ## Art Style transfer (A comparison between models)
 
 Art Style Transfer consists in the transformation of an image into a similar one that seems to have been painted by an artist.

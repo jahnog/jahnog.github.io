@@ -1,0 +1,63 @@
+schema: spec-driven
+
+# Project context (the OpenSpec equivalent of a Spec Kit "constitution").
+# Shown to AI as background/constraints when creating any artifact.
+context: |
+  ## Mission
+
+  This repository is Javier's personal GitHub Pages site
+  (https://jahnog.github.io/). Its single overriding objective is to be an
+  attractive, credible showcase of my software-engineering works so that
+  recruiters and hiring managers take me into consideration as a candidate.
+  Every change must serve that goal: make the portfolio clearer, more
+  polished, more discoverable, and more convincing to a technical recruiter
+  skimming it for a few minutes.
+
+  ## Audience
+
+  Primary: software-engineering recruiters and hiring managers (technical and
+  non-technical). They scan quickly, on desktop and mobile. Optimize for fast
+  comprehension of "what did this person build, and can they build it well?"
+  Secondary: fellow engineers who may dig into the technical details.
+
+  ## Tech stack
+
+  - Static site built with Jekyll ~3.7 (GitHub Pages compatible).
+  - Theme: Minimal Mistakes (remote_theme "mmistakes/minimal-mistakes"),
+    "dark" skin. Prefer theme features and includes over custom code.
+  - Content: Markdown posts in `_posts/`, layouts in `_layouts/`, partials in
+    `_includes/`, data in `_data/`, styles in `_sass/`, site config in
+    `_config.yml`. JS is bundled/uglified via the npm scripts in package.json.
+  - Showcased works are technical projects (AI/ML, simulations, data analysis,
+    e.g. neural style transfer, Barnes-Hut N-body in ScalaJS, economic and
+    climate data analysis), often linking to live demos or external hosts.
+
+  ## Principles
+
+  1. Recruiter-first: lead with outcomes and impact, not just implementation
+     detail. Each showcased work should make its purpose and the skills it
+     demonstrates obvious at a glance.
+  2. Professional and trustworthy tone: clear, concise, no typos, no broken
+     links or images. A broken portfolio reads worse than a smaller one.
+  3. Performance and accessibility: fast load, responsive layout, semantic
+     headings, descriptive alt text and link text.
+  4. Stay GitHub-Pages-safe: only use plugins/features supported by the
+     `github-pages` gem; don't break the build.
+  5. Minimal, theme-aligned customization: extend the Minimal Mistakes theme
+     rather than fighting it; keep custom CSS/JS small and justified.
+  6. SEO and shareability: meaningful titles, descriptions, and preview images
+     so the work surfaces and looks good when shared.
+
+# Per-artifact rules. Reinforce the mission for each generated artifact.
+rules:
+  proposal:
+    - State explicitly how the change improves the portfolio's appeal to
+      software-engineering recruiters.
+    - Include a short "Non-goals" section to keep scope tight.
+  design:
+    - Prefer Minimal Mistakes theme features/includes over bespoke code; call
+      out any GitHub-Pages compatibility concerns.
+    - Note impact on page load performance, responsiveness, and accessibility.
+  tasks:
+    - Break work into small, verifiable steps; include a step to preview the
+      site locally and confirm no broken links/images.
