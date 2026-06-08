@@ -64,3 +64,11 @@
     margin-bottom: 2em;
   }
 }
+
+/* Support native <video> elements inside <figure> similar to images */
+figure video {
+  width: 100%;
+  border-radius: $border-radius;
+  transition: $global-transition;
+  margin-bottom: 1em;
+}
