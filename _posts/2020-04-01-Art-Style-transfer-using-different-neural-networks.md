@@ -66,9 +66,9 @@ These image transformations are possible thanks to advances in computing process
 
 Before continuing, you may like to see how to implement a bare bones Neural Network using python without any complex framework [Clicking Here]({% post_url 2021-04-01-Artificial-Intelligence-Beginnings %})
 
-The Convolutional Neural Networks (CNN), composed of a series of layers of convolutional matrix operations, are ideal for image analysis and object identification. They employ a similar concept to graphic filters and detectors used in applications like Gimp or Photoshop, but in a much powerful and complex way.
+The Convolutional Neural Networks (CNN), composed of a series of layers of convolutional matrix operations, are ideal for image analysis and object identification. They employ a similar concept to graphic filters and detectors used in applications like Gimp or Photoshop, but in a much more powerful and complex way.
 
-A basic example of a matrix operation is performed by an edge detector. It takes a small picture sample of NxN pixels (5x5 in the following example), multiplies it’s values by a predefined NxN convolution matrix and obtains a value that indicates if an edge is present in that portion of the image. Repeating this procedure for all the NxN portions of the image, we can generate a new image where we have detected the borders of the objects present in there.
+A basic example of a matrix operation is performed by an edge detector. It takes a small picture sample of NxN pixels (5x5 in the following example), multiplies its values by a predefined NxN convolution matrix and obtains a value that indicates if an edge is present in that portion of the image. Repeating this procedure for all the NxN portions of the image, we can generate a new image where we have detected the borders of the objects present in there.
 
 ![condor photo plus edge detector equals condor borders](/assets/images/art-style-transfer/49nqOoWK4cAsuQMSm382wQ.png){: .centered-image}
 
@@ -128,7 +128,7 @@ Its main finding was that the **_Content_** of a natural image and its **_Style_
 
 Many of the other Neural Style Transfer models discussed here took this idea and expanded it with faster and more complex networks, but still using this foundation.
 
-Gatys et al. model is based in a VGG-19\[3\] neural network, which is commonly used for visual object recognition and rivals human performance.
+Gatys et al. model is based on a VGG-19\[3\] neural network, which is commonly used for visual object recognition and rivals human performance.
 
 ![vgg neural network](/assets/images/art-style-transfer/dd2M0dum748VtZnJwcmHLQ.png){: .centered-image}
 
@@ -166,7 +166,7 @@ Pre-trained networks for a single style transfer
 
 These networks tackle the main disadvantage of models like the previously described have: The time it takes to produce an artistic image.
 
-They are based in models like the one described in the paper _“Perceptual Losses for Real-Time Style Transfer and Super-Resolution”_\[4\] by Justin Johnson, Alexandre Alahi, Li Fei-Fei.
+They are based on models like the one described in the paper _“Perceptual Losses for Real-Time Style Transfer and Super-Resolution”_\[4\] by Justin Johnson, Alexandre Alahi, Li Fei-Fei.
 
 These models pre-train a CNN with a specific style, which can take a few hours in a GPU, and then these networks can be used to apply the selected style to any image nearly in real-time and also to apply styles to movies in a few minutes.
 

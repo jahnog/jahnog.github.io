@@ -5,7 +5,8 @@ header:
   teaser: /assets/images/temperatures.jpg
 tags:
   - data-analysis
-  - python
+  - scala
+  - scala-js
   - visualization
   - climate
 ---

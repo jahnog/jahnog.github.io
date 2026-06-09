@@ -220,6 +220,6 @@ There were a lot of omitted concepts on purpose in this example as they may frig
 
 We hope that having seen that it is possible to start with a really simple implementation, without needing specialized libraries or hardware, will increase your interest in the exciting field of Artificial Intelligence.
 
-To learn more about this field, two of the common starting point are the [Deep Learning and Neural Network](http://neuralnetworksanddeeplearning.com/index.html) book from Michael Nielsen and the [Deep Learning](https://www.deeplearningbook.org/) book from Ian Goodfellow.
+To learn more about this field, two of the common starting points are the [Deep Learning and Neural Network](http://neuralnetworksanddeeplearning.com/index.html) book from Michael Nielsen and the [Deep Learning](https://www.deeplearningbook.org/) book from Ian Goodfellow.
 
 And, If you have some interest in the visual arts, this article about [Artistic Style transfer using AI]({% post_url 2020-04-01-Art-Style-transfer-using-different-neural-networks %}) might also be worth reading.

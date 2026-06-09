@@ -1,6 +1,8 @@
 ---
 title: "Barnes-Hut N-Body Simulation"
 excerpt: "An O(n log n) N-body galaxy simulation implemented in Scala.js."
+header:
+  teaser: /assets/images/barnes-hut.jpg
 tags:
   - scala
   - scala-js
