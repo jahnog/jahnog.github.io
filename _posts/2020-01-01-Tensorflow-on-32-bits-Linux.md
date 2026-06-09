@@ -11,6 +11,12 @@ tags:
 ---
 ## Install Tensorflow on 32 bits Linux
 
+> **TL;DR** — TensorFlow only ships 64-bit binaries, so I built it from source for 32-bit (i386) Linux — a hands-on tour of Bazel, cross-compilation, and the platform assumptions baked into a large C++/Python codebase.
+>
+> **Stack** — TensorFlow, Bazel, C++, Python, Linux (i386)
+>
+> **Links** — [Build & install instructions / Source](https://github.com/jahnog/tensorflow-32-bits-linux)
+
 ![Tensorflow](/assets/images/tensorflow.jpg)
 
 Instructions to build and install Tensorflow in a 32 bits linux system, maybe just for fun.

@@ -12,6 +12,12 @@ tags:
 
 ## Art Style transfer (A comparison between models)
 
+> **TL;DR** — I built [artcopypaste.com](https://artcopypaste.com/), a web app that repaints your photos in the style of famous artworks. This write-up is a deep dive into the families of neural networks that make it work, with side-by-side results.
+>
+> **Stack** — Python, TensorFlow/Keras, PyTorch, Convolutional Neural Networks (VGG, ResNet, Inception)
+>
+> **Links** — [Live product: artcopypaste.com](https://artcopypaste.com/)
+
 Art Style Transfer consists in the transformation of an image into a similar one that seems to have been painted by an artist.
 If we are Vincent van Gogh fans, and we love German Shepherds, we may like to get a picture of our favorite dog painted in van Gogh’s Starry Night fashion.
 
@@ -22,41 +28,37 @@ If we are Vincent van Gogh fans, and we love German Shepherds, we may like to ge
 Introduction
 ============
 
-Art Style Transfer consists in the transformation of an image into a similar one that seems to have been painted by an artist.
-
-If we are Vincent van Gogh fans, and we love German Shepherds, we may like to get a picture of our favorite dog painted in van Gogh’s Starry Night fashion.
-
-![german shepherd](https://miro.medium.com/v2/resize:fit:768/1*Sv-uTeNcf32eZ1s7UPvUUw.jpeg){: .centered-image}
+![german shepherd](/assets/images/art-style-transfer/Sv-uTeNcf32eZ1s7UPvUUw.jpeg){: .centered-image}
 
 Image by author
 
-![van gogh starry night](https://miro.medium.com/v2/resize:fit:768/1*6U_BQMRY5oeHvx6kfvu-BA.jpeg){: .centered-image}
+![van gogh starry night](/assets/images/art-style-transfer/6U_BQMRY5oeHvx6kfvu-BA.jpeg){: .centered-image}
 
 _Starry Night by Vincent van Gogh,_ [_Public Domain_](https://commons.wikimedia.org/w/index.php?curid=10749998){: .centered-image}
 
 The resulting picture can be something like this:
 
-![german shepherd with a starry night style](https://miro.medium.com/v2/resize:fit:768/1*ZpECAVBmJh8tkFLLIVOVtQ.jpeg){: .centered-image}
+![german shepherd with a starry night style](/assets/images/art-style-transfer/ZpECAVBmJh8tkFLLIVOVtQ.jpeg){: .centered-image}
 
 Image by author
 
 Instead, if we like Katsushika Hokusai’s Great Wave off Kanagawa, we may obtain a picture like this one:
 
-![the great wave](https://miro.medium.com/v2/resize:fit:768/1*ZBo4y3HmRTYGrPgA--hwSA.jpeg){: .centered-image}
+![the great wave](/assets/images/art-style-transfer/ZBo4y3HmRTYGrPgA--hwSA.jpeg){: .centered-image}
 
 _The Great wave of Kanagawa by Katsushika Hokusai,_ [_Public Domain_](https://commons.wikimedia.org/wiki/File:Great_Wave_off_Kanagawa.jpg){: .centered-image}
 
-![german shepherd with the great wave style](https://miro.medium.com/v2/resize:fit:768/1*4La37aXKDP6CZkFzfEHDyQ.jpeg){: .centered-image}
+![german shepherd with the great wave style](/assets/images/art-style-transfer/4La37aXKDP6CZkFzfEHDyQ.jpeg){: .centered-image}
 
 Image by author
 
 And something like the following picture, if we prefer Wassily Kandinsky’s Composition 7:
 
-![wassily kandinsky composition 7](https://miro.medium.com/v2/resize:fit:768/1*cmy7J38WC5jHi9nljX-bYg.jpeg){: .centered-image}
+![wassily kandinsky composition 7](/assets/images/art-style-transfer/cmy7J38WC5jHi9nljX-bYg.jpeg){: .centered-image}
 
 _Compositions 7 by Wassily Kandinsky,_ [_Public Domain_](https://commons.wikimedia.org/wiki/File:Vassily_Kandinsky,_1913_-_Composition_7.jpg){: .centered-image}
 
-![german shepherd with composition 7 style](https://miro.medium.com/v2/resize:fit:768/1*qiVeS8iEBobXWPT84fBa8w.jpeg){: .centered-image}
+![german shepherd with composition 7 style](/assets/images/art-style-transfer/qiVeS8iEBobXWPT84fBa8w.jpeg){: .centered-image}
 
 Image by author
 
@@ -68,7 +70,7 @@ The Convolutional Neural Networks (CNN), composed of a series of layers of convo
 
 A basic example of a matrix operation is performed by an edge detector. It takes a small picture sample of NxN pixels (5x5 in the following example), multiplies it’s values by a predefined NxN convolution matrix and obtains a value that indicates if an edge is present in that portion of the image. Repeating this procedure for all the NxN portions of the image, we can generate a new image where we have detected the borders of the objects present in there.
 
-![condor photo plus edge detector equals condor borders](https://miro.medium.com/v2/resize:fit:1050/1*49nqOoWK4cAsuQMSm382wQ.png){: .centered-image}
+![condor photo plus edge detector equals condor borders](/assets/images/art-style-transfer/49nqOoWK4cAsuQMSm382wQ.png){: .centered-image}
 
 Image by author
 
@@ -79,37 +81,37 @@ The two main features of CNNs are:
 
 This is the typical structure of a Convolutional Neural Network:
 
-![](https://miro.medium.com/v2/resize:fit:1050/1*3BRLw4lsANPEfGgimG3YVQ.png){: .centered-image}
+![](/assets/images/art-style-transfer/3BRLw4lsANPEfGgimG3YVQ.png){: .centered-image}
 
 Image by [Aphex34](https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Typical_cnn.png/512px-Typical_cnn.png){: .centered-image} / [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0)
 
 Thanks to papers like _“Visualizing and Understanding Convolutional Networks”\[1\]_ by Matthew D. Zeiler, Rob Fergus and _“Feature Visualization”\[12\]_ by Chris Olah, Alexander Mordvintsev, Ludwig Schubert, we can visually understand what features are detected by the different CNN layers:
 
-![](https://miro.medium.com/v2/resize:fit:480/1*rYOXpsZAtGyYZX51kX5VcQ.jpeg){: .centered-image}
+![](/assets/images/art-style-transfer/rYOXpsZAtGyYZX51kX5VcQ.jpeg){: .centered-image}
 
 Image by Matthew D. Zeiler et al. _“Visualizing and Understanding Convolutional Networks”\[1\], usage authorized_
 
 The first layers detect the most basic features of the image like edges.
 
-![](https://miro.medium.com/v2/resize:fit:480/1*ngJrXA4uJxr-tSiREZHRoA.jpeg){: .centered-image}
+![](/assets/images/art-style-transfer/ngJrXA4uJxr-tSiREZHRoA.jpeg){: .centered-image}
 
 Image by Matthew D. Zeiler et al. _“Visualizing and Understanding Convolutional Networks”\[1\], usage authorized_
 
 The next layers combine the information of the previous layer to detect more complex features like textures.
 
-![](https://miro.medium.com/v2/resize:fit:480/1*0o6odnoF4ap7hBoPwl7i0A.jpeg){: .centered-image}
+![](/assets/images/art-style-transfer/0o6odnoF4ap7hBoPwl7i0A.jpeg){: .centered-image}
 
 Image by Matthew D. Zeiler et al. _“Visualizing and Understanding Convolutional Networks”\[1\], usage authorized_
 
 Following layers, continue to use the previous information to detect features like repetitive patterns.
 
-![](https://miro.medium.com/v2/resize:fit:480/1*iGeYVLPZZYH8NIVYUtGjIQ.jpeg){: .centered-image}
+![](/assets/images/art-style-transfer/iGeYVLPZZYH8NIVYUtGjIQ.jpeg){: .centered-image}
 
 Image by Matthew D. Zeiler et al. _“Visualizing and Understanding Convolutional Networks”\[1\], usage authorized_
 
 The latest network layers are able to detect complex features like object parts.
 
-![](https://miro.medium.com/v2/resize:fit:480/1*LqatJHUMh1IQi3tat22s1w.jpeg){: .centered-image}
+![](/assets/images/art-style-transfer/LqatJHUMh1IQi3tat22s1w.jpeg){: .centered-image}
 
 Image by Matthew D. Zeiler et al. _“Visualizing and Understanding Convolutional Networks”\[1\], usage authorized_
 
@@ -128,7 +130,7 @@ Many of the other Neural Style Transfer models discussed here took this idea and
 
 Gatys et al. model is based in a VGG-19\[3\] neural network, which is commonly used for visual object recognition and rivals human performance.
 
-![vgg neural network](https://miro.medium.com/v2/resize:fit:1050/1*dd2M0dum748VtZnJwcmHLQ.png){: .centered-image}
+![vgg neural network](/assets/images/art-style-transfer/dd2M0dum748VtZnJwcmHLQ.png){: .centered-image}
 
 Image by author
 
@@ -138,7 +140,7 @@ Then, it uses pieces of it to define some functions:
 *   A **Style Loss** function, that calculates how the style of the generated image differs from the style of the classic art paint (or whatever style image we choose to use). To compare Styles, a different approach is required. It takes layers at different levels (to compare features of different complexity) and for each layer, a matrix (Gram matrix) with the correlation between the detected features is created. This matrix indicates which features occur simultaneously (like finding that horizontal lines always have X color, etc). The Style Loss is calculated as the distance between the Gram matrices of the layers of the **_Style Image_** and the Gram matrices of the layers in the **_Output Image_**. This allows us to apply features from the simple ones, like blocks of some color, to the most complex ones like waves or the artist brushstroke.
 *   A **Total Loss** function that takes into account both the Content Loss and the Style Loss.
 
-![vgg19 style and content loss function](https://miro.medium.com/v2/resize:fit:1050/1*9mRwqQvc3pKAW1mpr-XEfQ.png){: .centered-image}
+![vgg19 style and content loss function](/assets/images/art-style-transfer/9mRwqQvc3pKAW1mpr-XEfQ.png){: .centered-image}
 
 Image by author
 
@@ -173,13 +175,13 @@ They are composed of two CNNs:
 *   An optimizable **_Image Transformation Network_**, that takes the Original Image and generates the new Artistic Image, following the Encoder-Decoder design. An Image is first reduced to a set of high-level features that then can be expanded to recreate the image, but in this case, with an artistic style applied.
 *   A fixed **_Loss Network_**, that’s used to measure the “Perception Loss”, or how the generated image differs from the original despite changing its style. This Loss is similar to _Gatys et al_\[2\] Total Loss function (Content Loss + Style Loss) but it’s calculated using a pre-trained VGG16\[3\] network instead of a VGG19 network.
 
-![](https://miro.medium.com/v2/resize:fit:1050/1*szkOelXhXAy8vip-nW2Zzg.png){: .centered-image}
+![](/assets/images/art-style-transfer/szkOelXhXAy8vip-nW2Zzg.png){: .centered-image}
 
 Image by author
 
 The structure of the Image Transform Network is similar to:
 
-![johnson image transform network](https://miro.medium.com/v2/resize:fit:1050/1*rCZQ5dI1RG_yuo0fIUbl3g.png){: .centered-image}
+![johnson image transform network](/assets/images/art-style-transfer/rCZQ5dI1RG_yuo0fIUbl3g.png){: .centered-image}
 
 Image by author
 
@@ -193,15 +195,15 @@ This image down-sampling and up-sampling help detect higher-level features of th
 
 Using the same images and styles as before, it will produce the following results:
 
-![german shepherd with starry night style using johnson model](https://miro.medium.com/v2/resize:fit:768/1*4eadjoYOql8H4tG_JycDbA.jpeg){: .centered-image}
+![german shepherd with starry night style using johnson model](/assets/images/art-style-transfer/4eadjoYOql8H4tG_JycDbA.jpeg){: .centered-image}
 
 Image by author, starry night style
 
-![german shepherd with great wave style using johnson model](https://miro.medium.com/v2/resize:fit:768/1*QhWLhF-KXqJh_XOl9_AOpg.jpeg){: .centered-image}
+![german shepherd with great wave style using johnson model](/assets/images/art-style-transfer/QhWLhF-KXqJh_XOl9_AOpg.jpeg){: .centered-image}
 
 Image by author, great wave style
 
-![german shepherd with composition 7 style using johnson model](https://miro.medium.com/v2/resize:fit:768/1*FGaTyreSQQsmSf1XnD4wkw.jpeg){: .centered-image}
+![german shepherd with composition 7 style using johnson model](/assets/images/art-style-transfer/FGaTyreSQQsmSf1XnD4wkw.jpeg){: .centered-image}
 
 Image by author, composition 7 style
 
@@ -229,7 +231,7 @@ This model consists of three Neural Networks:
 *   A **_Loss Network_** (similar to _Johnson et al._ VGG16\[3\])
 *   And adds a **_Style Prediction Network_** (Inception V3\[9\]).
 
-![style transfer and style prediction neural networks](https://miro.medium.com/v2/resize:fit:1050/1*C0IHfHFHVJAcceKTIlTztw.png){: .centered-image}
+![style transfer and style prediction neural networks](/assets/images/art-style-transfer/C0IHfHFHVJAcceKTIlTztw.png){: .centered-image}
 
 Image by author
 
@@ -243,29 +245,29 @@ Fortunately, there are pre-trained models readily available that can be used dir
 
 *   A first version, available in Tensorflow Hub with only 39 MB in weights data size, and can produce the following images: [https://tfhub.dev/google/magenta/arbitrary-image-stylization-v1-256/1](https://tfhub.dev/google/magenta/arbitrary-image-stylization-v1-256/1)
 
-![german shepherd with starry night style](https://miro.medium.com/v2/resize:fit:768/1*4cTHFL8PMqoZiqXUH-G9bA.jpeg){: .centered-image}
+![german shepherd with starry night style](/assets/images/art-style-transfer/4cTHFL8PMqoZiqXUH-G9bA.jpeg){: .centered-image}
 
 Image by author, starry night style
 
-![german shepherd with the great wave off kanagawa style](https://miro.medium.com/v2/resize:fit:768/1*XUeXcw1wpvggZZ85EeMqlA.jpeg){: .centered-image}
+![german shepherd with the great wave off kanagawa style](/assets/images/art-style-transfer/XUeXcw1wpvggZZ85EeMqlA.jpeg){: .centered-image}
 
 Image by author, great wave style
 
-![german shepherd with kandinsky composition 7 style](https://miro.medium.com/v2/resize:fit:768/1*NxZvzTytoPSdXs6TAArBAA.jpeg){: .centered-image}
+![german shepherd with kandinsky composition 7 style](/assets/images/art-style-transfer/NxZvzTytoPSdXs6TAArBAA.jpeg){: .centered-image}
 
 Image by author, composition 7 style
 
 *   A Second updated version, of 82 MB in size, also available in Tensorflow Hub: [https://tfhub.dev/google/magenta/arbitrary-image-stylization-v1-256/2](https://tfhub.dev/google/magenta/arbitrary-image-stylization-v1-256/2)
 
-![german shepherd with van gogh starry night style](https://miro.medium.com/v2/resize:fit:768/1*ocLbirZLarz4kRHE-BcfcA.jpeg){: .centered-image}
+![german shepherd with van gogh starry night style](/assets/images/art-style-transfer/ocLbirZLarz4kRHE-BcfcA.jpeg){: .centered-image}
 
 Image by author, starry night style
 
-![german shepherd with hokusai great wave off kanagawa style](https://miro.medium.com/v2/resize:fit:768/1*hcSbDpASMT65ADA1t_Dzyg.jpeg){: .centered-image}
+![german shepherd with hokusai great wave off kanagawa style](/assets/images/art-style-transfer/hcSbDpASMT65ADA1t_Dzyg.jpeg){: .centered-image}
 
 Image by author, great wave style
 
-![german shepherd with kandinsky composition 7 style](https://miro.medium.com/v2/resize:fit:768/1*YEPQp-B-1XDh6jd-pzeU4w.jpeg){: .centered-image}
+![german shepherd with kandinsky composition 7 style](/assets/images/art-style-transfer/YEPQp-B-1XDh6jd-pzeU4w.jpeg){: .centered-image}
 
 Image by author, composition 7 style
 
@@ -291,7 +293,7 @@ It first trains a series of Decoder networks that connect to the different layer
 
 Using an image dataset, the decoders are trained to regenerate the original image feed to the VGG. And once they have been trained, their weights are fixed for the rest of the process.
 
-![VGG19 network as encoder, with one decoder for each layer](https://miro.medium.com/v2/resize:fit:1050/1*SfKi42o9wsxsymPS1Z92zw.png){: .centered-image}
+![VGG19 network as encoder, with one decoder for each layer](/assets/images/art-style-transfer/SfKi42o9wsxsymPS1Z92zw.png){: .centered-image}
 
 Image by author
 
@@ -304,7 +306,7 @@ For single-level transformation:
 3.  Then, a Whitening and Coloring transformation is applied to those features.
 4.  The result of the WCT then is fed to the corresponding Decoder network to generate the stylized image.
 
-![whitening and coloring transform WCT](https://miro.medium.com/v2/resize:fit:1050/1*qeGYKTv1uQrPnmeHtBAu_g.png){: .centered-image}
+![whitening and coloring transform WCT](/assets/images/art-style-transfer/qeGYKTv1uQrPnmeHtBAu_g.png){: .centered-image}
 
 Image by author
 
@@ -321,21 +323,21 @@ For a multi-level optimization:
 7.  Similarly, these steps are repeated until we get a generated image from the first Decoder.
 8.  This generated image is our final artistic image.
 
-![real time art style transfer using multiple encoder-decoder networks](https://miro.medium.com/v2/resize:fit:908/1*Zlv8y5xFmGL0r-UV15WhiA.png){: .centered-image}
+![real time art style transfer using multiple encoder-decoder networks](/assets/images/art-style-transfer/Zlv8y5xFmGL0r-UV15WhiA.png){: .centered-image}
 
 Image by author
 
 Some examples of this model are the following:
 
-![german shepherd with van gogh starry night style](https://miro.medium.com/v2/resize:fit:768/1*c8bzl6iKlSb4Ds_q8GJgow.jpeg){: .centered-image}
+![german shepherd with van gogh starry night style](/assets/images/art-style-transfer/c8bzl6iKlSb4Ds_q8GJgow.jpeg){: .centered-image}
 
 Image by author, starry night style
 
-![german shepherd with hokusai great wave off kanagawa style](https://miro.medium.com/v2/resize:fit:768/1*s68jmVuXf0Q5PA6Sxh68gw.jpeg){: .centered-image}
+![german shepherd with hokusai great wave off kanagawa style](/assets/images/art-style-transfer/s68jmVuXf0Q5PA6Sxh68gw.jpeg){: .centered-image}
 
 Image by author, great wave style
 
-![german shepherd with kandinsky composition 7 style](https://miro.medium.com/v2/resize:fit:768/1*jbaUwt6AtFg5oRNTRY3NzA.jpeg){: .centered-image}
+![german shepherd with kandinsky composition 7 style](/assets/images/art-style-transfer/jbaUwt6AtFg5oRNTRY3NzA.jpeg){: .centered-image}
 
 Image by author, composition 7 style
 

@@ -12,6 +12,12 @@ tags:
 
 ## Build a Neural Network from scratch in Python
 
+> **TL;DR** — A feed-forward neural network with backpropagation, implemented from scratch in pure Python/NumPy (no ML framework), that predicts a car's fuel efficiency close to the real values.
+>
+> **Stack** — Python, NumPy
+>
+> **Links** — [Run the notebook](https://colab.research.google.com/github/jahnog/artificial-intelligence-python/blob/master/neural_network.ipynb) · [Source](https://github.com/jahnog/artificial-intelligence-python)
+
 Objective
 =========
 
@@ -30,7 +36,7 @@ A Neural Network is one of the most commonly used computational models to apply 
 
 Each neuron is connected to others by links. Through them, they receive information, evaluate it, and spread the outcome of that evaluation, which can be either a signal to highlight a feature or to attenuate it.
 
-The network also has one ore more Final Neurons that will take signals from previous ones and will produce that can be a real number (for regression problems) or a set of values (for classification problems).
+The network also has one or more Final Neurons that will take signals from previous ones and will produce a result that can be a real number (for regression problems) or a set of values (for classification problems).
 
 Structure
 =========
@@ -68,7 +74,7 @@ Where **_X_** is a vector (one-dimensional matrix) with the information coming f
 
 ![](https://miro.medium.com/v2/resize:fit:1050/1*QN7Ai6Iipsf8aPWLrLyd0Q.gif){: .centered-image}
 
-Image from: [_www.MLinGIFS.aqeel-anwar.com_](http://www.google.com/url?q=http%3A%2F%2Fwww.MLinGIFS.aqeel-anwar.com&sa=D&sntz=1&usg=AFQjCNFcazsCiM9CNyGnCkBq6cjLHCIpFQ){: .centered-image} Author: [Aqeel Anwar](http://www.google.com/url?q=http%3A%2F%2Fwww.aqeel-anwar.com&sa=D&sntz=1&usg=AFQjCNHLwgfMupBQNoyk__gtpMtrJdmJLw) Usage authorized
+Image from: [_www.MLinGIFS.aqeel-anwar.com_](https://www.google.com/url?q=http%3A%2F%2Fwww.MLinGIFS.aqeel-anwar.com&sa=D&sntz=1&usg=AFQjCNFcazsCiM9CNyGnCkBq6cjLHCIpFQ){: .centered-image} Author: [Aqeel Anwar](https://www.aqeel-anwar.com) Usage authorized
 
 Non-linear Activation
 ---------------------
