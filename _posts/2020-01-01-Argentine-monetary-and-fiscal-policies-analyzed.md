@@ -16,7 +16,7 @@ tags:
 >
 > **Stack** — Python, pandas, Google Colab, World Bank World Development Indicators
 >
-> **Links** — [Run the notebook](https://colab.research.google.com/drive/147_-CNAE7QoRsabUy4YRGiZezvdtw3e8) · [Source](https://github.com/jahnog/still-passing-the-buck)
+> **Links** — [Run the notebook](https://colab.research.google.com/drive/1_6WXYooZConWN1X7sxdaVeOuWESmDdQG) · [Source](https://github.com/jahnog/still-passing-the-buck)
 
 An Economic Performance comparison between Argentine Government Administrations using World Bank Development Indicators dataset.
 
