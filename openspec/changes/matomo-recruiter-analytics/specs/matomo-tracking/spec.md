@@ -30,6 +30,10 @@ The production tracker MUST disable cookies, MUST enable the heartbeat timer, MU
 - **WHEN** a visitor loads a production page
 - **THEN** the tracker MUST have cookies disabled
 
+#### Scenario: Firefox does not fail the tracker URL
+- **WHEN** a production pageview or heartbeat is sent to `matomo.php`
+- **THEN** the request MUST include `send_image=1` so the tracker returns a `200` GIF instead of an empty `204` that Firefox reports as `NS_ERROR_DOM_NETWORK_ERR`
+
 ### Requirement: Same-host CuratedSkills click is an event
 The production tracker MUST, on click of an `a[href]` whose path is under `/CuratedSkills` on this host, push `trackEvent` with category `outbound`, action `demo`, and name equal to the destination URL. The tracker MUST NOT send outbound `trackEvent`s for other hosts.
 

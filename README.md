@@ -247,7 +247,7 @@ Excluded from the published site (see `_config.yml` `exclude`):
 - The site uses `remote_theme` so the full Minimal Mistakes source is not vendored.
 - Analytics use a cookieless Matomo tracker (site id 4, `https://contentlabstudy.com/Mat0mo/`). The snippet ships only in `JEKYLL_ENV=production` builds and initializes only on `jahnog.github.io`.
 - Campaign URLs Matomo already understands, for example `https://jahnog.github.io/?mtm_campaign=linkedin-profile` when sharing from LinkedIn.
-- After deploy, confirm a `matomo.php` pageview and a later `ping=1` heartbeat in the browser network tab; LinkedIn **profile** clicks should convert, LinkedIn **share** buttons should not.
+- After deploy, confirm a `matomo.php` pageview (`send_image=1`, HTTP 200 GIF) and a later `ping=1` heartbeat in the browser network tab; LinkedIn **profile** clicks should convert, LinkedIn **share** buttons should not. Firefox must not show `NS_ERROR_DOM_NETWORK_ERR` on that URL.
 - Comments are disabled by default in the current configuration.
 - For theme customization, refer to the [Minimal Mistakes documentation](https://mmistakes.github.io/minimal-mistakes/docs/).
 

@@ -6,6 +6,9 @@
     }
     var _paq = (window._paq = window._paq || []);
     _paq.push(["disableCookies"]);
+    // matomo.php send_image=0 is a 204 with nosniff and no Content-Type; Firefox
+    // reports that as NS_ERROR_DOM_NETWORK_ERR. send_image=1 returns a 1x1 GIF.
+    _paq.push(["appendToTrackingUrl", "send_image=1"]);
     var path = location.pathname.replace(/\/index\.html$/i, "/");
     if (path !== "/" && path.slice(-1) !== "/") {
       path += "/";
