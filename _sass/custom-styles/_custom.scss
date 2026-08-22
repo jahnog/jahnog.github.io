@@ -72,3 +72,25 @@ figure video {
   transition: $global-transition;
   margin-bottom: 1em;
 }
+
+/* Keep GitHub/LinkedIn visible below $large (theme hides them behind Follow) */
+.author__urls-wrapper button {
+  display: none;
+}
+
+.author__urls {
+  display: block;
+  position: relative;
+  right: auto;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  cursor: default;
+
+  &:before,
+  &:after {
+    display: none;
+  }
+}
