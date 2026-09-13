@@ -6,18 +6,17 @@ This is a static site generator project. The source lives in this repository; th
 
 ## Prerequisites
 
-- **Ruby** (3.x recommended; project tested with Ruby 3.2.3). Jekyll ~3.7 is pinned via the `github-pages` gem for GitHub Pages compatibility.
-- **Bundler**: `gem install bundler`
-- **Node.js** (>= 0.10.0; project tested with Node 24.14.0) and **npm** (for JavaScript asset minification and banner injection).
+- GitHub Pages currently uses **Ruby 3.3.4** and **github-pages 232** ([dependency versions](https://pages.github.com/versions.json)). The Gemfile pins that gemset.
+- **`./scripts/serve`** for local preview: uses Ruby 3.3.4 on PATH if present, otherwise Docker or Podman (`ruby:3.3.4`).
+- **Node.js** (>= 0.10.0; project tested with Node 24.14.0) and **npm** (for JavaScript asset minification and banner injection), only if you change files under `assets/js/`.
 - Git (for cloning and version control).
 
 Optional but recommended for local development:
 - A modern terminal / shell (bash, zsh, PowerShell, etc.).
 
 **Platform notes**:
-- **Linux/macOS**: Native Ruby + Node work well. Use a Ruby version manager (rbenv, rvm, asdf, mise) if you manage multiple Ruby versions.
-- **Windows**: Use WSL2 (recommended) or install Ruby/Node natively via RubyInstaller / Node.js installer. Commands below use `bundle exec` and work in all environments.
-- No Docker or containerized environments are configured.
+- **Linux/macOS**: `./scripts/serve` is the supported preview path. A local Ruby 3.3.4 install (rbenv, rvm, asdf, mise) skips Docker; otherwise Docker or Podman is enough.
+- **Windows**: Use WSL2 (recommended), then the same `./scripts/serve` command.
 
 ## Installation / Setup
 
@@ -27,11 +26,10 @@ Clone the repository and install dependencies:
 git clone https://github.com/jahnog/jahnog.github.io.git
 cd jahnog.github.io
 
-# Install Ruby gems (Jekyll + theme + plugins). Uses vendor/bundle by default in this repo.
-bundle install
-
-# Install Node dev dependencies (for JS build scripts).
+# Optional: Node dev dependencies (only if you edit assets/js/).
 npm install
+
+# Gems are installed by ./scripts/serve (vendor/bundle, Ruby 3.3.4).
 ```
 
 **Notes**:
@@ -45,23 +43,15 @@ npm install
 
 ## Running the Development Server
 
-Start a local web server with live reload:
+Preview with the same Ruby and `github-pages` versions GitHub Pages uses:
 
 ```bash
-# Basic serve (rebuilds on file changes)
-bundle exec jekyll serve
-
-# Serve with drafts and future-dated posts visible
-bundle exec jekyll serve --drafts --future
-
-# Serve on a custom port / host (useful in containers or when 4000 is taken)
-bundle exec jekyll serve --port 4001 --host 0.0.0.0
-
-# Verbose output + trace for debugging
-bundle exec jekyll serve --trace --verbose
+./scripts/serve
 ```
 
-- Site will be available at **http://localhost:4000** (or the port you specified).
+Extra Jekyll flags are passed through (`./scripts/serve --drafts --future`). Use `PORT=4001 ./scripts/serve` if 4000 is taken.
+
+- Site will be available at **http://localhost:4000** (or `PORT`).
 - Changes to Markdown, layouts, includes, Sass, and most `_config.yml` settings trigger an automatic rebuild.
 - **Important**: After editing `_config.yml`, you usually need to restart the server for some settings to take effect.
 
@@ -260,11 +250,9 @@ This site inherits the MIT license from the Minimal Mistakes Jekyll theme. Conte
 **Quick reference (copy-paste friendly)**
 
 ```bash
-# One-time setup
-bundle install && npm install
+# Daily development (Ruby 3.3.4 + github-pages 232, Docker if needed)
+./scripts/serve
 
-# Daily development
-bundle exec jekyll serve --drafts
 # (in another terminal if editing JS)
 npm run watch:js
 
