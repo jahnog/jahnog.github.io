@@ -1,6 +1,6 @@
 ---
 title: "A Searchable Registry of Coding-Agent Skills"
-excerpt: "A curated, security-focused catalog of coding-agent skills with fast full-text search — built as a zero-backend static site."
+excerpt: "A high-trust catalog of software-engineering and security agent skills with fast full-text search — built as a zero-backend static site."
 header:
   teaser: /assets/images/curatedskills.jpg
 tags:
@@ -9,24 +9,25 @@ tags:
   - static-site
   - coding-agents
   - security
+  - spec-driven-development
 ---
 
 ## A Searchable Registry of Coding-Agent Skills
 
-> **TL;DR** — I built [CuratedSkills](https://github.com/jahnog/CuratedSkills): a hand-curated registry of security-focused coding-agent skills — things like reviewing Dependabot PRs, running static analysis, and wiring up security MCP servers — with a fast, minimalistic full-text search, served as a fully static site.
+> **TL;DR** — I built [CuratedSkills](https://github.com/jahnog/CuratedSkills): a hand-curated registry of high-trust agent skills for **software engineering and security** — specs, tests, review, delivery, Dependabot PRs, static analysis, and security MCP servers — with a fast, minimalistic full-text search, served as a fully static site.
 >
-> **Stack** — Node.js, JavaScript, MiniSearch, YAML, GitHub Pages, GitHub Actions
+> **Stack** — Node.js 20+, JavaScript, MiniSearch, YAML, GitHub Pages, GitHub Actions
 >
 > **Links** — [Live search](https://jahnog.github.io/CuratedSkills/) · [Source](https://github.com/jahnog/CuratedSkills)
 
 ![CuratedSkills search UI](/assets/images/curatedskills.jpg)
 
-As coding agents took off, the *skills* that extend them — small, reusable capability definitions — started piling up across scattered repositories with no good way to find the trustworthy ones. CuratedSkills is my answer: a small, opinionated registry focused on **security** skills, with a search box that actually makes the catalog usable.
+As coding agents took off, the *skills* that extend them — small, reusable capability definitions — started piling up across scattered repositories with no good way to find the trustworthy ones. CuratedSkills is my answer: an opinionated registry of **high-trust** skills for software engineering *and* security, with a search box that actually makes the catalog usable.
 
-The content is a **human-edited YAML catalog** — `skills.yaml`, `repositories.yaml`, and supporting `trust-tiers.yaml` and `categories.yaml` — so every entry is deliberately curated and tagged with a trust tier (highest / high / medium) and a category. The interesting engineering is how that becomes a searchable site without any server. A Node.js build pipeline fetches each skill's actual content from its source repository, builds a [MiniSearch](https://github.com/lucaong/minisearch) full-text index at **build time**, and emits it as a static `index.json` alongside a minimal, dark-first UI. The result deploys to GitHub Pages through a GitHub Actions workflow, and search runs entirely in the browser against the prebuilt index — **no backend, no database, nothing to keep running**, which is exactly what a static-hosted catalog should be.
+The content is a **human-edited YAML catalog** — `skills.yaml`, `repositories.yaml`, and supporting `trust-tiers.yaml` and `categories.yaml` — so every entry is deliberately curated and tagged with a trust tier (highest / high / medium) and a category. Navigation always opens the **skill's folder** on GitHub, with a secondary link to its primary file (`SKILL.md`, `README.md`, or `action.yml`). Those folder URLs are *derived* from the file URLs at build time rather than hand-authored, so they cannot drift out of sync.
 
-A few design choices kept it honest. Navigation always opens the **skill's folder** on GitHub, with a secondary link to its primary file (`SKILL.md`, `README.md`, or `action.yml`) — and those folder URLs are *derived* from the file URLs at build time rather than hand-authored, so they can't drift out of sync. The build also **validates** the catalog schema and checks that every remote file URL still resolves, so a broken or moved skill is caught when the index is generated instead of by a visitor hitting a dead link.
+The interesting engineering is how that becomes a searchable site without any server. A Node.js build pipeline validates the catalog schema and checks that every remote file URL still resolves, fetches each skill's actual content from its source repository, builds a [MiniSearch](https://github.com/lucaong/minisearch) full-text index at **build time**, and emits it as a static `index.json` alongside a minimal, dark-first UI. The result deploys to GitHub Pages through a GitHub Actions workflow, and search runs entirely in the browser against the prebuilt index — **no backend, no database, nothing to keep running**.
 
-It's a deliberately small project, but it captures a pattern I like: push all the heavy lifting into a build step so the thing you ship stays trivially cheap to host and fast to use.
+v1.2.0 widened the catalog beyond Dependabot, SAST, and MCP. It now covers **Define & Plan**, testing, debugging, code quality, architecture, and delivery — Superpowers TDD, GitHub Spec Kit, OpenSpec, Addy Osmani's spec-driven and incremental-implementation skills — next to Trail of Bits review tooling, NVIDIA SkillSpector, Semgrep, and the rest. Lower-fit and medium-trust sources were pruned so the list stays small and opinionated. The live search is the inventory; the site is just the cheapest way to keep it findable.
 
 [Try the live search](https://jahnog.github.io/CuratedSkills/) · [Source on GitHub](https://github.com/jahnog/CuratedSkills)
