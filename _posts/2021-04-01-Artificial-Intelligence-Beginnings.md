@@ -10,7 +10,7 @@ tags:
   - from-scratch
 ---
 
-## Build a Neural Network from scratch in Python
+## Build a Neural Network from Scratch
 
 > **TL;DR** — A feed-forward neural network with backpropagation, implemented from scratch in pure Python/NumPy (no ML framework), that predicts a car's fuel efficiency close to the real values.
 >
@@ -41,9 +41,9 @@ The network also has one or more Final Neurons that will take signals from previ
 Structure
 =========
 
-Commonly, Neural Networks are implemented in the form of several neuron layers. The first layer, called the input layer or layer 0, represents the different object features that are evaluated. It differentiates from all the other layers as it doesn’t perform any calculations, just represents the data fed to the network.
+Commonly, Neural Networks are implemented in the form of several neuron layers. The first layer, called the input layer or layer 0, represents the different object features that are evaluated. It differs from all the other layers as it doesn’t perform any calculations, just represents the data fed to the network.
 
-In our example, the first layer will hold the features of the cars that will be examined. For example the number of cylinders, weight, acceleration, year and manufacturing origin, etc.
+In our example, the first layer will hold the features of the cars that will be examined. For example, the number of cylinders, weight, acceleration, year and manufacturing origin, etc.
 
 Then, the model will contain two hidden layers. They are called hidden because they don’t connect directly to the inputs or outputs. They will be responsible for evaluating the relationship between the different characteristics from the previous layer and issuing a result to the next layer.
 
@@ -107,7 +107,7 @@ Image by author
 Optimization of the Neural Network: aka Learning
 ------------------------------------------------
 
-The network learning process will involve searching values ​​for the weights **_W_** and offsets **_b_** that when you feed the network with the data of a car, it will produce the result we want to estimate: the mileage per gallon of that car.
+The network learning process will involve searching values for the weights **_W_** and offsets **_b_** that when you feed the network with the data of a car, it will produce the result we want to estimate: the mileage per gallon of that car.
 
 **Logic:**
 
@@ -119,8 +119,8 @@ To find the W and b values, first, we initialize them with:
 Then, repeat the following steps several times (we will call each iteration of this loop an Epoch):
 
 1.  Feed the network with the characteristics of a car or several cars (in case our network is capable of processing several input data in parallel).
-2.  Perform the calculations of the neuronal network (called forward propagation), multiplying the weights by the input values, adding the offsets, and applying the activation functions layer by layer, until we get the final value.
-3.  Calculate the error (or difference) between the estimated value of the network and the car real value which we will call **_J(W, b)_** and will represent the Mean Squared Error in our example.
+2.  Perform the calculations of the neural network (called forward propagation), multiplying the weights by the input values, adding the offsets, and applying the activation functions layer by layer, until we get the final value.
+3.  Calculate the error (or difference) between the estimated value of the network and the car's real value which we will call **_J(W, b)_** and will represent the Mean Squared Error in our example.
 4.  From the back to the beginning (a process called backward propagation), using the difference obtained, we will calculate the derivatives for the weights **_W_** and the offset **_b_** using the following formulas:
 
 ![](https://miro.medium.com/v2/resize:fit:441/1*Nbm_BIFO4Rpnqov1gEybug.jpeg){: .centered-image}
@@ -129,7 +129,7 @@ Image by author
 
 ![](https://miro.medium.com/v2/resize:fit:1050/1*ejK6xybDkCTrS4ANO-f_iA.png){: .centered-image}
 
-5\. With the derivatives, we proceed to modify the weights to bring them closer to the point where the difference reaches a minimum. For this, we multiply the derivative by an **_α_** value (called Learning Rate) and we will subtract it to the corresponding weights:
+5\. With the derivatives, we proceed to modify the weights to bring them closer to the point where the difference reaches a minimum. For this, we multiply the derivative by an **_α_** value (called Learning Rate) and we will subtract it from the corresponding weights:
 
 ![](https://miro.medium.com/v2/resize:fit:462/1*sNLP1LeOBtleJTdPQ3N59Q.jpeg){: .centered-image}
 
@@ -192,9 +192,9 @@ And finally, the code to create and train the network, and evaluate its predicti
 
 {% gist 04ab7c3aa1bf7abf43c69c2fb6672505 %}{: .centered-image}
 
-After training the Network finishes, we use it to predict the MPG for the cars in the test set and compare them with their real MPG values.
+After training finishes, we use it to predict the MPG for the cars in the test set and compare them with their real MPG values.
 
-The predictions are not perfect but near the real MPG values.
+The predictions are not perfect but close to the real MPG values.
 
 Predictions: **29, 26, 30, 32, 25, 28, 42, 34, 29, 28**
 
@@ -212,14 +212,14 @@ This was a simplified regression problem, addressed with a Neural Network writte
 
 There were a lot of omitted concepts on purpose in this example as they may frighten some people. In a real-world project, they will need to be considered. Some of them are:
 
-*   The data availability, cleanness, balance between classes, distribution, and how to process it.
+*   The data availability, quality, balance between classes, distribution, and how to process it.
 *   The different network models for different problems (like the one presented for regression and classification tasks, Convolutional networks for Image detection, Recurrent network for sequential series (language translation, stock market forecasting), etc.).
 *   Different optimization methods (batch Gradient Descent like in this model, mini-batch G.D., Momentum, RMSProp, Adam, etc), and hyperparameter optimizations (layer quantity and size, learning rate, momentum parameters, activation and cost functions used).
-*   Common problems and how to solve them (Bias and Variance, Exploding or Diminishing gradients, Regularization, Dropout, etc).
+*   Common problems and how to solve them (Bias and Variance, Exploding or vanishing gradients, Regularization, Dropout, etc).
 *   Specialized Hardware for computation speed up (like CPU SIMD instructions, GPUs and TPUs).
 
-We hope that having seen that it is possible to start with a really simple implementation, without needing specialized libraries or hardware, will increase your interest in the exciting field of Artificial Intelligence.
+If this shows that it is possible to start with a really simple implementation, without needing specialized libraries or hardware, it may increase your interest in the exciting field of Artificial Intelligence.
 
-To learn more about this field, two of the common starting points are the [Deep Learning and Neural Network](http://neuralnetworksanddeeplearning.com/index.html) book from Michael Nielsen and the [Deep Learning](https://www.deeplearningbook.org/) book from Ian Goodfellow.
+To learn more about this field, two of the common starting points are the [*Neural Networks and Deep Learning*](http://neuralnetworksanddeeplearning.com/index.html) book from Michael Nielsen and the [Deep Learning](https://www.deeplearningbook.org/) book from Ian Goodfellow.
 
-And, If you have some interest in the visual arts, this article about [Artistic Style transfer using AI]({% post_url 2020-04-01-Art-Style-transfer-using-different-neural-networks %}) might also be worth reading.
+And if you have some interest in the visual arts, this article about [Artistic Style transfer using AI]({% post_url 2020-04-01-Art-Style-transfer-using-different-neural-networks %}) might also be worth reading.

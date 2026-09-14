@@ -5,11 +5,11 @@ layout: single
 author_profile: true
 ---
 
-Javier H. Nogueira. Senior software engineer. I build backend systems and, lately, AI features that have to cite their sources or stay quiet.
+Javier Nogueira. Senior software engineer. I build backend systems and, lately, AI features that have to cite their sources or stay quiet.
 
-This site is a small set of systems I can show: a cited RAG over BCRA FX rules, a spec-first security CLI on PyPI, and a curated registry of agent skills. Older course-style posts are archived.
+This site is a small set of systems I can show: a cited RAG over BCRA FX rules, a spec-first security CLI on PyPI, and a curated registry of agent skills. The older posts are course-style write-ups from earlier learning projects — still here, not the main story.
 
-~30 years in production software. Remote/Hybrid from La Plata, Buenos Aires.
+About 30 years in production software. Remote or hybrid, from La Plata, Buenos Aires.
 
 ## Get in touch
 

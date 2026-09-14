@@ -1,6 +1,6 @@
 # jahnog.github.io
 
-Personal portfolio and blog of Javier (Software Engineer & Deep Learning Enthusiast). Built with [Jekyll](https://jekyllrb.com/) using the [Minimal Mistakes](https://mmistakes.github.io/minimal-mistakes/) theme. Deployed automatically to GitHub Pages at [https://jahnog.github.io](https://jahnog.github.io).
+Personal portfolio and blog of Javier Nogueira (senior software engineer; AI systems). Built with [Jekyll](https://jekyllrb.com/) using the [Minimal Mistakes](https://mmistakes.github.io/minimal-mistakes/) theme. Deployed automatically to GitHub Pages at [https://jahnog.github.io](https://jahnog.github.io).
 
 This is a static site generator project. The source lives in this repository; the rendered output is served from the `gh-pages` branch (or directly from `master` via GitHub Pages).
 

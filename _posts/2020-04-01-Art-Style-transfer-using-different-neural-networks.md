@@ -10,7 +10,7 @@ tags:
   - python
 ---
 
-## Art Style transfer (A comparison between models)
+## Neural Art Style Transfer
 
 > **TL;DR** — I built [artcopypaste.com](https://artcopypaste.com/), a web app that repaints your photos in the style of famous artworks. This write-up is a deep dive into the families of neural networks that make it work, with side-by-side results.
 >
@@ -18,8 +18,8 @@ tags:
 >
 > **Links** — [Live product: artcopypaste.com](https://artcopypaste.com/)
 
-Art Style Transfer consists in the transformation of an image into a similar one that seems to have been painted by an artist.
-If we are Vincent van Gogh fans, and we love German Shepherds, we may like to get a picture of our favorite dog painted in van Gogh’s Starry Night fashion.
+Art Style Transfer is the transformation of an image into a similar one that seems to have been painted by an artist.
+If we are Vincent van Gogh fans, and we love German Shepherds, we may like to get a picture of our favorite dog painted in van Gogh’s Starry Night style.
 
 ![Art Styles](/assets/images/art.jpg)
 
@@ -46,7 +46,7 @@ Instead, if we like Katsushika Hokusai’s Great Wave off Kanagawa, we may obtai
 
 ![the great wave](/assets/images/art-style-transfer/ZBo4y3HmRTYGrPgA--hwSA.jpeg){: .centered-image}
 
-_The Great wave of Kanagawa by Katsushika Hokusai,_ [_Public Domain_](https://commons.wikimedia.org/wiki/File:Great_Wave_off_Kanagawa.jpg){: .centered-image}
+_The Great Wave off Kanagawa by Katsushika Hokusai,_ [_Public Domain_](https://commons.wikimedia.org/wiki/File:Great_Wave_off_Kanagawa.jpg){: .centered-image}
 
 ![german shepherd with the great wave style](/assets/images/art-style-transfer/4La37aXKDP6CZkFzfEHDyQ.jpeg){: .centered-image}
 
@@ -56,17 +56,17 @@ And something like the following picture, if we prefer Wassily Kandinsky’s Com
 
 ![wassily kandinsky composition 7](/assets/images/art-style-transfer/cmy7J38WC5jHi9nljX-bYg.jpeg){: .centered-image}
 
-_Compositions 7 by Wassily Kandinsky,_ [_Public Domain_](https://commons.wikimedia.org/wiki/File:Vassily_Kandinsky,_1913_-_Composition_7.jpg){: .centered-image}
+_Composition 7 by Wassily Kandinsky,_ [_Public Domain_](https://commons.wikimedia.org/wiki/File:Vassily_Kandinsky,_1913_-_Composition_7.jpg){: .centered-image}
 
 ![german shepherd with composition 7 style](/assets/images/art-style-transfer/qiVeS8iEBobXWPT84fBa8w.jpeg){: .centered-image}
 
 Image by author
 
-These image transformations are possible thanks to advances in computing processing power that allowed the usage of more complex neural networks.
+These image transformations are possible thanks to advances in computing power that allowed the usage of more complex neural networks.
 
-Before continuing, you may like to see how to implement a bare bones Neural Network using python without any complex framework [Clicking Here]({% post_url 2021-04-01-Artificial-Intelligence-Beginnings %})
+Before continuing, you may like to see how to implement a bare-bones neural network using Python without any complex framework in [Build a Neural Network from Scratch]({% post_url 2021-04-01-Artificial-Intelligence-Beginnings %}).
 
-The Convolutional Neural Networks (CNN), composed of a series of layers of convolutional matrix operations, are ideal for image analysis and object identification. They employ a similar concept to graphic filters and detectors used in applications like Gimp or Photoshop, but in a much more powerful and complex way.
+Convolutional neural networks (CNNs), composed of a series of layers of convolutional matrix operations, are ideal for image analysis and object identification. They employ a similar concept to graphic filters and detectors used in applications like Gimp or Photoshop, but in a much more powerful and complex way.
 
 A basic example of a matrix operation is performed by an edge detector. It takes a small picture sample of NxN pixels (5x5 in the following example), multiplies its values by a predefined NxN convolution matrix and obtains a value that indicates if an edge is present in that portion of the image. Repeating this procedure for all the NxN portions of the image, we can generate a new image where we have detected the borders of the objects present in there.
 
@@ -103,7 +103,7 @@ The next layers combine the information of the previous layer to detect more com
 
 Image by Matthew D. Zeiler et al. _“Visualizing and Understanding Convolutional Networks”\[1\], usage authorized_
 
-Following layers, continue to use the previous information to detect features like repetitive patterns.
+The following layers continue to use the previous information to detect features like repetitive patterns.
 
 ![](/assets/images/art-style-transfer/iGeYVLPZZYH8NIVYUtGjIQ.jpeg){: .centered-image}
 
@@ -124,11 +124,11 @@ Independent image optimization
 
 One of the most important papers regarding Art Style Transfer is “_A Neural Algorithm of Artistic Style”_\[2\] by Leon A. Gatys, Alexander S. Ecker, Matthias Bethge.
 
-Its main finding was that the **_Content_** of a natural image and its **_Style_** can be separated and processed independently of each other, which allows us to “extract” the style from a classic art paint and apply it to our own images.
+Its main finding was that the **_Content_** of a natural image and its **_Style_** can be separated and processed independently of each other, which allows us to “extract” the style from a classic painting and apply it to our own images.
 
 Many of the other Neural Style Transfer models discussed here took this idea and expanded it with faster and more complex networks, but still using this foundation.
 
-Gatys et al. model is based on a VGG-19\[3\] neural network, which is commonly used for visual object recognition and rivals human performance.
+Gatys et al.'s model is based on a VGG-19\[3\] neural network, which is commonly used for visual object recognition and rivals human performance.
 
 ![vgg neural network](/assets/images/art-style-transfer/dd2M0dum748VtZnJwcmHLQ.png){: .centered-image}
 
@@ -137,7 +137,7 @@ Image by author
 Then, it uses pieces of it to define some functions:
 
 *   A **Content Loss** function, that calculates how the content of the generated image differs from the content of our original image. To compare the Content, instead of comparing the image pixels, it checks the values of one of the CNN highest layers of the **_Input Image_** and the values of that layer for the **_Output Image_**. This will allow us to generate different images that will contain similar objects in them.
-*   A **Style Loss** function, that calculates how the style of the generated image differs from the style of the classic art paint (or whatever style image we choose to use). To compare Styles, a different approach is required. It takes layers at different levels (to compare features of different complexity) and for each layer, a matrix (Gram matrix) with the correlation between the detected features is created. This matrix indicates which features occur simultaneously (like finding that horizontal lines always have X color, etc). The Style Loss is calculated as the distance between the Gram matrices of the layers of the **_Style Image_** and the Gram matrices of the layers in the **_Output Image_**. This allows us to apply features from the simple ones, like blocks of some color, to the most complex ones like waves or the artist brushstroke.
+*   A **Style Loss** function, that calculates how the style of the generated image differs from the style of the classic painting (or whatever style image we choose to use). To compare Styles, a different approach is required. It takes layers at different levels (to compare features of different complexity) and for each layer, a matrix (Gram matrix) with the correlation between the detected features is created. This matrix indicates which features occur simultaneously (like finding that horizontal lines always have X color, etc). The Style Loss is calculated as the distance between the Gram matrices of the layers of the **_Style Image_** and the Gram matrices of the layers in the **_Output Image_**. This allows us to apply features from the simple ones, like blocks of some color, to the most complex ones like waves or the artist brushstroke.
 *   A **Total Loss** function that takes into account both the Content Loss and the Style Loss.
 
 ![vgg19 style and content loss function](/assets/images/art-style-transfer/9mRwqQvc3pKAW1mpr-XEfQ.png){: .centered-image}
@@ -148,7 +148,7 @@ Then it runs several optimization rounds (thousands or more) that will introduce
 
 All the previous German Shepherd artistic images were generated using this method.
 
-You can also generate your own artistic pictures using this method going to the [artcopypaste.com](https://artcopypaste.com/) web site.
+You can also generate your own artistic pictures using this method going to [artcopypaste.com](https://artcopypaste.com/).
 
 **_Advantages:_**
 
@@ -164,7 +164,7 @@ You can also generate your own artistic pictures using this method going to the 
 Pre-trained networks for a single style transfer
 ================================================
 
-These networks tackle the main disadvantage of models like the previously described have: The time it takes to produce an artistic image.
+These networks tackle the main disadvantage that models like the one described above have: the time it takes to produce an artistic image.
 
 They are based on models like the one described in the paper _“Perceptual Losses for Real-Time Style Transfer and Super-Resolution”_\[4\] by Justin Johnson, Alexandre Alahi, Li Fei-Fei.
 
@@ -214,7 +214,7 @@ Image by author, composition 7 style
 **_Disadvantages:_**
 
 *   It takes much more time to train as it needs to train the network against an image dataset.
-*   Not only it needs the weights data for the VGG (550 MB), but also needs the image dataset for training (for example, the COCO 2014 dataset that contains 82,700 images and needs 13.7 GB of storage)
+*   Not only does it need the weights data for the VGG (550 MB), but it also needs the image dataset for training (for example, the COCO 2014 dataset that contains 82,700 images and needs 13.7 GB of storage)
 
 Pre-trained networks for arbitrary style transfer
 =================================================
@@ -223,7 +223,7 @@ These networks also generate a pre-trained model, but not limited to only one st
 
 One way to create this type of network model is described in the paper _“Exploring the structure of a real-time, arbitrary neural artistic stylization network”_\[7\] by Golnaz Ghiasi, Honglak Lee, Manjunath Kudlur, Vincent Dumoulin, Jonathon Shlens.
 
-Another very similar model, is described in _“Arbitrary Style Transfer in Real-time with Adaptive Instance Normalization”\[8\]_ by Xun Huang, Serge Belongie.
+Another very similar model is described in _“Arbitrary Style Transfer in Real-time with Adaptive Instance Normalization”\[8\]_ by Xun Huang, Serge Belongie.
 
 This model consists of three Neural Networks:
 
@@ -239,7 +239,7 @@ _Golnaz Ghiasi et al._\[7\] paper expands the initial work described in “A Lea
 
 Thanks to the addition of the **_Style Prediction Network_**, the model is able to apply any number of styles, even styles for which it was not trained. This network produces a vector of normalization parameters **S** that represents the detected Style present in the Style Image and applies them to the Style Transfer network to generate the Artwork.
 
-To train this model, not only requires a large image dataset to use as content for training Style Transfer Network (in this case, the ImageNet dataset consisting of 14 million images) but also a large style image dataset to train the Style Prediction Network (in this case the Painter by Numbers dataset, consisting of 80.000 art paintings and the Describable Textures dataset, composed of 5600 textures).
+Training this model not only requires a large image dataset to use as content for training the Style Transfer Network (in this case, the ImageNet dataset consisting of 14 million images) but also a large style image dataset to train the Style Prediction Network (in this case the Painter by Numbers dataset, consisting of 80,000 paintings and the Describable Textures dataset, composed of 5600 textures).
 
 Fortunately, there are pre-trained models readily available that can be used directly:
 
@@ -257,7 +257,7 @@ Image by author, great wave style
 
 Image by author, composition 7 style
 
-*   A Second updated version, of 82 MB in size, also available in Tensorflow Hub: [https://tfhub.dev/google/magenta/arbitrary-image-stylization-v1-256/2](https://tfhub.dev/google/magenta/arbitrary-image-stylization-v1-256/2)
+*   A second updated version, of 82 MB in size, also available in Tensorflow Hub: [https://tfhub.dev/google/magenta/arbitrary-image-stylization-v1-256/2](https://tfhub.dev/google/magenta/arbitrary-image-stylization-v1-256/2)
 
 ![german shepherd with van gogh starry night style](/assets/images/art-style-transfer/ocLbirZLarz4kRHE-BcfcA.jpeg){: .centered-image}
 
@@ -271,7 +271,7 @@ Image by author, great wave style
 
 Image by author, composition 7 style
 
-You can also test your own images with this model in the [artcopypaste.com](https://artcopypaste.com/) web site.
+You can also test your own images with this model on [artcopypaste.com](https://artcopypaste.com/).
 
 **_Advantages:_**
 
@@ -287,11 +287,11 @@ Universal style transfer with Encoder-Decoder networks
 
 This model is detailed in the paper _“Universal Style Transfer via Feature Transforms”_\[11\] by Yijun Li, Chen Fang, Jimei Yang, Zhaowen Wang, Xin Lu, Ming-Hsuan Yang
 
-It tries to discard the need to train the network on the style images while still maintaining visual appealing transformed images.
+It tries to discard the need to train the network on the style images while still maintaining visually appealing transformed images.
 
 It first trains a series of Decoder networks that connect to the different layers of a VGG network. The VGG network acts as an encoder. It is loaded with the ImageNet weights and fixed. Each decoder structure has the inverse structure of the VGG up to the point where the decoder connects to the encoder.
 
-Using an image dataset, the decoders are trained to regenerate the original image feed to the VGG. And once they have been trained, their weights are fixed for the rest of the process.
+Using an image dataset, the decoders are trained to regenerate the original image fed to the VGG. And once they have been trained, their weights are fixed for the rest of the process.
 
 ![VGG19 network as encoder, with one decoder for each layer](/assets/images/art-style-transfer/SfKi42o9wsxsymPS1Z92zw.png){: .centered-image}
 
@@ -347,7 +347,7 @@ Image by author, composition 7 style
 
 **_Disadvantages:_**
 
-*   It needs large image datasets and time to train each of the five decoder networks, but this is needed just only one time, but the paper even includes pre-trained weights in the code samples.
+*   It needs large image datasets and time to train each of the five decoder networks, but this is only needed once, and the paper even includes pre-trained weights in the code samples.
 
 Final Thoughts
 ==============
@@ -356,9 +356,9 @@ This work is far from describing all the existing neural network models to perfo
 
 The best example is Gatys et al. separation between the Content and the Style of an image, that was taken and expanded by almost all other models.
 
-I also just wanted to show, using a few examples, how we can get a deeper understanding of what we consider an object in an image, despite all the possible transformations in color and form it can suffer, and get a better idea how we perceive the world we see around us.
+I also just wanted to show, using a few examples, how we can get a deeper understanding of what we consider an object in an image, despite all the possible transformations in color and form it can suffer, and get a better idea of how we perceive the world we see around us.
 
-Other related stories: [Artificial Intelligence Beginnings (Build a Neural Network from scratch in Python)]({% post_url 2021-04-01-Artificial-Intelligence-Beginnings %})
+Other related stories: [Build a Neural Network from Scratch]({% post_url 2021-04-01-Artificial-Intelligence-Beginnings %})
 
 **References**
 ==============

@@ -6,9 +6,9 @@ author_profile: true
 entries_layout: grid
 ---
 
-A selection of things I've built — machine learning, simulations, and data
-analysis. Each card links to a write-up, and to a live demo or source where one
-is available.
+Selected work in cited RAG, spec-driven tools, and agent-skill infrastructure,
+plus earlier projects in machine learning, simulation, and data analysis. Each
+card links to a write-up, and to a live demo or source when one exists.
 
 <div class="entries-grid">
   {% for post in site.posts %}
