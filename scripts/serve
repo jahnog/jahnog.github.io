@@ -1,0 +1,127 @@
+#!/usr/bin/env bash
+# Preview the site with the same Ruby and github-pages versions GitHub Pages uses:
+# https://pages.github.com/versions.json
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+cd "$ROOT"
+
+PAGES_RUBY="3.3.4"
+PORT="${PORT:-4000}"
+BUNDLE_PATH_DIR="${ROOT}/vendor/bundle"
+
+# Local-preview log lines that are not site failures (stale Bundler, Faraday 2, unauthenticated
+# github-metadata, Chrome DevTools probing Jekyll's port).
+PREVIEW_NOISE_REGEX="DidYouMean::SPELL_CHECKERS|To use retry middleware with Faraday|No GitHub API authentication could be found|ERROR '/json/version' not found"
+
+filter_preview_noise() {
+  grep -vE --line-buffered "$PREVIEW_NOISE_REGEX" || true
+}
+
+apply_preview_log_filter() {
+  exec > >(filter_preview_noise)
+  exec 2> >(filter_preview_noise >&2)
+}
+
+install_pages_gems() {
+  # Lockfile is gitignored; an old BUNDLED WITH 2.2.15 forces Bundler that warns on Ruby 3.3.
+  rm -f Gemfile.lock
+  bundle install --quiet
+}
+
+local_ruby_version() {
+  if ! command -v ruby >/dev/null 2>&1; then
+    return 1
+  fi
+  ruby -e 'print RUBY_VERSION'
+}
+
+run_local() {
+  export BUNDLE_PATH="${BUNDLE_PATH_DIR}"
+  install_pages_gems
+  apply_preview_log_filter
+  exec bundle exec jekyll serve --host 0.0.0.0 --port "${PORT}" "$@"
+}
+
+container_engine() {
+  if command -v docker >/dev/null 2>&1 && docker info >/dev/null 2>&1; then
+    echo docker
+    return 0
+  fi
+  if command -v podman >/dev/null 2>&1 && podman info >/dev/null 2>&1; then
+    echo podman
+    return 0
+  fi
+  return 1
+}
+
+clear_unwritable_site() {
+  local engine="$1"
+  if [[ ! -e "${ROOT}/_site" ]]; then
+    return 0
+  fi
+  if rm -rf "${ROOT}/_site" 2>/dev/null; then
+    return 0
+  fi
+  echo "Clearing leftover root-owned _site via ${engine}..."
+  "$engine" run --rm \
+    -v "${ROOT}:/site:z" \
+    "ruby:${PAGES_RUBY}" \
+    rm -rf /site/_site
+}
+
+run_container() {
+  local engine="$1"
+  shift
+
+  clear_unwritable_site "$engine"
+
+  local tty_opts=(--rm)
+  if [[ -t 0 && -t 1 ]]; then
+    tty_opts+=(-it)
+  else
+    tty_opts+=(-i)
+  fi
+
+  exec "$engine" run "${tty_opts[@]}" --init \
+    -u "$(id -u):$(id -g)" \
+    -e HOME=/tmp \
+    -e GEM_HOME=/tmp/gems \
+    -e GEM_PATH=/tmp/gems \
+    -e BUNDLE_PATH=/site/vendor/bundle \
+    -e BUNDLE_APP_CONFIG=/tmp/.bundle \
+    -e PATH="/tmp/gems/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin" \
+    -e PORT="${PORT}" \
+    -e PREVIEW_NOISE_REGEX="${PREVIEW_NOISE_REGEX}" \
+    -p "${PORT}:${PORT}" \
+    -v "${ROOT}:/site:z" \
+    -w /site \
+    "ruby:${PAGES_RUBY}" \
+    bash -lc 'set -euo pipefail
+      command -v bundle >/dev/null || gem install bundler --no-document
+      rm -f Gemfile.lock
+      bundle install --quiet
+      filter_preview_noise() { grep -vE --line-buffered "${PREVIEW_NOISE_REGEX}" || true; }
+      exec > >(filter_preview_noise)
+      exec 2> >(filter_preview_noise >&2)
+      extra=()
+      if [[ $# -gt 0 ]]; then
+        extra=("$@")
+      fi
+      exec bundle exec jekyll serve --host 0.0.0.0 --port "${PORT}" --watch --force_polling "${extra[@]}"
+    ' bash "$@"
+}
+
+if [[ "$(local_ruby_version 2>/dev/null || true)" == "${PAGES_RUBY}" ]]; then
+  echo "Using local Ruby ${PAGES_RUBY} (GitHub Pages)."
+  run_local "$@"
+fi
+
+if engine="$(container_engine)"; then
+  echo "Using ${engine} ruby:${PAGES_RUBY} (GitHub Pages)."
+  run_container "$engine" "$@"
+fi
+
+echo "Need Ruby ${PAGES_RUBY} on PATH, or Docker/Podman, to match GitHub Pages." >&2
+echo "Install Ruby ${PAGES_RUBY}, or install Docker/Podman, then re-run $0." >&2
+exit 1

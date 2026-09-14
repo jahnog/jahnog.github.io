@@ -5,22 +5,11 @@ layout: single
 author_profile: true
 ---
 
-I'm Javier, a software engineer and deep learning enthusiast. I enjoy turning
-hard problems into working software — from training and comparing neural
-networks, to building physics simulations, to wrangling real-world datasets
-into clear, honest visualizations.
+Javier Nogueira. Senior software engineer. I build backend systems and, lately, AI features that have to cite their sources or stay quiet.
 
-This site collects a selection of my projects. Each one links to a write-up and,
-where available, a live demo or the source code.
+This site is a small set of systems I can show: a cited RAG over BCRA FX rules, a spec-first security CLI on PyPI, and a curated registry of agent skills. The older posts are course-style write-ups from earlier learning projects — still here, not the main story.
 
-## What I work with
-
-- **Machine learning & deep learning:** neural networks (from scratch and with
-  frameworks), computer vision, neural style transfer, TensorFlow.
-- **Data analysis & visualization:** Python, pandas, and notebook-driven
-  analysis of economic and climate datasets.
-- **Software & simulations:** Scala / Scala.js, algorithms (e.g. the Barnes-Hut
-  O(n log n) N-body approximation), and building things end to end.
+About 30 years in production software. Remote or hybrid, from La Plata, Buenos Aires.
 
 ## Get in touch
 

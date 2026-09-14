@@ -16,11 +16,11 @@ minimal_mistakes_skin    : "dark" # "default" # "air", "aqua", "contrast", "dark
 
 # Site Settings
 locale                   : "en-US"
-title                    : "Javier"
+title                    : "Javier Nogueira"
 title_separator          : "-"
-subtitle                 : "Software Engineer & Deep Learning Enthusiast" # site tagline that appears below site title in masthead
-name                     : "Javier"
-description              : "Javier — software engineer and deep learning enthusiast. A showcase of projects in machine learning, neural networks, simulations, and data analysis."
+subtitle                 : "Senior software engineer · AI systems (RAG, agents) · remote" # site tagline that appears below site title in masthead
+name                     : "Javier Nogueira"
+description              : "Senior software engineer. Backend systems, cited RAG, coding agents, and earlier work in machine learning, simulation, and data analysis."
 url                      : "https://jahnog.github.io" # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : jahnog/jahnog.github.io # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
@@ -80,7 +80,7 @@ og_image                 : /assets/images/800px-MultiLayerNeuralNetworkBigger_en
 # - https://developers.google.com/structured-data/customize/social-profiles
 social:
   type                   : Person # Person or Organization (defaults to Person)
-  name                   : "Javier" # If the user or organization name differs from the site's name
+  name                   : "Javier Nogueira" # If the user or organization name differs from the site's name
   links: # An array of links to social media profiles
     - "https://www.linkedin.com/in/jntech/"
     - "https://github.com/jahnog"
@@ -95,9 +95,9 @@ analytics:
 
 # Site Author
 author:
-  name             : "Javier"
+  name             : "Javier Nogueira"
   avatar           : /assets/images/the_scream_98x98.jpg # path of avatar image, e.g. "/assets/images/bio-photo.jpg" entrepreneur, investor,
-  bio              : "Software engineer & deep learning enthusiast. I build projects in machine learning, simulations, and data analysis."
+  bio              : "Senior software engineer. AI systems (RAG, agents)."
   location         : # "Somewhere"
   email            :
   links:
@@ -198,7 +198,6 @@ plugins:
   - jekyll-gist
   - jekyll-feed
   - jekyll-include-cache
-  - jekyll-gist
 
 # mimic GitHub Pages with --safe
 whitelist:
