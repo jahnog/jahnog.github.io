@@ -65,6 +65,10 @@ figure video {
   display: none;
 }
 
+html {
+  font-size: 16px !important;
+}
+
 body {
   background-color: var(--wl-bg) !important;
   color: var(--wl-text);
@@ -79,8 +83,6 @@ a:hover {
   color: var(--wl-text);
 }
 
-.masthead,
-.page__footer,
 .sidebar {
   background: var(--wl-surface);
 }
@@ -148,7 +150,12 @@ a:hover {
 }
 
 .page,
-.archive {
+.archive,
+.page__inner-wrap,
+.page__content,
+.page__meta,
+.page__share,
+.page__footer {
   float: none !important;
   width: 100% !important;
   padding-right: 0 !important;
@@ -167,9 +174,18 @@ a:hover {
   display: none;
 }
 
+.greedy-nav > a.site-title,
 .site-title {
   color: var(--wl-text);
   font-weight: 600;
+  text-decoration: none;
+}
+
+.greedy-nav > a.site-title:hover,
+.greedy-nav > a.site-title:focus-visible,
+.site-title:hover {
+  color: var(--wl-text);
+  text-decoration: none;
 }
 
 .site-subtitle {
@@ -177,7 +193,17 @@ a:hover {
 }
 
 .masthead {
-  border-bottom: 1px solid var(--wl-border);
+  background: transparent !important;
+  border-bottom: 0;
+  padding: clamp(0.75rem, 1.5vw, 1.15rem) clamp(0.9rem, 1.6vw, 1.4rem) 0;
+}
+
+.masthead__inner-wrap {
+  background: var(--wl-surface);
+  border: 1px solid var(--wl-border);
+  border-radius: 8px;
+  box-shadow: var(--wl-shadow);
+  max-width: 72rem;
 }
 
 .greedy-nav .visible-links a {
@@ -200,9 +226,20 @@ a:hover {
   background: transparent;
 }
 
-.page-projects .greedy-nav a[href="/projects/"],
-.page-home .greedy-nav a[href="/"],
-.page-about .greedy-nav a[href="/about/"] {
+.greedy-nav .hidden-links {
+  background: var(--wl-surface);
+  border: 1px solid var(--wl-border);
+  border-radius: 8px;
+  box-shadow: var(--wl-shadow);
+}
+
+.greedy-nav .hidden-links a {
+  color: var(--wl-muted);
+}
+
+.page-projects .greedy-nav .visible-links a[href="/projects/"],
+.page-home .greedy-nav .visible-links a[href="/"],
+.page-about .greedy-nav .visible-links a[href="/about/"] {
   border-color: var(--wl-gold);
   color: var(--wl-gold);
   text-decoration: none;
@@ -223,6 +260,31 @@ a:focus-visible {
 .archive__item-title a:focus-visible {
   color: var(--wl-text);
   text-decoration: none;
+}
+
+.page__title {
+  font-size: clamp(1.5rem, 2.4vw, 1.9rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-bottom: 0.65rem;
+}
+
+.archive > p {
+  color: var(--wl-muted);
+  font-size: 1.02rem;
+  max-width: 42rem;
+  line-height: 1.5;
+  margin: 0 0 1.5rem;
+}
+
+.page__content h2 {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.page__meta {
+  display: none !important;
 }
 
 .page__content a:hover,
@@ -326,7 +388,20 @@ a:focus-visible {
   display: flex;
   flex-wrap: wrap;
   gap: 0.45rem;
-  margin: 0.75rem 0 0;
+  margin: 0.75rem 0 1rem;
+  width: auto !important;
+  max-width: 100%;
+  float: none !important;
+}
+
+.page__actions .btn,
+.archive__item-actions .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  width: auto;
+  float: none;
 }
 
 .btn--ghost,
@@ -345,6 +420,15 @@ a.btn--ghost:focus-visible {
   color: var(--wl-gold);
   text-decoration: none;
   background: transparent;
+}
+
+.entries-list .list__item {
+  padding: 1.15rem 0;
+  border-bottom: 1px solid var(--wl-border);
+}
+
+.entries-list .list__item:first-child {
+  border-top: 1px solid var(--wl-border);
 }
 
 .entries-list .archive__item-title {
@@ -382,6 +466,39 @@ a.btn--ghost:focus-visible {
   color: var(--wl-muted);
 }
 
+.page__footer {
+  background: transparent !important;
+  border: 0;
+  margin-top: 1.5rem;
+  padding: 0 clamp(0.9rem, 1.6vw, 1.4rem) 1rem;
+}
+
+.page__footer footer {
+  background: var(--wl-surface);
+  border: 1px solid var(--wl-border);
+  border-radius: 8px;
+  box-shadow: var(--wl-shadow);
+  max-width: 72rem;
+  margin: 0 auto 1rem;
+  padding: 0.85rem 1.1rem;
+}
+
+.page__footer-follow ul {
+  margin: 0 0 0.35rem;
+}
+
+.page__footer-follow li {
+  text-transform: none;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.page__footer-follow a {
+  color: var(--wl-muted);
+  font-weight: 500;
+}
+
+.page__footer-copyright,
 .page__footer-copyright a {
   color: var(--wl-muted);
 }

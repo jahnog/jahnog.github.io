@@ -45,6 +45,26 @@ if (!custom.includes(".archive__item-title a") || !custom.includes("text-decorat
 if (footer.includes("Minimal Mistakes")) {
   throw new Error("footer still credits Minimal Mistakes");
 }
+if (footer.includes("follow_label") || footer.includes("fas fa-")) {
+  throw new Error("footer still uses FOLLOW label or icon chrome");
+}
+
+const archiveSingle = readFileSync(join(root, "_includes", "archive-single.html"), "utf8");
+if (!archiveSingle.includes("assign teaser = nil")) {
+  throw new Error("archive-single.html does not reset teaser per post");
+}
+if (!custom.includes(".visible-links a[href=\"/projects/\"]")) {
+  throw new Error("active nav is not scoped to .visible-links (wordmark would turn gold)");
+}
+if (!custom.includes(".page__inner-wrap") || !custom.includes("float: none")) {
+  throw new Error("_custom.scss does not unfloat .page__inner-wrap");
+}
+if (!custom.includes("masthead__inner-wrap") || !custom.includes("border-radius: 8px")) {
+  throw new Error("masthead is not a surface card");
+}
+if (!custom.includes("font-size: 16px !important")) {
+  throw new Error("html root font-size is not pinned to 16px");
+}
 
 const compiledPath = join(root, "_site", "assets", "css", "main.css");
 if (existsSync(compiledPath)) {

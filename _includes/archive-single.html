@@ -1,5 +1,6 @@
+{% assign teaser = nil %}
 {% if post.header.teaser %}
-  {% capture teaser %}{{ post.header.teaser }}{% endcapture %}
+  {% assign teaser = post.header.teaser %}
 {% elsif include.type != "grid" %}
   {% assign teaser = site.teaser %}
 {% endif %}
