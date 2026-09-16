@@ -355,6 +355,9 @@
   max-width: var(--wl-measure);
   line-height: var(--wl-leading);
   color: var(--wl-text);
+  /* Bare URLs used as link text have no break opportunity and would
+     otherwise push the page wider than the viewport on a phone. */
+  overflow-wrap: break-word;
 }
 
 .wl-prose > :first-child {
