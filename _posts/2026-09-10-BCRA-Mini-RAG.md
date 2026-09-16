@@ -10,9 +10,9 @@ tags:
   - gradio
   - evals
   - spec-driven-development
+demo: https://bcra.contentlabstudy.com/
+source: https://github.com/jahnog/mini-rag-service
 ---
-
-## BCRA Mini-RAG
 
 > **TL;DR** — I built [BCRA Mini-RAG](https://bcra.contentlabstudy.com/): a small RAG assistant over Argentine FX regulation (BCRA CAMEX). Ask what a circular says and you get a **cited clause** — Comunicación “A” number plus punto (clause number) — or honest **silencio**. It is neither a general BCRA chatbot nor legal advice. I wrote the code **spec-first** with OpenSpec.
 >

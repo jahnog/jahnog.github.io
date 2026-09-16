@@ -10,9 +10,9 @@ tags:
   - coding-agents
   - security
   - spec-driven-development
+demo: https://jahnog.github.io/CuratedSkills/
+source: https://github.com/jahnog/CuratedSkills
 ---
-
-## A Searchable Registry of Coding-Agent Skills
 
 > **TL;DR** — I built [CuratedSkills](https://github.com/jahnog/CuratedSkills): a hand-curated registry of high-trust agent skills for **software engineering and security** — specs, tests, review, delivery, Dependabot PRs, static analysis, and security MCP servers — with a fast, minimalistic full-text search, served as a fully static site.
 >

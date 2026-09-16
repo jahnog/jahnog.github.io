@@ -9,9 +9,9 @@ tags:
   - simulation
   - physics
   - algorithms
+demo: https://jnbigdatabarneshut.s3.amazonaws.com/index.html
+source: https://github.com/jahnog/barnes-hut-web
 ---
-## Barnes-Hut N-Body Simulation
-
 > **TL;DR** — An interactive N-body galaxy simulation that runs in the browser, using the Barnes-Hut quadtree approximation to bring the cost of computing gravitational forces down from O(n²) to O(n log n). Written in Scala and compiled to JavaScript.
 >
 > **Stack** — Scala, Scala.js, quadtree spatial partitioning

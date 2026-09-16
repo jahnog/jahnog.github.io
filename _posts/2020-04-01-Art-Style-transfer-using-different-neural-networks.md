@@ -8,9 +8,8 @@ tags:
   - machine-learning
   - computer-vision
   - python
+demo: https://artcopypaste.com/
 ---
-
-## Neural Art Style Transfer
 
 > **TL;DR** — I built [artcopypaste.com](https://artcopypaste.com/), a web app that repaints your photos in the style of famous artworks. This write-up is a deep dive into the families of neural networks that make it work, with side-by-side results.
 >

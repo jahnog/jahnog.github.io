@@ -25,7 +25,7 @@ url                      : "https://jahnog.github.io" # the base hostname & prot
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : jahnog/jahnog.github.io # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
 teaser                   : /assets/images/800px-MultiLayerNeuralNetworkBigger_english.png # fallback teaser for posts without a specific image
-logo                     : /assets/images/the_scream_98x98.jpg # path of logo image to display in the masthead, e.g. "/assets/images/88x88.png"
+logo                     : # wordmark only; Scream asset stays on disk, not in chrome
 masthead_title           : # overrides the website title displayed in the masthead, use " " for no title
 # breadcrumbs            : false # true, false (default)
 words_per_minute         : 200
@@ -253,8 +253,8 @@ defaults:
       type: posts
     values:
       layout: single
-      author_profile: true
+      author_profile: false
       read_time: true
       comments: # true
-      share: true
+      share: false
       related: true

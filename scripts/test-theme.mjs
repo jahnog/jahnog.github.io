@@ -8,6 +8,8 @@ const weblab = readFileSync(join(root, "assets", "css", "weblab.css"), "utf8");
 const custom = readFileSync(join(root, "_sass", "custom-styles", "_custom.scss"), "utf8");
 const mainScss = readFileSync(join(root, "assets", "css", "main.scss"), "utf8");
 const head = readFileSync(join(root, "_includes", "head", "custom.html"), "utf8");
+const config = readFileSync(join(root, "_config.yml"), "utf8");
+const footer = readFileSync(join(root, "_includes", "footer.html"), "utf8");
 
 for (const token of ["#050821", "#f4b223", "#121548", "#b5c5e8"]) {
   if (!weblab.includes(token)) throw new Error(`missing ${token}`);
@@ -27,6 +29,21 @@ if (!custom.includes(".btn--primary") || !custom.includes("var(--wl-on-gold)")) 
 }
 if (!custom.includes(".pagination li a.current")) {
   throw new Error("_custom.scss does not remap pagination current to gold");
+}
+if (!/author_profile:\s*false/.test(config)) {
+  throw new Error("_config.yml still enables author_profile");
+}
+if (/logo\s*:\s*\/assets\/images\/the_scream/.test(config)) {
+  throw new Error("masthead logo is still the Scream crop");
+}
+if (!custom.includes(".entries-grid") || !custom.includes("display: grid")) {
+  throw new Error("_custom.scss does not turn .entries-grid into a CSS grid");
+}
+if (!custom.includes(".archive__item-title a") || !custom.includes("text-decoration: none")) {
+  throw new Error("archive titles are not de-underlined");
+}
+if (footer.includes("Minimal Mistakes")) {
+  throw new Error("footer still credits Minimal Mistakes");
 }
 
 const compiledPath = join(root, "_site", "assets", "css", "main.css");
