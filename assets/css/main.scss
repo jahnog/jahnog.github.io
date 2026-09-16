@@ -4,6 +4,11 @@
 
 @charset "utf-8";
 
+// WebLook tokens before the MM skin's `!default` teal (#00adb5).
+$background-color: #050821;
+$text-color: #ffffff;
+$primary-color: #f4b223;
+
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
 @import "minimal-mistakes"; // main partials
 @import "custom-styles"; // custom styles

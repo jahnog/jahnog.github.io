@@ -121,6 +121,24 @@ a:hover {
   border-radius: 999px;
 }
 
+.btn--primary,
+.btn--primary:visited,
+.btn--primary:hover {
+  background-color: var(--wl-gold);
+  color: var(--wl-on-gold);
+}
+
+.pagination li a.current,
+.pagination li a.current.disabled {
+  background: var(--wl-gold);
+  color: var(--wl-on-gold);
+}
+
+.toc .nav__title {
+  background: var(--wl-gold);
+  color: var(--wl-on-gold);
+}
+
 .author__urls {
   display: block;
   position: relative;
