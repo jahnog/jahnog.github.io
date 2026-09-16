@@ -1,0 +1,45 @@
+---
+layout: default
+---
+
+<article class="post">
+  <header class="post-header">
+    <p class="wl-kicker">{{ page.date | date: "%B %-d, %Y" }}</p>
+    <h1 class="wl-title wl-title-lg">{{ page.title }}</h1>
+    {% if page.excerpt %}
+      <p class="wl-subtitle">{{ page.excerpt | strip_html | strip_newlines }}</p>
+    {% endif %}
+
+    {% if page.demo or page.source %}
+      <div class="wl-actions">
+        {% if page.demo %}
+          <a class="wl-btn wl-btn-primary" href="{{ page.demo }}" rel="noopener">Live demo</a>
+        {% endif %}
+        {% if page.source %}
+          <a class="wl-btn wl-btn-ghost" href="{{ page.source }}" rel="noopener">Source</a>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    {% if page.tags and page.tags.size > 0 %}
+      <div class="wl-chip-row">
+        {% for tag in page.tags %}
+          <span class="wl-chip">{{ tag }}</span>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </header>
+
+  <div class="wl-prose">
+    {{ content }}
+  </div>
+</article>
+
+<nav class="wl-actions post-nav" aria-label="Post navigation">
+  {% if page.previous %}
+    <a class="wl-btn wl-btn-ghost" href="{{ page.previous.url | relative_url }}">Previous</a>
+  {% endif %}
+  {% if page.next %}
+    <a class="wl-btn wl-btn-ghost" href="{{ page.next.url | relative_url }}">Next</a>
+  {% endif %}
+</nav>

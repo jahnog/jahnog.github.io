@@ -1,0 +1,18 @@
+<header class="wl-topbar">
+  <div class="wl-brand">
+    <a class="site-title wl-title" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+    {% if site.subtitle %}
+      <p class="wl-subtitle">{{ site.subtitle }}</p>
+    {% endif %}
+  </div>
+
+  <nav class="wl-nav" aria-label="Main">
+    {% for link in site.data.navigation.main %}
+      {% assign target = link.url | relative_url %}
+      <a
+        href="{{ target }}"
+        {% if page.url == link.url %}aria-current="page"{% endif %}
+      >{{ link.title }}</a>
+    {% endfor %}
+  </nav>
+</header>

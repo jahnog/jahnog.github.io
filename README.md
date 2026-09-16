@@ -1,39 +1,31 @@
 # jahnog.github.io
 
-Personal portfolio and blog of Javier Nogueira (senior software engineer; AI systems). Built with [Jekyll](https://jekyllrb.com/) using the [Minimal Mistakes](https://mmistakes.github.io/minimal-mistakes/) theme. Deployed automatically to GitHub Pages at [https://jahnog.github.io](https://jahnog.github.io).
+Personal portfolio and blog of Javier Nogueira (senior software engineer; AI systems). Built with [Jekyll](https://jekyllrb.com/) and deployed automatically to GitHub Pages at [https://jahnog.github.io](https://jahnog.github.io).
 
-This is a static site generator project. The source lives in this repository; the rendered output is served from the `gh-pages` branch (or directly from `master` via GitHub Pages).
+There is no theme gem and no remote theme. The site is rendered by a handful of local layouts and includes, styled by `assets/css/weblab.css` — the shared navy-and-gold template vendored from the sibling [WebLook](../WebLook) repo — plus a short `assets/css/site.css` for the few site-specific bits. No JavaScript ships with the site apart from the analytics snippet.
 
 ## Prerequisites
 
 - GitHub Pages currently uses **Ruby 3.3.4** and **github-pages 232** ([dependency versions](https://pages.github.com/versions.json)). The Gemfile pins that gemset.
 - **`./scripts/serve`** for local preview: uses Ruby 3.3.4 on PATH if present, otherwise Docker or Podman (`ruby:3.3.4`).
-- **Node.js** (>= 0.10.0; project tested with Node 24.14.0) and **npm** (for JavaScript asset minification and banner injection), only if you change files under `assets/js/`.
+- **Node.js** only to run `scripts/test-theme.mjs`.
 - Git (for cloning and version control).
 
-Optional but recommended for local development:
-- A modern terminal / shell (bash, zsh, PowerShell, etc.).
-
 **Platform notes**:
-- **Linux/macOS**: `./scripts/serve` is the supported preview path. A local Ruby 3.3.4 install (rbenv, rvm, asdf, mise) skips Docker; otherwise Docker or Podman is enough.
+- **Linux/macOS**: `./scripts/serve` is the supported preview path. A local Ruby 3.3.4 install (rbenv, rvm, asdf, mise) skips the container; otherwise Docker or Podman is enough.
 - **Windows**: Use WSL2 (recommended), then the same `./scripts/serve` command.
 
 ## Installation / Setup
-
-Clone the repository and install dependencies:
 
 ```bash
 git clone https://github.com/jahnog/jahnog.github.io.git
 cd jahnog.github.io
 
-# Optional: Node dev dependencies (only if you edit assets/js/).
-npm install
-
 # Gems are installed by ./scripts/serve (vendor/bundle, Ruby 3.3.4).
 ```
 
 **Notes**:
-- `Gemfile.lock` and `package-lock.json` are intentionally ignored by `.gitignore` (common for Jekyll + GitHub Pages setups to avoid platform-specific lockfile issues).
+- `Gemfile.lock` is intentionally ignored by `.gitignore` (common for Jekyll + GitHub Pages setups to avoid platform-specific lockfile issues).
 - If you see permission or path issues with gems, run:
   ```bash
   bundle config set --local path 'vendor/bundle'
@@ -52,78 +44,52 @@ Preview with the same Ruby and `github-pages` versions GitHub Pages uses:
 Extra Jekyll flags are passed through (`./scripts/serve --drafts --future`). Use `PORT=4001 ./scripts/serve` if 4000 is taken.
 
 - Site will be available at **http://localhost:4000** (or `PORT`).
-- Changes to Markdown, layouts, includes, Sass, and most `_config.yml` settings trigger an automatic rebuild.
-- **Important**: After editing `_config.yml`, you usually need to restart the server for some settings to take effect.
-
-## Building JavaScript Assets
-
-The theme ships with several JS plugins that are concatenated, minified, and stamped with a banner at build time.
-
-Available npm scripts (defined in `package.json`):
-
-```bash
-# One-time production build of assets/js/main.min.js (uglify + banner)
-npm run build:js
-
-# Watch mode: rebuild JS automatically when any source JS file changes
-npm run watch:js
-```
-
-**When to run**:
-- Run `npm run build:js` at least once after a fresh clone (or if `assets/js/main.min.js` is missing or stale).
-- Use `npm run watch:js` in a separate terminal while developing if you are editing files under `assets/js/`.
-- The Jekyll build process does **not** automatically run the JS build; you must run the npm script yourself when JS sources change.
-
-The minified bundle is committed to the repo (under `assets/js/main.min.js`) so the site works out of the box on GitHub Pages.
+- Changes to Markdown, layouts, includes, and CSS trigger an automatic rebuild.
+- **Important**: After editing `_config.yml`, restart the server.
 
 ## Building the Static Site
-
-Generate the production-ready site into the `_site/` directory:
 
 ```bash
 # Standard build (development mode)
 bundle exec jekyll build
 
-# Production build (applies JEKYLL_ENV=production settings, e.g. compressed HTML, analytics, etc.)
+# Production build (enables the analytics snippet)
 JEKYLL_ENV=production bundle exec jekyll build
 
 # Build with safe mode (mimics GitHub Pages restrictions more closely)
 bundle exec jekyll build --safe
-
-# Clean previous build artifacts first
-bundle exec jekyll clean && bundle exec jekyll build
 ```
 
-Output is written to `_site/`. You can serve the static files directly with any HTTP server for testing:
+Output is written to `_site/`, which you can serve with any static file server:
 
 ```bash
-# Quick static preview of the built site (Python 3)
 python -m http.server 8000 --directory _site
-
-# Or with Node
-npx serve _site
 ```
 
 ## Testing & Validation
 
-There are no automated unit or integration tests in this repository. Validation is performed by attempting a full site generation:
-
 ```bash
-# Primary "test": does the site build without errors?
+# Does the site build without errors?
 bundle exec jekyll build
 
-# Additional diagnostics
+# Does the WebLook reskin still hold?
+node scripts/test-theme.mjs
+```
+
+`scripts/test-theme.mjs` is the regression guard for the design system. It asserts that the vendored `weblab.css` still carries its tokens and scales, that the chrome stays flat (topbar and footer are hairline bars, not cards), that the layouts bind to the `wl-*` classes, that no trace of the old Minimal Mistakes theme has crept back in, and that the things which must not change — post permalinks, pagination paths, the plugin set, the Matomo production-host guard — are intact. Run it after any template or layout edit.
+
+Useful extra diagnostics:
+
+```bash
 bundle exec jekyll doctor
 bundle exec jekyll build --trace
 ```
 
-- `jekyll doctor` reports common configuration problems and deprecated settings.
-- A successful `JEKYLL_ENV=production bundle exec jekyll build` is the closest equivalent to a production smoke test.
-- The Rakefile contains a `:preview` task inherited from the Minimal Mistakes theme development workflow. It is not used for this personal site (it targets a `test/` directory that is excluded from the build). You can ignore it unless you are hacking on the theme itself.
+### Responsive check
+
+The template is mobile-first, so check narrow before wide: **375px must work first** (no horizontal overflow, everything stacked), then 1280px. Header and footer should read as hairline bars rather than floating cards.
 
 ## Debugging
-
-### Common Commands
 
 ```bash
 # Full stack trace on errors
@@ -132,14 +98,8 @@ bundle exec jekyll serve --trace
 # Extremely verbose logging
 bundle exec jekyll serve --verbose
 
-# Build only (no server) with trace
-bundle exec jekyll build --trace
-
 # Check what plugins and gems are active
 bundle list
-
-# Show current Jekyll configuration (merged)
-bundle exec jekyll build --config _config.yml --trace 2>&1 | head -100
 ```
 
 ### Frequent Issues & Fixes
@@ -151,55 +111,30 @@ bundle exec jekyll build --config _config.yml --trace 2>&1 | head -100
 2. **Changes to `_config.yml` not taking effect**
    - Restart the `jekyll serve` process. Some settings are only read at startup.
 
-3. **JavaScript not updating / `main.min.js` looks old**
-   - Run `npm run build:js` (or `npm run watch:js` in another terminal).
+3. **A layout or include is missing**
+   - There is no theme fallback any more: every layout named in front matter must exist under `_layouts/`. A missing one fails the build outright.
 
-4. **Sass / CSS not updating**
-   - Delete `.sass-cache` and restart the server:
-     ```bash
-     rm -rf .sass-cache
-     bundle exec jekyll serve
-     ```
-
-5. **"Liquid Exception" or template errors**
+4. **"Liquid Exception" or template errors**
    - Use `--trace` to see the full backtrace.
    - Check for syntax errors in recently edited `.html`, `.md`, or Liquid includes/layouts.
 
-6. **GitHub Pages build fails after push**
+5. **GitHub Pages build fails after push**
    - Reproduce locally with `JEKYLL_ENV=production bundle exec jekyll build --safe`.
-   - Ensure you are not relying on gems or plugins outside the `github-pages` whitelist (see `_config.yml` `whitelist` section).
+   - Ensure you are not relying on plugins outside the `github-pages` whitelist (see `_config.yml` `whitelist`).
    - Check the Actions / Pages build log in the GitHub repository for the exact error.
-
-7. **Permission or ownership errors on Linux/macOS**
-   - Avoid running `bundle` or `npm` as root. Use a user-level Ruby installation or version manager.
-
-8. **Node version too old for uglify**
-   - The `uglify-js` devDependency is old but still works on modern Node. If you hit issues, try Node 18+.
 
 ### Environment Variables
 
-- `JEKYLL_ENV=production` — enables production optimizations (used by GitHub Pages).
-- `LISTEN_GEM_DEBUGGING=1` — used by the Rakefile preview task (rarely needed).
+- `JEKYLL_ENV=production` — enables production optimizations and the analytics snippet (used by GitHub Pages).
 
 ## Deployment
 
 This site is deployed automatically by **GitHub Pages**.
 
 - Pushing to the `master` branch triggers a build and deploy.
-- No GitHub Actions workflow is currently configured (GitHub Pages uses its built-in Jekyll builder, which respects the `github-pages` gem in the Gemfile).
-- The `remote_theme` setting in `_config.yml` pulls the Minimal Mistakes theme at build time on GitHub's servers.
+- No GitHub Actions workflow is configured; GitHub Pages uses its built-in Jekyll builder, which respects the `github-pages` gem in the Gemfile.
 
-### Manual / Preview Deployment Steps (rarely needed)
-
-```bash
-# 1. Build production site locally
-JEKYLL_ENV=production bundle exec jekyll build
-
-# 2. (Optional) Test the exact files that will be published
-#    The _site directory is what GitHub Pages serves.
-```
-
-To force a rebuild on GitHub, you can push an empty commit:
+To force a rebuild on GitHub, push an empty commit:
 
 ```bash
 git commit --allow-empty -m "chore: trigger GitHub Pages rebuild"
@@ -209,59 +144,69 @@ git push
 ## Project Structure (Key Paths)
 
 ```
-├── _config.yml           # Main Jekyll configuration (theme, plugins, site metadata)
-├── Gemfile / Gemfile.lock
-├── package.json          # Node scripts for JS asset pipeline
-├── banner.js             # Adds license/version header to minified JS
-├── Rakefile              # Legacy Minimal Mistakes preview task (not used for site)
-├── index.html            # Site entry point / home layout hook
+├── _config.yml           # Jekyll configuration and site metadata
+├── Gemfile               # Pins github-pages 232
+├── index.html            # Home page (layout: home)
 ├── _posts/               # Blog posts (Markdown with YAML front matter)
-├── _pages/               # Standalone pages (about, projects, etc.)
-├── _includes/            # Reusable Liquid partials
-├── _layouts/             # Page/post layout templates
-├── _sass/                # Custom Sass / theme overrides
-├── assets/               # Images, JS (source + minified), videos, etc.
-│   └── js/
-│       ├── _main.js
-│       └── main.min.js   # Generated; commit this
-├── _site/                # Generated output (git-ignored; created by `jekyll build`)
-├── .gitignore
+├── _pages/               # Standalone pages (about, projects)
+├── _data/navigation.yml  # Main nav links
+├── _layouts/
+│   ├── default.html      # Shell: head, header, main, footer
+│   ├── home.html         # Paginated post feed
+│   ├── post.html         # Article page
+│   ├── page.html         # Plain content page
+│   └── archive.html      # Card grid of all posts (projects)
+├── _includes/
+│   ├── head.html         # Meta, SEO, fonts, stylesheets
+│   ├── header.html       # Wordmark + nav
+│   ├── footer.html       # Links + copyright
+│   ├── post-card.html    # Post card, list and grid variants
+│   └── analytics.html    # Cookieless Matomo
+├── assets/
+│   ├── css/weblab.css    # Vendored WebLook template — edit upstream, not here
+│   ├── css/site.css      # Small site-specific layer
+│   ├── images/
+│   └── videos/
+├── scripts/
+│   ├── serve             # Local preview on the GitHub Pages toolchain
+│   └── test-theme.mjs    # Reskin regression guard
+├── _site/                # Generated output (git-ignored)
 └── README.md             # This file
 ```
 
-Excluded from the published site (see `_config.yml` `exclude`):
-- `node_modules/`, `vendor/`, `Gemfile*`, `package*.json`, `Rakefile`, `README*`, `openspec/`, test dirs, etc.
+Excluded from the published site (see `_config.yml` `exclude`): `vendor/`, `Gemfile`, `README`, `scripts/`, `openspec/`.
+
+## Updating the shared template
+
+`assets/css/weblab.css` is a vendored copy. Do not edit it here — change it in the WebLook repo, run its `./scripts/check.sh`, then copy the file across (or use WebLook's `scripts/sync.sh`, which only writes to consumers sitting on the `feature/apply-weblab` branch). Re-run `node scripts/test-theme.mjs` afterwards.
 
 ## Additional Notes
 
-- The site uses `remote_theme` so the full Minimal Mistakes source is not vendored.
+- Post permalinks are `/:categories/:title/`, and no post declares categories, so posts live at `/<Title-Slug>/`. Changing the permalink setting would break every existing URL.
 - Analytics use a cookieless Matomo tracker (site id 4, `https://contentlabstudy.com/Mat0mo/`). The snippet ships only in `JEKYLL_ENV=production` builds and initializes only on `jahnog.github.io`.
 - Campaign URLs Matomo already understands, for example `https://jahnog.github.io/?mtm_campaign=linkedin-profile` when sharing from LinkedIn.
 - After deploy, confirm a `matomo.php` pageview (`send_image=1`, HTTP 200 GIF) and a later `ping=1` heartbeat in the browser network tab; LinkedIn **profile** clicks should convert, LinkedIn **share** buttons should not. Firefox must not show `NS_ERROR_DOM_NETWORK_ERR` on that URL.
-- Comments are disabled by default in the current configuration.
-- For theme customization, refer to the [Minimal Mistakes documentation](https://mmistakes.github.io/minimal-mistakes/docs/).
+- Comments are not implemented.
 
 ## License
 
-This site inherits the MIT license from the Minimal Mistakes Jekyll theme. Content (posts, pages, images) is © Javier unless otherwise noted.
+MIT for the site code. Content (posts, pages, images) is © Javier unless otherwise noted.
 
 ---
 
 **Quick reference (copy-paste friendly)**
 
 ```bash
-# Daily development (Ruby 3.3.4 + github-pages 232, Docker if needed)
+# Daily development (Ruby 3.3.4 + github-pages 232, container if needed)
 ./scripts/serve
 
-# (in another terminal if editing JS)
-npm run watch:js
+# Reskin guard
+node scripts/test-theme.mjs
 
 # Production build check
 JEKYLL_ENV=production bundle exec jekyll build --trace
 
 # Clean everything
 bundle exec jekyll clean
-rm -rf node_modules vendor .sass-cache .jekyll-cache
+rm -rf vendor .jekyll-cache
 ```
-
-Happy building! If you find missing commands or environment-specific gotchas, feel free to improve this README.

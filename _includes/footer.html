@@ -1,14 +1,12 @@
-<div class="page__footer-follow">
-  <ul class="social-icons">
-    {% if site.footer.links %}
-      {% for link in site.footer.links %}
-        {% if link.label and link.url %}
-          <li><a href="{{ link.url }}" rel="nofollow noopener noreferrer">{{ link.label }}</a></li>
-        {% endif %}
-      {% endfor %}
-    {% endif %}
-    <li><a href="{% if site.atom_feed.path %}{{ site.atom_feed.path }}{% else %}{{ '/feed.xml' | relative_url }}{% endif %}">{{ site.data.ui-text[site.locale].feed_label | default: "Feed" }}</a></li>
-  </ul>
-</div>
-
-<div class="page__footer-copyright">&copy; {{ site.time | date: '%Y' }} {{ site.name | default: site.title }}. Cookieless Matomo, first-party.</div>
+<footer class="wl-footer">
+  <p class="footer-links">
+    {% for link in site.footer.links %}
+      <a href="{{ link.url }}" rel="me noopener">{{ link.label }}</a>
+    {% endfor %}
+    <a href="{{ '/feed.xml' | relative_url }}">Feed</a>
+  </p>
+  <p>
+    &copy; {{ site.time | date: "%Y" }} {{ site.author.name | default: site.title }}.
+    Cookieless Matomo, first-party.
+  </p>
+</footer>
