@@ -1,0 +1,122 @@
+/* Site-specific layer on top of weblab.css. Keep this small — anything
+   reusable belongs in the template, not here. */
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+}
+
+.skip-link:focus {
+  position: fixed;
+  top: var(--wl-space-2);
+  left: var(--wl-space-2);
+  z-index: 10;
+}
+
+/* Wordmark */
+
+.wl-page a.site-title {
+  color: var(--wl-text);
+  text-decoration: none;
+}
+
+.wl-page a.site-title:hover,
+.wl-page a.site-title:focus-visible {
+  color: var(--wl-gold);
+}
+
+/* Cards */
+
+.wl-page .card-title a {
+  color: var(--wl-text);
+  text-decoration: none;
+}
+
+.wl-page .card-title a:hover,
+.wl-page .card-title a:focus-visible {
+  color: var(--wl-gold);
+}
+
+.card-title {
+  font-size: var(--wl-text-xl);
+}
+
+/* Cards in a row stretch to equal height, so pin the action row to the
+   bottom instead of letting it float under uneven excerpts. */
+.project-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wl-space-3);
+}
+
+.project-card .wl-actions {
+  margin-top: auto;
+}
+
+.project-card .card-media img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: var(--wl-radius);
+  display: block;
+}
+
+.list-media img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: var(--wl-radius);
+  display: block;
+}
+
+.list-body {
+  min-width: 0;
+}
+
+.list-body .wl-title {
+  font-size: var(--wl-text-lg);
+}
+
+@media (min-width: 40rem) {
+  .list-media {
+    flex: 0 0 12rem;
+  }
+
+  .list-media img {
+    aspect-ratio: 4 / 3;
+  }
+}
+
+/* Post and page headers */
+
+/* Share the prose measure so the article reads as one column. */
+.post-header {
+  display: grid;
+  gap: var(--wl-space-3);
+  max-width: var(--wl-measure);
+  padding-bottom: var(--wl-space-4);
+  border-bottom: 1px solid var(--wl-border);
+}
+
+.post-nav:empty {
+  display: none;
+}
+
+/* Footer link row */
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--wl-space-4);
+  margin: 0 0 var(--wl-space-2);
+}
+
+/* Kramdown {: .centered-image} used across the older posts */
+
+.wl-prose .centered-image {
+  margin-inline: auto;
+}
+
+.wl-prose p > img.centered-image {
+  display: block;
+}

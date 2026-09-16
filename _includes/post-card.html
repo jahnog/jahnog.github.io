@@ -1,0 +1,41 @@
+{% assign card = include.post %}
+{% assign teaser = card.header.teaser | default: site.teaser %}
+
+{% if include.type == "grid" %}
+  <article class="wl-panel project-card">
+    {% if teaser %}
+      <a class="card-media" href="{{ card.url | relative_url }}" tabindex="-1" aria-hidden="true">
+        <img src="{{ teaser | relative_url }}" alt="" loading="lazy" />
+      </a>
+    {% endif %}
+    <h2 class="wl-title card-title">
+      <a href="{{ card.url | relative_url }}">{{ card.title }}</a>
+    </h2>
+    <p class="wl-subtitle">{{ card.excerpt | strip_html | strip_newlines | truncate: 160 }}</p>
+    {% if card.demo or card.source %}
+      <div class="wl-actions">
+        {% if card.demo %}
+          <a class="wl-btn wl-btn-primary" href="{{ card.demo }}" rel="noopener">Live demo</a>
+        {% endif %}
+        {% if card.source %}
+          <a class="wl-btn wl-btn-ghost" href="{{ card.source }}" rel="noopener">Source</a>
+        {% endif %}
+      </div>
+    {% endif %}
+  </article>
+{% else %}
+  <article class="wl-list-item">
+    {% if teaser %}
+      <a class="list-media" href="{{ card.url | relative_url }}" tabindex="-1" aria-hidden="true">
+        <img src="{{ teaser | relative_url }}" alt="" loading="lazy" />
+      </a>
+    {% endif %}
+    <div class="list-body">
+      <p class="wl-kicker">{{ card.date | date: "%B %-d, %Y" }}</p>
+      <h2 class="wl-title card-title">
+        <a href="{{ card.url | relative_url }}">{{ card.title }}</a>
+      </h2>
+      <p class="wl-subtitle">{{ card.excerpt | strip_html | strip_newlines | truncate: 200 }}</p>
+    </div>
+  </article>
+{% endif %}

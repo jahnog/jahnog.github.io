@@ -1,22 +1,32 @@
 ---
-layout: archive
+layout: default
 ---
 
-{{ content }}
-
-<p class="archive__subtitle">Writing</p>
-
-{% if paginator %}
-  {% assign posts = paginator.posts %}
-{% else %}
-  {% assign posts = site.posts %}
+{% if page.title %}
+  <h1 class="wl-title wl-title-lg">{{ page.title }}</h1>
 {% endif %}
 
-{% assign entries_layout = page.entries_layout | default: 'list' %}
-<div class="entries-{{ entries_layout }}{% if entries_layout == 'list' %} wl-list{% endif %}">
+{% if content != "" %}
+  <div class="wl-prose">{{ content }}</div>
+{% endif %}
+
+<p class="wl-kicker">Writing</p>
+
+<div class="wl-list">
+  {% assign posts = paginator.posts | default: site.posts %}
   {% for post in posts %}
-    {% include archive-single.html type=entries_layout %}
+    {% include post-card.html post=post type="list" %}
   {% endfor %}
 </div>
 
-{% include paginator.html %}
+{% if paginator.total_pages > 1 %}
+  <nav class="wl-actions pagination" aria-label="Pagination">
+    {% if paginator.previous_page %}
+      <a class="wl-btn wl-btn-ghost" href="{{ paginator.previous_page_path | relative_url }}">Newer</a>
+    {% endif %}
+    <span class="wl-pill">Page {{ paginator.page }} of {{ paginator.total_pages }}</span>
+    {% if paginator.next_page %}
+      <a class="wl-btn wl-btn-ghost" href="{{ paginator.next_page_path | relative_url }}">Older</a>
+    {% endif %}
+  </nav>
+{% endif %}

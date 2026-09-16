@@ -1,130 +1,151 @@
 #!/usr/bin/env node
+// Guards the WebLook reskin: the site is built from local layouts styled by
+// the vendored weblab.css, with no Minimal Mistakes anywhere.
 import { existsSync, readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
-const weblab = readFileSync(join(root, "assets", "css", "weblab.css"), "utf8");
-const custom = readFileSync(join(root, "_sass", "custom-styles", "_custom.scss"), "utf8");
-const mainScss = readFileSync(join(root, "assets", "css", "main.scss"), "utf8");
-const head = readFileSync(join(root, "_includes", "head", "custom.html"), "utf8");
-const config = readFileSync(join(root, "_config.yml"), "utf8");
-const footer = readFileSync(join(root, "_includes", "footer.html"), "utf8");
+const read = (...parts) => readFileSync(join(root, ...parts), "utf8");
+
+const weblab = read("assets", "css", "weblab.css");
+const site = read("assets", "css", "site.css");
+const config = read("_config.yml");
+const head = read("_includes", "head.html");
+const header = read("_includes", "header.html");
+const footer = read("_includes", "footer.html");
+const analytics = read("_includes", "analytics.html");
+const card = read("_includes", "post-card.html");
+const defaultLayout = read("_layouts", "default.html");
+const homeLayout = read("_layouts", "home.html");
+const postLayout = read("_layouts", "post.html");
+const archiveLayout = read("_layouts", "archive.html");
+
+const fail = (message) => {
+  throw new Error(message);
+};
+
+// --- template tokens -------------------------------------------------------
 
 for (const token of ["#050821", "#f4b223", "#121548", "#b5c5e8"]) {
-  if (!weblab.includes(token)) throw new Error(`missing ${token}`);
+  if (!weblab.includes(token)) fail(`weblab.css is missing ${token}`);
 }
 for (const token of ["backdrop-filter", "#72d6cb", "#04111d"]) {
-  if (weblab.includes(token)) throw new Error(`forbidden ${token}`);
+  if (weblab.includes(token)) fail(`weblab.css contains forbidden ${token}`);
 }
-if (!head.includes("weblab.css")) throw new Error("head/custom.html does not link weblab.css");
-if (!custom.includes("var(--wl-bg)") || !custom.includes("var(--wl-gold)")) {
-  throw new Error("_custom.scss does not bind chrome to --wl-*");
+for (const token of ["--wl-space-4", "--wl-text-base", "--wl-measure"]) {
+  if (!weblab.includes(token)) fail(`weblab.css predates the ${token} scale`);
 }
-if (!mainScss.includes("$primary-color: #f4b223")) {
-  throw new Error("main.scss does not pin MM $primary-color to gold before the skin");
+for (const cls of [".wl-prose", ".wl-card-grid", ".wl-list-item", ".wl-main"]) {
+  if (!weblab.includes(cls)) fail(`weblab.css is missing ${cls}`);
 }
-if (!custom.includes(".btn--primary") || !custom.includes("var(--wl-on-gold)")) {
-  throw new Error("_custom.scss does not set navy labels on gold primary buttons");
-}
-if (!custom.includes(".pagination li a.current")) {
-  throw new Error("_custom.scss does not remap pagination current to gold");
-}
-if (!/author_profile:\s*false/.test(config)) {
-  throw new Error("_config.yml still enables author_profile");
-}
-if (/logo\s*:\s*\/assets\/images\/the_scream/.test(config)) {
-  throw new Error("masthead logo is still the Scream crop");
-}
-if (!custom.includes(".entries-grid") || !custom.includes("display: grid")) {
-  throw new Error("_custom.scss does not turn .entries-grid into a CSS grid");
-}
-if (!custom.includes("auto-fit") || !custom.includes("minmax(min(100%, 18rem), 1fr)")) {
-  throw new Error("_custom.scss must use a fluid auto-fit grid, not fixed column counts");
-}
-if (!custom.includes("min(100%, 2400px)")) {
-  throw new Error("the site shell does not grow with a large window");
-}
-if (!custom.includes(".entries-list.wl-list") || !custom.includes("minmax(min(100%, 32rem), 1fr)")) {
-  throw new Error("the writing list must use a fluid auto-fill grid like the project cards");
-}
-if (!custom.includes(".entries-grid .grid__item") || !custom.includes("float: none !important")) {
-  throw new Error("_custom.scss does not kill Minimal Mistakes grid floats");
-}
-if (!custom.includes(".archive__item-title a") || !custom.includes("text-decoration: none")) {
-  throw new Error("archive titles are not de-underlined");
-}
-if (footer.includes("Minimal Mistakes")) {
-  throw new Error("footer still credits Minimal Mistakes");
-}
-if (footer.includes("follow_label") || footer.includes("fas fa-")) {
-  throw new Error("footer still uses FOLLOW label or icon chrome");
+if (!weblab.includes("margin: 0 auto")) {
+  fail("weblab.css is missing the centered shell");
 }
 
-const defaultLayout = readFileSync(join(root, "_layouts", "default.html"), "utf8");
-if (!defaultLayout.includes("wl-page") || !defaultLayout.includes("wl-shell") || !defaultLayout.includes("wl-main") || !defaultLayout.includes("wl-fill")) {
-  throw new Error("default.html does not wrap chrome in wl-page / wl-shell wl-fill / wl-main");
+// Chrome must stay flat: the topbar is a hairline bar, not a card.
+const topbarRule = weblab.match(/\.wl-topbar \{[^}]+\}/)?.[0] ?? "";
+if (!topbarRule.includes("border-bottom")) {
+  fail(".wl-topbar is not a hairline bar");
 }
-const homeLayout = readFileSync(join(root, "_layouts", "home.html"), "utf8");
-if (!homeLayout.includes("wl-list")) {
-  throw new Error("home.html does not mark the writing list as wl-list");
+if (topbarRule.includes("box-shadow") || topbarRule.includes("border-radius")) {
+  fail(".wl-topbar went back to a card treatment");
 }
-const masthead = readFileSync(join(root, "_includes", "masthead.html"), "utf8");
-if (!masthead.includes("wl-topbar")) {
-  throw new Error("masthead inner wrap is not a wl-topbar");
-}
-
-const archiveSingle = readFileSync(join(root, "_includes", "archive-single.html"), "utf8");
-if (!archiveSingle.includes("assign teaser = nil")) {
-  throw new Error("archive-single.html does not reset teaser per post");
-}
-if (archiveSingle.includes("include.type == \"grid\" and teaser")) {
-  throw new Error("list entries still hide the post teaser");
-}
-if (!archiveSingle.includes("wl-list-item")) {
-  throw new Error("archive-single.html does not mark list rows as wl-list-item");
-}
-if (!custom.includes(".entries-list .archive__item-teaser")) {
-  throw new Error("_custom.scss does not size list teasers");
-}
-if (!custom.includes(".visible-links a[href=\"/projects/\"]")) {
-  throw new Error("active nav is not scoped to .visible-links (wordmark would turn gold)");
-}
-if (!custom.includes(".page__inner-wrap") || !custom.includes("float: none")) {
-  throw new Error("_custom.scss does not unfloat .page__inner-wrap");
-}
-if (!weblab.includes(".wl-list-item") || !weblab.includes("border-radius: var(--wl-radius)")) {
-  throw new Error("weblab.css does not give list items surface-card radius");
-}
-if (/max-width:\s*72rem/.test(custom)) {
-  throw new Error("_custom.scss still caps chrome at 72rem");
-}
-if (custom.includes("--wl-max: 100%")) {
-  throw new Error("_custom.scss must not unset --wl-max; the 1500px cap is what keeps the layout responsive");
-}
-if (!custom.includes("font-size: 16px !important")) {
-  throw new Error("html root font-size is not pinned to 16px");
-}
-if (!weblab.includes(".wl-main") || !weblab.includes("margin: 0 auto")) {
-  throw new Error("weblab.css is missing the centered shell / wl-main fill");
+if (!weblab.includes(".wl-boxed")) {
+  fail(".wl-boxed opt-in is gone; consumers lose the card escape hatch");
 }
 
-const compiledPath = join(root, "_site", "assets", "css", "main.css");
-if (existsSync(compiledPath)) {
-  const compiled = readFileSync(compiledPath, "utf8");
-  if (compiled.includes("#00adb5")) {
-    throw new Error("compiled main.css still contains teal #00adb5");
-  }
-  const btnRules = compiled.match(/\.btn--primary[^{]*\{[^}]+\}/g) || [];
-  const lastBtn = btnRules.at(-1) || "";
-  if (!lastBtn.includes("var(--wl-gold)") || !lastBtn.includes("var(--wl-on-gold)")) {
-    throw new Error(`last compiled .btn--primary is not gold/navy: ${lastBtn}`);
-  }
-  const pageRules = compiled.match(/\.pagination li a\.current[^}]+\}/g) || [];
-  const lastPage = pageRules.at(-1) || "";
-  if (!lastPage.includes("var(--wl-gold)") || !lastPage.includes("var(--wl-on-gold)")) {
-    throw new Error(`last compiled pagination current is not gold/navy: ${lastPage}`);
+// Mobile first: no desktop-first max-width breakpoints.
+if (/@media \(max-width/.test(weblab)) {
+  fail("weblab.css has a desktop-first max-width media query");
+}
+if (!weblab.includes("@media (min-width: 40rem)")) {
+  fail("weblab.css is missing the 40rem breakpoint");
+}
+
+// --- no Minimal Mistakes ---------------------------------------------------
+
+if (existsSync(join(root, "_sass"))) {
+  fail("_sass still exists; the Minimal Mistakes bridge should be gone");
+}
+if (existsSync(join(root, "assets", "css", "main.scss"))) {
+  fail("assets/css/main.scss still exists");
+}
+if (existsSync(join(root, "assets", "js"))) {
+  fail("assets/js still exists; the site ships no JavaScript bundle");
+}
+if (/remote_theme|minimal_mistakes/.test(config)) {
+  fail("_config.yml still references Minimal Mistakes");
+}
+for (const [name, source] of [
+  ["head.html", head],
+  ["header.html", header],
+  ["footer.html", footer],
+  ["post-card.html", card],
+]) {
+  if (/masthead|greedy-nav|archive__item|page__/.test(source)) {
+    fail(`${name} still uses Minimal Mistakes markup`);
   }
 }
 
-console.log("theme tokens ok");
+// --- layouts bind to the template -----------------------------------------
+
+if (!head.includes("weblab.css")) fail("head.html does not link weblab.css");
+if (!head.includes("site.css")) fail("head.html does not link site.css");
+if (!head.includes("{% seo %}")) fail("head.html dropped jekyll-seo-tag");
+if (!head.includes("og:image")) fail("head.html no longer emits a social image");
+
+for (const cls of ["wl-page", "wl-shell", "wl-fill", "wl-main"]) {
+  if (!defaultLayout.includes(cls)) fail(`default.html is missing .${cls}`);
+}
+if (!defaultLayout.includes("analytics.html")) {
+  fail("default.html no longer includes analytics");
+}
+if (!header.includes("wl-topbar") || !header.includes("wl-nav")) {
+  fail("header.html is not a wl-topbar with wl-nav");
+}
+if (!header.includes('aria-current="page"')) {
+  fail("header.html does not mark the current nav item");
+}
+if (!footer.includes("wl-footer")) fail("footer.html is not a wl-footer");
+if (!homeLayout.includes("wl-list")) fail("home.html does not use wl-list");
+if (!postLayout.includes("wl-prose")) fail("post.html does not use wl-prose");
+if (!archiveLayout.includes("wl-card-grid")) {
+  fail("archive.html does not use wl-card-grid");
+}
+if (!card.includes("wl-list-item") || !card.includes("wl-panel")) {
+  fail("post-card.html lost its list or grid variant");
+}
+
+// --- preserved behaviour ---------------------------------------------------
+
+if (!/permalink:\s*\/:categories\/:title\//.test(config)) {
+  fail("post permalinks changed; existing URLs would break");
+}
+if (!/paginate_path:\s*\/page:num\//.test(config)) {
+  fail("pagination paths changed");
+}
+for (const plugin of ["jekyll-feed", "jekyll-sitemap", "jekyll-gist", "jekyll-seo-tag"]) {
+  if (!config.includes(plugin)) fail(`_config.yml dropped ${plugin}`);
+}
+if (!analytics.includes('location.hostname !== "jahnog.github.io"')) {
+  fail("the Matomo production-host guard is gone");
+}
+if (!site.includes(".centered-image")) {
+  fail("site.css dropped .centered-image, used by the older posts");
+}
+
+// --- built output, when present --------------------------------------------
+
+const builtHome = join(root, "_site", "index.html");
+if (existsSync(builtHome)) {
+  const built = readFileSync(builtHome, "utf8");
+  if (/minimal-mistakes|greedy-nav|jquery/i.test(built)) {
+    fail("built HTML still references Minimal Mistakes assets");
+  }
+  if (!built.includes("weblab.css")) {
+    fail("built HTML does not load weblab.css");
+  }
+}
+
+console.log("theme ok");
