@@ -238,9 +238,20 @@
 
 .wl-layout {
   display: grid;
-  grid-template-columns: 1fr;
+  /* minmax(0, 1fr), not 1fr: a bare 1fr track is minmax(auto, 1fr) and
+     refuses to shrink below its content's min-content width, which lets a
+     wide child push the whole page sideways. */
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--wl-space-6);
   align-items: start;
+}
+
+/* Grid and flex items default to min-width: auto, so a wide child refuses
+   to shrink and overflows its track. Let the containers' children shrink. */
+.wl-layout > *,
+.wl-main > *,
+.wl-panel > * {
+  min-width: 0;
 }
 
 .wl-card-grid {
@@ -346,6 +357,29 @@
   display: flex;
   flex-wrap: wrap;
   gap: var(--wl-space-2);
+}
+
+/* ---------- Notes ----------
+   Full-width inline message. A chip is a pill; this is the block form. */
+
+.wl-note {
+  display: block;
+  padding: var(--wl-space-3) var(--wl-space-4);
+  border: 1px solid var(--wl-border);
+  border-left: 3px solid var(--wl-muted);
+  border-radius: var(--wl-radius);
+  background: var(--wl-surface-strong);
+  color: var(--wl-text);
+  font-size: var(--wl-text-sm);
+  line-height: var(--wl-leading);
+}
+
+.wl-note-danger {
+  border-left-color: var(--wl-danger);
+}
+
+.wl-note-success {
+  border-left-color: var(--wl-success);
 }
 
 /* ---------- Prose ----------
@@ -537,6 +571,14 @@
   max-width: var(--wl-max);
   margin-inline: auto;
   min-height: 100dvh;
+}
+
+/* Single-card pages — sign-in, confirmations — that should not stretch to
+   --wl-max. Declared after the fill rules above, which re-assert --wl-max at
+   the same specificity. */
+.wl-shell-narrow,
+.wl-shell.wl-shell-narrow:has(> .wl-main) {
+  max-width: 34rem;
 }
 
 .wl-shell.wl-fill > .wl-topbar,
