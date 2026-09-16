@@ -9,7 +9,8 @@
   {% assign title = post.title %}
 {% endif %}
 
-<div class="{{ include.type | default: 'list' }}__item">
+{% assign item_type = include.type | default: 'list' %}
+<div class="{{ item_type }}__item{% if item_type == 'list' %} wl-list-item{% endif %}">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     {% if teaser %}
       <div class="archive__item-teaser">

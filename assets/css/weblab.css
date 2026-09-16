@@ -269,3 +269,79 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Opt-in height fill. Width stays --wl-max (1500px) and shrinks below that.
+   AdRedirect-style pages omit .wl-main / .wl-fill and keep a content-sized grid. */
+.wl-page:has(.wl-shell > .wl-main),
+.wl-page:has(.wl-shell.wl-fill),
+.wl-page:has(.wl-shell > .wl-main) body,
+.wl-page:has(.wl-shell.wl-fill) body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+}
+
+.wl-shell.wl-fill,
+.wl-shell:has(> .wl-main) {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: var(--wl-max);
+  margin-inline: auto;
+  min-height: 100dvh;
+}
+
+.wl-shell.wl-fill > .wl-topbar,
+.wl-shell.wl-fill > .wl-footer,
+.wl-shell:has(> .wl-main) > .wl-topbar,
+.wl-shell:has(> .wl-main) > .wl-footer {
+  flex: 0 0 auto;
+}
+
+.wl-main {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.wl-main > .wl-layout {
+  flex: 1 1 auto;
+  min-height: 0;
+  align-items: stretch;
+}
+
+.wl-list {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.wl-list-item {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  min-width: 0;
+  background: var(--wl-surface);
+  color: var(--wl-text);
+  border: 1px solid var(--wl-border);
+  border-radius: var(--wl-radius);
+  box-shadow: var(--wl-shadow);
+  padding: 0.75rem 1rem;
+}
+
+.wl-panel:has(> .wl-list) {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.wl-panel > .wl-list {
+  flex: 1 1 auto;
+  min-height: 0;
+}
