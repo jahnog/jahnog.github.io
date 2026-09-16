@@ -7,9 +7,8 @@ tags:
   - security
   - cli
   - github-spec-kit
+source: https://github.com/jahnog/check-unprotected-keys
 ---
-
-## Spec-Driven Development with GitHub Spec Kit
 
 > **TL;DR** — I built [`check-unprotected-keys`](https://github.com/jahnog/check-unprotected-keys) — a Python CLI that scans your folders for private keys left unencrypted or protected with an empty passphrase, so you can find and lock them down — and I built the whole thing *spec-first* with GitHub Spec Kit. The real goal was to learn spec-driven development by shipping a complete, packaged tool with it.
 >

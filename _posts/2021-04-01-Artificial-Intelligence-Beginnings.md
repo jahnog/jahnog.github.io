@@ -10,8 +10,6 @@ tags:
   - from-scratch
 ---
 
-## Build a Neural Network from Scratch
-
 > **TL;DR** — A feed-forward neural network with backpropagation, implemented from scratch in pure Python/NumPy (no ML framework), that predicts a car's fuel efficiency close to the real values.
 >
 > **Stack** — Python, NumPy
