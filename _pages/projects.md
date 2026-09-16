@@ -2,8 +2,9 @@
 title: "Projects"
 permalink: /projects/
 layout: archive
-author_profile: true
+author_profile: false
 entries_layout: grid
+classes: page-projects
 ---
 
 Selected work in cited RAG, spec-driven tools, and agent-skill infrastructure,

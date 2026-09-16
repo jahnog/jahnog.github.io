@@ -9,9 +9,9 @@ tags:
   - scala-js
   - visualization
   - climate
+demo: https://jnbigdatatemp.s3.amazonaws.com/index.html
+source: https://github.com/jahnog/capstone-observatory
 ---
-
-## Global Warming Analysis
 
 > **TL;DR** — Four decades of global temperature records (1975–2015) turned into color-coded, zoomable world map tiles — computing each region's deviation from its long-run baseline so the warming signal jumps out. Built in Scala with an interactive Scala.js / Leaflet viewer.
 >
