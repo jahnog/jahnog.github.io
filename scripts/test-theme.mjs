@@ -53,6 +53,12 @@ const archiveSingle = readFileSync(join(root, "_includes", "archive-single.html"
 if (!archiveSingle.includes("assign teaser = nil")) {
   throw new Error("archive-single.html does not reset teaser per post");
 }
+if (archiveSingle.includes("include.type == \"grid\" and teaser")) {
+  throw new Error("list entries still hide the post teaser");
+}
+if (!custom.includes(".entries-list .archive__item-teaser")) {
+  throw new Error("_custom.scss does not size list teasers");
+}
 if (!custom.includes(".visible-links a[href=\"/projects/\"]")) {
   throw new Error("active nav is not scoped to .visible-links (wordmark would turn gold)");
 }
