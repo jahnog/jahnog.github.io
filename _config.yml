@@ -21,6 +21,12 @@ repository               : jahnog/jahnog.github.io
 teaser                   : /assets/images/800px-MultiLayerNeuralNetworkBigger_english.png # fallback card image
 logo                     : # wordmark only; Scream asset stays on disk, not in chrome
 
+# Home page hero. The topbar already carries the wordmark and the role line,
+# so this is a statement, not a repeat.
+hero:
+  title: "Backend systems and AI features that cite their sources — or stay quiet."
+  text: "Cited RAG over regulation, a spec-first security CLI, a curated registry of coding-agent skills, and earlier work in machine learning, simulation, and data analysis. About 30 years in production software, remote."
+
 # SEO Related
 google_site_verification : # paste a Search Console verification token here to enable indexing verification
 bing_site_verification   :
@@ -116,7 +122,7 @@ kramdown:
 # break every existing post URL.
 permalink: /:categories/:title/
 paginate: 5
-paginate_path: /page:num/
+paginate_path: /writing/page:num/
 timezone:
 
 

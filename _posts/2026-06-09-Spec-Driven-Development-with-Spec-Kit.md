@@ -1,6 +1,9 @@
 ---
 title: "Spec-Driven Development with GitHub Spec Kit"
 excerpt: "Designing and building a security CLI entirely spec-first — every feature specified, planned, and broken into tasks before a line of code."
+featured: true
+header:
+  teaser: /assets/images/spec-kit.jpg
 tags:
   - spec-driven-development
   - python

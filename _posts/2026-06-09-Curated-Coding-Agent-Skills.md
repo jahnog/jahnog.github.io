@@ -3,6 +3,7 @@ title: "A Searchable Registry of Coding-Agent Skills"
 excerpt: "A high-trust catalog of software-engineering and security agent skills with fast full-text search — built as a zero-backend static site."
 header:
   teaser: /assets/images/curatedskills.jpg
+featured: true
 tags:
   - javascript
   - search
