@@ -16,15 +16,13 @@ tags:
 >
 > **Links** — [Run the notebook](https://colab.research.google.com/github/jahnog/artificial-intelligence-python/blob/master/neural_network.ipynb) · [Source](https://github.com/jahnog/artificial-intelligence-python)
 
-Objective
-=========
+## Objective
 
 This post will explain how to create a Neural Network from scratch, using just the Python language, and how to use it to examine cars and predict their mileage per gallon.
 
 First, there are some concepts that should be explained:
 
-The Network
-===========
+## The Network
 
 A Neural Network is one of the most commonly used computational models to apply Artificial Intelligence to real-world problems. It consists of sets of units, called neurons, connected to each other to transmit and process signals.
 
@@ -36,8 +34,7 @@ Each neuron is connected to others by links. Through them, they receive informat
 
 The network also has one or more Final Neurons that will take signals from previous ones and will produce a result that can be a real number (for regression problems) or a set of values (for classification problems).
 
-Structure
-=========
+## Structure
 
 Commonly, Neural Networks are implemented in the form of several neuron layers. The first layer, called the input layer or layer 0, represents the different object features that are evaluated. It differs from all the other layers as it doesn’t perform any calculations, just represents the data fed to the network.
 
@@ -53,8 +50,7 @@ The following image is an example of the connections between the neurons of the 
 
 Copyright 2021 Tensorflow: Usage authorized under [Apache License 2.0](https://github.com/tensorflow/playground/blob/master/LICENSE)
 
-Neurons
--------
+### Neurons
 
 Each layer will be formed by several neurons, except the last layer, the output layer, which in this example will have only one neuron for our problem.
 
@@ -74,8 +70,7 @@ Where **_X_** is a vector (one-dimensional matrix) with the information coming f
 
 Image from: [_www.MLinGIFS.aqeel-anwar.com_](https://www.google.com/url?q=http%3A%2F%2Fwww.MLinGIFS.aqeel-anwar.com&sa=D&sntz=1&usg=AFQjCNFcazsCiM9CNyGnCkBq6cjLHCIpFQ){: .centered-image} Author: [Aqeel Anwar](https://www.aqeel-anwar.com) Usage authorized
 
-Non-linear Activation
----------------------
+### Non-linear Activation
 
 The latter function is a linear one. If all the neurons were linear functions, the result of the neural network would also be another linear function. This would not allow the network to identify complex relationships that exist between the features.
 
@@ -91,8 +86,7 @@ So the complete formula of each neuron, except for that of the output layer, wil
 
 Image by author
 
-Final Linear Activation
------------------------
+### Final Linear Activation
 
 As the goal is to predict a value (regression), instead of detecting or classifying an object (classification), the neuron of the output layer, must generate a real value. So it will not have a non-linear activation applied.
 
@@ -102,8 +96,7 @@ The formula of this neuron will be just:
 
 Image by author
 
-Optimization of the Neural Network: aka Learning
-------------------------------------------------
+### Optimization of the Neural Network: aka Learning
 
 The network learning process will involve searching values for the weights **_W_** and offsets **_b_** that when you feed the network with the data of a car, it will produce the result we want to estimate: the mileage per gallon of that car.
 
@@ -135,50 +128,43 @@ Image by author
 
 6\. With the updated weights, we repeat all the previous steps until the error, the difference between the predictions of the network and the actual values, is acceptably small.
 
-The Code
-========
+## The Code
 
 In practice, the optimization of the neural network is not performed one example at a time. There are code libraries that use the capabilities of the modern CPU, GPU, and TPU to perform calculations simultaneously on many examples.
 
 In our case, we will use the Python language and the Numpy library to perform the calculations on all examples simultaneously and obtain a better performance.
 
-The Model
----------
+### The Model
 
 We will define the structure (number of neurons in the first and second hidden layers) and create the model of our Neural Network:
 
 {% gist afe1847b57524d574b7e1be399cc802a %}{: .centered-image}
 
-The forward propagation function
---------------------------------
+### The forward propagation function
 
 It computes the network predictions
 
 {% gist 0b72d26ef661c547fa754b7a57d0865a %}{: .centered-image}
 
-The cost function
------------------
+### The cost function
 
 It measures the difference between the network estimation and the real values:
 
 {% gist 5effe673c628f8cf1df98a03c6490ee2 %}{: .centered-image}
 
-The backward propagation function
----------------------------------
+### The backward propagation function
 
 It calculates the derivatives of the network functions
 
 {% gist e1fdb6da53cbecda69c0e257de47325d %}{: .centered-image}
 
-The update weights function
----------------------------
+### The update weights function
 
 It allows our network to get closer to the expected result
 
 {% gist 07702ddc5806226d75f990fbe701cde8 %}{: .centered-image}
 
-The Data
---------
+### The Data
 
 With the model defined, now we will train the Neural Network with the classic [Auto MPG](https://archive.ics.uci.edu/ml/datasets/auto+mpg) dataset to predict the fuel efficiency of the late-1970s and early 1980s automobiles. The dataset provides a description of many automobiles from that time period. This description includes attributes like cylinders, displacement, horsepower, and weight.
 
@@ -198,13 +184,11 @@ Predictions: **29, 26, 30, 32, 25, 28, 42, 34, 29, 28**
 
 Real Values: **26, 22, 32, 36, 27, 27, 44, 32, 28, 31**
 
-Run the example yourself
-------------------------
+### Run the example yourself
 
 To see how this example performs, you can open this [Google Colaboratory Notebook](https://colab.research.google.com/github/jahnog/artificial-intelligence-python/blob/master/neural_network.ipynb), and directly run it in your browser.
 
-Conclusions
------------
+### Conclusions
 
 This was a simplified regression problem, addressed with a Neural Network written in Python, that presents the very basic but fundamental working concepts of all networks.
 

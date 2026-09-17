@@ -1,6 +1,6 @@
 <header class="wl-topbar">
   <div class="wl-brand">
-    <a class="site-title wl-title" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+    <a class="site-title" href="{{ '/' | relative_url }}">{{ site.title }}</a>
     {% if site.subtitle %}
       <p class="wl-subtitle">{{ site.subtitle }}</p>
     {% endif %}
@@ -11,7 +11,7 @@
       {% assign target = link.url | relative_url %}
       <a
         href="{{ target }}"
-        {% if page.url == link.url %}aria-current="page"{% endif %}
+        {% if page.url == link.url or page.url contains link.url %}aria-current="page"{% endif %}
       >{{ link.title }}</a>
     {% endfor %}
   </nav>

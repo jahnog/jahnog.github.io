@@ -1,5 +1,5 @@
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#050821" />
 
 {% seo %}
@@ -15,7 +15,9 @@
   <meta name="twitter:image" content="{{ social_image | absolute_url }}" />
 {% endif %}
 
-<link rel="icon" href="{{ '/favicon.ico' | relative_url }}" />
+<link rel="icon" href="{{ '/favicon.ico' | relative_url }}" sizes="48x48" />
+<link rel="icon" href="{{ '/assets/css/favicon.svg' | relative_url }}" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="{{ '/assets/css/apple-touch-icon.png' | relative_url }}" />
 <link
   rel="alternate"
   type="application/atom+xml"

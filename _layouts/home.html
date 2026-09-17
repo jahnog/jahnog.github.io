@@ -2,31 +2,44 @@
 layout: default
 ---
 
-{% if page.title %}
-  <h1 class="wl-title wl-title-lg">{{ page.title }}</h1>
-{% endif %}
+<section class="wl-hero" aria-labelledby="hero-title">
+  <p class="wl-kicker">Portfolio</p>
+  <h1 class="wl-title wl-title-lg" id="hero-title">{{ site.hero.title | default: site.tagline }}</h1>
+  <p class="wl-subtitle">{{ site.hero.text | default: site.description }}</p>
+  <div class="wl-actions">
+    <a class="wl-btn wl-btn-primary" href="{{ '/projects/' | relative_url }}">See projects</a>
+    {% for link in site.author.links %}
+      <a class="wl-btn wl-btn-ghost" href="{{ link.url }}" rel="me noopener">{{ link.label }}</a>
+    {% endfor %}
+  </div>
+</section>
 
 {% if content != "" %}
   <div class="wl-prose">{{ content }}</div>
 {% endif %}
 
-<p class="wl-kicker">Writing</p>
-
-<div class="wl-list">
-  {% assign posts = paginator.posts | default: site.posts %}
-  {% for post in posts %}
-    {% include post-card.html post=post type="list" %}
-  {% endfor %}
-</div>
-
-{% if paginator.total_pages > 1 %}
-  <nav class="wl-actions pagination" aria-label="Pagination">
-    {% if paginator.previous_page %}
-      <a class="wl-btn wl-btn-ghost" href="{{ paginator.previous_page_path | relative_url }}">Newer</a>
-    {% endif %}
-    <span class="wl-pill">Page {{ paginator.page }} of {{ paginator.total_pages }}</span>
-    {% if paginator.next_page %}
-      <a class="wl-btn wl-btn-ghost" href="{{ paginator.next_page_path | relative_url }}">Older</a>
-    {% endif %}
-  </nav>
+{% assign featured = site.posts | where: "featured", true %}
+{% if featured.size > 0 %}
+  <section class="home-section" aria-labelledby="featured-title">
+    <p class="wl-kicker">Featured</p>
+    <h2 class="wl-title" id="featured-title">Selected work</h2>
+    <div class="wl-card-grid">
+      {% for post in featured %}
+        {% include post-card.html post=post type="grid" %}
+      {% endfor %}
+    </div>
+  </section>
 {% endif %}
+
+<section class="home-section" aria-labelledby="writing-title">
+  <p class="wl-kicker">Writing</p>
+  <h2 class="wl-title" id="writing-title">Latest write-ups</h2>
+  <div class="wl-list">
+    {% for post in site.posts limit: 5 %}
+      {% include post-card.html post=post type="list" %}
+    {% endfor %}
+  </div>
+  <div class="wl-actions">
+    <a class="wl-btn wl-btn-ghost" href="{{ '/writing/' | relative_url }}">All writing</a>
+  </div>
+</section>

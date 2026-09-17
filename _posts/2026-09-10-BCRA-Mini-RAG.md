@@ -3,6 +3,7 @@ title: "BCRA Mini-RAG"
 excerpt: "A cited-clause RAG over Argentine FX regulation: ask what a BCRA circular says, get a Comunicación “A” citation or honest silencio."
 header:
   teaser: /assets/images/bcra-mini-rag.jpg
+featured: true
 tags:
   - rag
   - python

@@ -24,8 +24,7 @@ If we are Vincent van Gogh fans, and we love German Shepherds, we may like to ge
 
 * [Create your own artistic photos Here](https://artcopypaste.com/)
 
-Introduction
-============
+## Introduction
 
 ![german shepherd](/assets/images/art-style-transfer/Sv-uTeNcf32eZ1s7UPvUUw.jpeg){: .centered-image}
 
@@ -118,8 +117,7 @@ The final layers are capable of classifying complete objects present in the imag
 
 The possibility of detecting complex image features is the key enabler to perform complex transformations to those features, but still perceiving the same content in the image.
 
-Independent image optimization
-==============================
+## Independent image optimization
 
 One of the most important papers regarding Art Style Transfer is “_A Neural Algorithm of Artistic Style”_\[2\] by Leon A. Gatys, Alexander S. Ecker, Matthias Bethge.
 
@@ -160,8 +158,7 @@ You can also generate your own artistic pictures using this method going to [art
 *   It takes a long time to produce results, in the order of several minutes on a medium-range GPU.
 *   It needs to store the VGG pre-trained weights data (550 MB).
 
-Pre-trained networks for a single style transfer
-================================================
+## Pre-trained networks for a single style transfer
 
 These networks tackle the main disadvantage that models like the one described above have: the time it takes to produce an artistic image.
 
@@ -215,8 +212,7 @@ Image by author, composition 7 style
 *   It takes much more time to train as it needs to train the network against an image dataset.
 *   Not only does it need the weights data for the VGG (550 MB), but it also needs the image dataset for training (for example, the COCO 2014 dataset that contains 82,700 images and needs 13.7 GB of storage)
 
-Pre-trained networks for arbitrary style transfer
-=================================================
+## Pre-trained networks for arbitrary style transfer
 
 These networks also generate a pre-trained model, but not limited to only one style, this model aims to be able to reproduce any style present in the style image.
 
@@ -281,8 +277,7 @@ You can also test your own images with this model on [artcopypaste.com](https://
 *   It needs a large image dataset and time to train. But fortunately, pre-trained models are available and ready to use.
 *   They do not generate results with the same high details as _Gatys et al\[2\]_ or _Johnson et al\[4\]_ due to the limited resolution of the styles used for training, but they still are very pleasant results.
 
-Universal style transfer with Encoder-Decoder networks
-======================================================
+## Universal style transfer with Encoder-Decoder networks
 
 This model is detailed in the paper _“Universal Style Transfer via Feature Transforms”_\[11\] by Yijun Li, Chen Fang, Jimei Yang, Zhaowen Wang, Xin Lu, Ming-Hsuan Yang
 
@@ -348,8 +343,7 @@ Image by author, composition 7 style
 
 *   It needs large image datasets and time to train each of the five decoder networks, but this is only needed once, and the paper even includes pre-trained weights in the code samples.
 
-Final Thoughts
-==============
+## Final Thoughts
 
 This work is far from describing all the existing neural network models to perform the fascinating process of art style transfer, that is in constant evolution.
 
@@ -359,8 +353,7 @@ I also just wanted to show, using a few examples, how we can get a deeper unders
 
 Other related stories: [Build a Neural Network from Scratch]({% post_url 2021-04-01-Artificial-Intelligence-Beginnings %})
 
-**References**
-==============
+## References
 
 1: Matthew D. Zeiler, Rob Fergus, “Visualizing and Understanding Convolutional Networks” (2013), [https://arxiv.org/abs/1311.2901](https://arxiv.org/abs/1311.2901)
 

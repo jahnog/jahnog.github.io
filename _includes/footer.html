@@ -3,6 +3,7 @@
     {% for link in site.footer.links %}
       <a href="{{ link.url }}" rel="me noopener">{{ link.label }}</a>
     {% endfor %}
+    <a href="https://github.com/{{ site.repository }}">Site source</a>
     <a href="{{ '/feed.xml' | relative_url }}">Feed</a>
   </p>
   <p>

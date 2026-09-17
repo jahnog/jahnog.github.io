@@ -13,11 +13,22 @@
   z-index: 10;
 }
 
-/* Wordmark */
+/* Wordmark — the topbar brand is a link, not the page heading. */
 
 .wl-page a.site-title {
   color: var(--wl-text);
   text-decoration: none;
+  font-size: var(--wl-text-lg);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: var(--wl-leading-tight);
+  /* 40px hit area without moving the layout. */
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.5rem;
+  padding-inline: var(--wl-space-2);
+  margin: calc(-1 * var(--wl-space-2)) 0 calc(-1 * var(--wl-space-2)) calc(-1 * var(--wl-space-2));
+  justify-self: start;
 }
 
 .wl-page a.site-title:hover,
@@ -87,6 +98,17 @@
   }
 }
 
+/* Home sections: kicker, heading, then the grid or list. */
+
+.home-section {
+  display: grid;
+  gap: var(--wl-space-4);
+}
+
+.home-section > .wl-kicker {
+  margin-bottom: calc(-1 * var(--wl-space-3));
+}
+
 /* Post and page headers */
 
 /* Share the prose measure so the article reads as one column. */
@@ -107,14 +129,25 @@
 .footer-links {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--wl-space-4);
+  gap: var(--wl-space-2) var(--wl-space-4);
   margin: 0 0 var(--wl-space-2);
 }
 
-/* Kramdown {: .centered-image} used across the older posts */
+/* Text-sized links, phone-sized hit areas. */
+.footer-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.5rem;
+  padding-inline: var(--wl-space-2);
+  margin-inline: calc(-1 * var(--wl-space-2));
+}
+
+/* Kramdown {: .centered-image} used across the older posts. One width for
+   all of them so a run of figures reads as a column, not a staircase. */
 
 .wl-prose .centered-image {
   margin-inline: auto;
+  max-width: min(100%, 40rem);
 }
 
 .wl-prose p > img.centered-image {
