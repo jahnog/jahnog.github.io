@@ -122,7 +122,7 @@ if (!card.includes("wl-list-item") || !card.includes("wl-panel")) {
 if (!/permalink:\s*\/:categories\/:title\//.test(config)) {
   fail("post permalinks changed; existing URLs would break");
 }
-if (!/paginate_path:\s*\/page:num\//.test(config)) {
+if (!/paginate_path:\s*\/writing\/page:num\//.test(config)) {
   fail("pagination paths changed");
 }
 for (const plugin of ["jekyll-feed", "jekyll-sitemap", "jekyll-gist", "jekyll-seo-tag"]) {
