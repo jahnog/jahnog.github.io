@@ -65,7 +65,7 @@ Below `$large`, `.author__urls` is `position: absolute` with a dropdown. The ove
 ## Risks / Trade-offs
 
 - **Cookieless unique visitors are inflated** → Judge funnel by visits, duration, goals, and outlinks, not returning-visitor counts.
-- **Owner traffic in Argentina still looks “engaged”** → Optional `excludedIps` later; “Outside Argentina” is a heuristic, not identity.
+- **Owner traffic still looks “engaged”** → Optional `excludedIps` later; the geographic segment is a heuristic, not identity.
 - **`excludeUnknownUrls` drops demo hosts from this property** → Intended. Those apps need their own site ids if they want analytics.
 - **CuratedSkills event is an extra action** → Only fires on an actual click, which is already not a bounce.
 - **Absolute dropdown leftover if CSS is incomplete** → Reset position, border, shadow, and pseudo-arrows; verify 375px and 1366px.

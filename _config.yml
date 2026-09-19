@@ -4,7 +4,7 @@
 # server process after editing it.
 #
 # The site is built from local layouts in _layouts and _includes, styled by
-# assets/css/weblab.css (vendored from the sibling WebLook repo) plus a small
+# assets/css/weblab.css (a vendored copy of the WebLook template) plus a small
 # assets/css/site.css. No theme gem, and no theme is fetched remotely.
 
 # Site Settings
