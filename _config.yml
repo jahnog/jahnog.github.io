@@ -14,19 +14,19 @@ title_separator          : "-"
 subtitle                 : "Senior software engineer · AI systems (RAG, agents) · remote"
 tagline                  : "Senior software engineer · AI systems (RAG, agents) · remote" # jekyll-seo-tag page titles
 name                     : "Javier Nogueira"
-description              : "Senior software engineer. Backend systems, cited RAG, coding agents, and earlier work in machine learning, simulation, and data analysis."
+description              : "Senior software engineer. Backend systems, RAG, coding agents, and earlier work in machine learning, simulation, and data analysis."
 url                      : "https://jahnog.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : jahnog/jahnog.github.io
 teaser                   : /assets/images/800px-MultiLayerNeuralNetworkBigger_english.png # fallback card image
 logo                     : # wordmark only; Scream asset stays on disk, not in chrome
-version                  : "1.2.0"
+version                  : "1.2.1"
 
 # Home page hero. The topbar already carries the wordmark and the role line,
 # so this is a statement, not a repeat.
 hero:
   title: "Backend systems and AI features."
-  text: "Cited RAG over regulation, a spec-first security CLI, a curated registry of coding-agent skills, and earlier work in machine learning, simulation, and data analysis. About 30 years in production software, remote."
+  text: "A RAG service over Argentine FX regulation, a spec-first security CLI, a curated registry of coding-agent skills, and earlier work in machine learning, simulation, and data analysis. About 30 years in production software, remote."
 
 # Recruiter call to action (_includes/hire-cta.html), shown on the home page,
 # every post, and About. Work history and the CV stay behind LinkedIn's login
