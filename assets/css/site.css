@@ -124,6 +124,26 @@
   display: none;
 }
 
+/* Space between the header rule and the first line of the post body. */
+.post-header + .wl-prose {
+  margin-top: var(--wl-space-4);
+}
+
+/* Recruiter call to action (_includes/hire-cta.html). The panel's grid gap
+   spaces its children, so drop the prose margins they pick up on About. */
+
+.hire-cta {
+  max-width: var(--wl-measure);
+}
+
+.wl-page .hire-cta > * {
+  margin: 0;
+}
+
+.wl-prose .hire-cta {
+  margin-top: var(--wl-space-8);
+}
+
 /* Footer link row */
 
 .footer-links {

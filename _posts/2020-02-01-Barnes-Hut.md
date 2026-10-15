@@ -1,6 +1,6 @@
 ---
 title: "Barnes-Hut N-Body Simulation"
-excerpt: "An O(n log n) N-body galaxy simulation implemented in Scala.js."
+excerpt: "An O(n log n) N-body galaxy simulation in Scala, running in the browser with Scala.js and on the JVM."
 header:
   teaser: /assets/images/barnes-hut.jpg
 tags:
@@ -12,14 +12,13 @@ tags:
 demo: https://jnbigdatabarneshut.s3.amazonaws.com/index.html
 source: https://github.com/jahnog/barnes-hut-web
 ---
-> **TL;DR** — An interactive N-body galaxy simulation that runs in the browser, using the Barnes-Hut quadtree approximation to bring the cost of computing gravitational forces down from O(n²) to O(n log n). Written in Scala and compiled to JavaScript.
->
-> **Stack** — Scala, Scala.js, quadtree spatial partitioning
->
-> **Links** — [Live demo](https://jnbigdatabarneshut.s3.amazonaws.com/index.html) · [Source](https://github.com/jahnog/barnes-hut-web)
 
-The Barnes–Hut simulation (named after Josh Barnes and Piet Hut) is an approximation algorithm for performing an n-body simulation. It is notable for running in O(n log n) compared with a direct-sum algorithm, which is O(n²).
+Stack: Scala 2.12, Scala.js, sbt, Vite, Swing
 
-I built this to watch gravity play out in the browser — an interactive N-body simulation where something like two galaxies of stars drift, pull on each other, and collide, with every body attracting every other one. The catch with N-body problems is that computing all the pairwise forces directly costs O(n²), which falls apart as the number of bodies grows. The Barnes-Hut approximation gets around that by recursively carving space into a quadtree and treating a faraway cluster of bodies as a single center of mass, which brings the cost down to O(n log n). I wrote it in Scala and compiled it to JavaScript with Scala.js, so the whole thing runs live in the browser with nothing to install — a small but satisfying example of how the right spatial data structure can turn an intractable simulation into one you can actually sit back and watch unfold.
+The simulation shows two galaxies of stars that drift toward each other, pull on each other, and collide. Every body attracts every other body, so computing all the forces directly costs O(n²) per step. That gets slow quickly as the number of bodies grows.
+
+The Barnes-Hut algorithm, named after Josh Barnes and Piet Hut, brings the cost down to O(n log n). It divides space recursively into a quadtree. When a group of bodies is far enough away, it treats the group as one mass at its center of mass. The parameter θ sets what counts as far enough, and this implementation uses θ = 0.5. The gravity physics uses Plummer softening, which keeps the force finite when two bodies get very close.
+
+The code is Scala, built with an immutable quadtree and an 8×8 sector matrix. The same simulation runs in the browser through Scala.js, which is the [live demo](https://jnbigdatabarneshut.s3.amazonaws.com/index.html), and on the JVM in a Swing window. The JVM build also has a parallel implementation. The test suite runs on both platforms.
 
 [Two Galaxies simulation using Barnes-Hut](https://jnbigdatabarneshut.s3.amazonaws.com/index.html)
