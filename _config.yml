@@ -20,7 +20,7 @@ baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : jahnog/jahnog.github.io
 teaser                   : /assets/images/800px-MultiLayerNeuralNetworkBigger_english.png # fallback card image
 logo                     : # wordmark only; Scream asset stays on disk, not in chrome
-version                  : "1.2.0"
+version                  : "1.2.1"
 
 # Home page hero. The topbar already carries the wordmark and the role line,
 # so this is a statement, not a repeat.
