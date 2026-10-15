@@ -3,6 +3,7 @@ title: "Neural Art Style Transfer"
 excerpt: "A tour of neural-network models that repaint photos in the style of famous artworks."
 header:
   teaser: /assets/images/art.jpg
+featured: true
 tags:
   - deep-learning
   - machine-learning
