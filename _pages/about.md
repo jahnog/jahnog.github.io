@@ -6,7 +6,7 @@ layout: page
 
 Javier Nogueira. Senior software engineer. I build backend systems and, lately, AI features that have to cite their sources or stay quiet.
 
-This site is a small set of systems I can show: a cited RAG over BCRA FX rules, a spec-first security CLI on PyPI, and a curated registry of agent skills. The older posts are course-style write-ups from earlier learning projects — still here, not the main story.
+This site is a small set of systems I can show: a cited RAG over BCRA FX rules, a spec-first security CLI on PyPI, a curated registry of agent skills, single-flight callers in [Java](/Java-Simple-Lazy-Cache/) and [C#](/Net-Simple-Lazy-Cache/), an [order saga](/MassTransit-Order-Saga/) on Kafka and Cosmos, [in-process throttling](/ASP-NET-Throttling-Middleware/) for ASP.NET Core, and a [coding-agent comparison](/Model-Tests/) on one TypeScript task. The older posts are course-style write-ups from earlier learning projects — still here, not the main story.
 
 About 30 years in production software. Remote or hybrid, from La Plata, Buenos Aires.
 
@@ -20,6 +20,7 @@ Spec first, then tests, then code — the [Spec Kit write-up](/Spec-Driven-Devel
   <span class="wl-chip">Python</span>
   <span class="wl-chip">FastAPI</span>
   <span class="wl-chip">Java · Spring Boot</span>
+  <span class="wl-chip">C# · ASP.NET Core</span>
   <span class="wl-chip">Scala · Scala.js</span>
   <span class="wl-chip">TypeScript · Angular</span>
   <span class="wl-chip">RAG · embeddings</span>
