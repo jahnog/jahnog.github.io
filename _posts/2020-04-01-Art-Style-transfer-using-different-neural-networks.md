@@ -12,18 +12,16 @@ tags:
 demo: https://artcopypaste.com/
 ---
 
-> **TL;DR** — I built [artcopypaste.com](https://artcopypaste.com/), a web app that repaints your photos in the style of famous artworks. This write-up is a deep dive into the families of neural networks that make it work, with side-by-side results.
->
-> **Stack** — Python, TensorFlow/Keras, PyTorch, Convolutional Neural Networks (VGG, ResNet, Inception)
->
-> **Links** — [Live product: artcopypaste.com](https://artcopypaste.com/)
+Stack: Python, TensorFlow/Keras, PyTorch, convolutional neural networks (VGG, ResNet, Inception)
+
+I built [artcopypaste.com](https://artcopypaste.com/), a web app that repaints your photos in the style of famous artworks. This post walks through the families of neural networks behind it, with side-by-side results.
 
 Art Style Transfer is the transformation of an image into a similar one that seems to have been painted by an artist.
 If we are Vincent van Gogh fans, and we love German Shepherds, we may like to get a picture of our favorite dog painted in van Gogh’s Starry Night style.
 
 ![Art Styles](/assets/images/art.jpg)
 
-* [Create your own artistic photos Here](https://artcopypaste.com/)
+* [Create your own artistic photos](https://artcopypaste.com/)
 
 ## Introduction
 
@@ -126,7 +124,7 @@ Its main finding was that the **_Content_** of a natural image and its **_Style_
 
 Many of the other Neural Style Transfer models discussed here took this idea and expanded it with faster and more complex networks, but still using this foundation.
 
-Gatys et al.'s model is based on a VGG-19\[3\] neural network, which is commonly used for visual object recognition and rivals human performance.
+Gatys et al.'s model is based on a VGG-19\[3\] neural network, an image classifier trained on ImageNet that is commonly used for visual object recognition.
 
 ![vgg neural network](/assets/images/art-style-transfer/dd2M0dum748VtZnJwcmHLQ.png){: .centered-image}
 
@@ -185,7 +183,7 @@ Image by author
 *   The network structure follows the guidelines from _Radford et al\[5\]_
 *   C1–3 are convolutions with a step 2 striding without pooling, to down-sample the image, and with Batch normalization and ReLU activation.
 *   RN1–5 are ResNets\[6\] for high-level image features recognition. ResNets proved to be faster than VGG at image recognition problems.
-*   C4–6 are convolutions with ½ striding without pooling, for image up-sampling, with Batch normalization and ReLU activation, except the last layer that uses Tanh activation to generate pixel values between 0 and 255.
+*   C4–6 are convolutions with ½ striding without pooling, for image up-sampling, with Batch normalization and ReLU activation, except the last layer, which uses a scaled Tanh activation to generate pixel values between 0 and 255.
 *   Convolutions C1 and C6 use 9x9 kernels, C2–5 use 3x3 kernels.
 
 This image down-sampling and up-sampling help detect higher-level features of the images. In a way, it works like a lossy compression but for image high-level features (not pixels or colors as in a JPEG image).
@@ -276,7 +274,7 @@ You can also test your own images with this model on [artcopypaste.com](https://
 **_Disadvantages:_**
 
 *   It needs a large image dataset and time to train. But fortunately, pre-trained models are available and ready to use.
-*   They do not generate results with the same high details as _Gatys et al\[2\]_ or _Johnson et al\[4\]_ due to the limited resolution of the styles used for training, but they still are very pleasant results.
+*   They do not generate results with the same high details as _Gatys et al\[2\]_ or _Johnson et al\[4\]_ due to the limited resolution of the styles used for training, but the results still look good.
 
 ## Universal style transfer with Encoder-Decoder networks
 
@@ -346,11 +344,11 @@ Image by author, composition 7 style
 
 ## Final Thoughts
 
-This work is far from describing all the existing neural network models to perform the fascinating process of art style transfer, that is in constant evolution.
+This post does not cover every neural network model for art style transfer, a field that keeps changing.
 
-The best example is Gatys et al. separation between the Content and the Style of an image, that was taken and expanded by almost all other models.
+The idea that most later models build on is Gatys et al.'s separation of an image's content from its style.
 
-I also just wanted to show, using a few examples, how we can get a deeper understanding of what we consider an object in an image, despite all the possible transformations in color and form it can suffer, and get a better idea of how we perceive the world we see around us.
+The examples also show how much the color and form of an image can change while its objects stay recognizable.
 
 Other related stories: [Build a Neural Network from Scratch]({% post_url 2021-04-01-Artificial-Intelligence-Beginnings %})
 

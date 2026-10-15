@@ -20,13 +20,23 @@ baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : jahnog/jahnog.github.io
 teaser                   : /assets/images/800px-MultiLayerNeuralNetworkBigger_english.png # fallback card image
 logo                     : # wordmark only; Scream asset stays on disk, not in chrome
-version                  : "1.1.1"
+version                  : "1.2.0"
 
 # Home page hero. The topbar already carries the wordmark and the role line,
 # so this is a statement, not a repeat.
 hero:
-  title: "Backend systems and AI features that cite their sources — or stay quiet."
+  title: "Backend systems and AI features."
   text: "Cited RAG over regulation, a spec-first security CLI, a curated registry of coding-agent skills, and earlier work in machine learning, simulation, and data analysis. About 30 years in production software, remote."
+
+# Recruiter call to action (_includes/hire-cta.html), shown on the home page,
+# every post, and About. Work history and the CV stay behind LinkedIn's login
+# wall, so the site points there rather than publishing them.
+hiring:
+  kicker: "Hiring?"
+  title: "Work history, CV, and contact are on LinkedIn"
+  text: "Open to senior backend and AI engineering roles, remote or hybrid, from La Plata, Argentina (UTC−3)."
+  cta: "Message me on LinkedIn"
+  url: "https://www.linkedin.com/in/jntech/"
 
 # SEO Related
 google_site_verification : # paste a Search Console verification token here to enable indexing verification
@@ -56,7 +66,7 @@ author:
   links:
     - label: "GitHub"
       url: "https://github.com/jahnog"
-    - label: "LinkedIn"
+    - label: "LinkedIn · work history"
       url: "https://www.linkedin.com/in/jntech/"
 
 # Site Footer

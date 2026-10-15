@@ -1,6 +1,6 @@
 ---
 title: "Build a Neural Network from Scratch"
-excerpt: "Implementing a neural network in pure Python to predict a car's fuel efficiency."
+excerpt: "A feed-forward neural network with backpropagation, written in Python and NumPy without an ML framework, that predicts fuel efficiency."
 header:
   teaser: /assets/images/backprop.png
 tags:
@@ -8,19 +8,14 @@ tags:
   - neural-networks
   - python
   - from-scratch
+source: https://github.com/jahnog/artificial-intelligence-python
 ---
 
-> **TL;DR** — A feed-forward neural network with backpropagation, implemented from scratch in pure Python/NumPy (no ML framework), that predicts a car's fuel efficiency close to the real values.
->
-> **Stack** — Python, NumPy
->
-> **Links** — [Run the notebook](https://colab.research.google.com/github/jahnog/artificial-intelligence-python/blob/master/neural_network.ipynb) · [Source](https://github.com/jahnog/artificial-intelligence-python)
+Stack: Python, NumPy
 
 ## Objective
 
-This post will explain how to create a Neural Network from scratch, using just the Python language, and how to use it to examine cars and predict their mileage per gallon.
-
-First, there are some concepts that should be explained:
+This post builds a neural network from scratch in Python, with NumPy and no machine-learning framework, and uses it to predict a car's fuel efficiency in miles per gallon. It starts with the concepts the code needs.
 
 ## The Network
 
@@ -190,9 +185,9 @@ To see how this example performs, you can open this [Google Colaboratory Noteboo
 
 ### Conclusions
 
-This was a simplified regression problem, addressed with a Neural Network written in Python, that presents the very basic but fundamental working concepts of all networks.
+This was a simplified regression problem, solved with a neural network written in Python. It shows the basic concepts that all networks share.
 
-There were a lot of omitted concepts on purpose in this example as they may frighten some people. In a real-world project, they will need to be considered. Some of them are:
+The example leaves out many concepts on purpose to keep it short. A real project needs them. Some of them are:
 
 *   The data availability, quality, balance between classes, distribution, and how to process it.
 *   The different network models for different problems (like the one presented for regression and classification tasks, Convolutional networks for Image detection, Recurrent network for sequential series (language translation, stock market forecasting), etc.).
@@ -200,7 +195,7 @@ There were a lot of omitted concepts on purpose in this example as they may frig
 *   Common problems and how to solve them (Bias and Variance, Exploding or vanishing gradients, Regularization, Dropout, etc).
 *   Specialized Hardware for computation speed up (like CPU SIMD instructions, GPUs and TPUs).
 
-If this shows that it is possible to start with a really simple implementation, without needing specialized libraries or hardware, it may increase your interest in the exciting field of Artificial Intelligence.
+The example shows that you can start with a simple implementation, without specialized libraries or hardware.
 
 To learn more about this field, two of the common starting points are the [*Neural Networks and Deep Learning*](http://neuralnetworksanddeeplearning.com/index.html) book from Michael Nielsen and the [Deep Learning](https://www.deeplearningbook.org/) book from Ian Goodfellow.
 

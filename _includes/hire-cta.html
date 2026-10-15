@@ -1,0 +1,13 @@
+{% comment %}
+  Recruiter call to action. Work history and the CV live behind LinkedIn's
+  login wall on purpose, so this points there instead of publishing them.
+  Wording lives in _config.yml under hiring.
+{% endcomment %}
+<aside class="wl-panel hire-cta" aria-labelledby="hire-title">
+  <p class="wl-kicker">{{ site.hiring.kicker }}</p>
+  <h2 class="wl-title card-title" id="hire-title">{{ site.hiring.title }}</h2>
+  <p class="wl-subtitle">{{ site.hiring.text }}</p>
+  <div class="wl-actions">
+    <a class="wl-btn wl-btn-primary" href="{{ site.hiring.url }}" rel="me noopener">{{ site.hiring.cta }}</a>
+  </div>
+</aside>
