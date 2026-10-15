@@ -2,18 +2,18 @@
 
 Personal portfolio and blog of Javier Nogueira (senior software engineer; AI systems). Built with [Jekyll](https://jekyllrb.com/) and deployed automatically to GitHub Pages at [https://jahnog.github.io](https://jahnog.github.io).
 
-There is no theme gem and no remote theme. The site is rendered by a handful of local layouts and includes, styled by `assets/css/weblab.css` — the shared navy-and-gold template vendored from the sibling [WebLook](../WebLook) repo — plus a short `assets/css/site.css` for the few site-specific bits. No JavaScript ships with the site apart from the analytics snippet.
+There is no theme gem and no remote theme. The site is rendered by a handful of local layouts and includes, styled by `assets/css/weblab.css` — a vendored copy of the shared "WebLook" navy-and-gold template — plus a short `assets/css/site.css` for the few site-specific bits. No JavaScript ships with the site apart from the analytics snippet.
 
 ## Prerequisites
 
 - GitHub Pages currently uses **Ruby 3.3.4** and **github-pages 232** ([dependency versions](https://pages.github.com/versions.json)). The Gemfile pins that gemset.
-- **`./scripts/serve`** for local preview: uses Ruby 3.3.4 on PATH if present, otherwise Docker or Podman (`ruby:3.3.4`).
+- **`./scripts/serve`** for local preview: uses Ruby 3.3.4 on `PATH` if present, otherwise Docker or Podman (`ruby:3.3.4`).
 - **Node.js** only to run `scripts/test-theme.mjs`.
 - Git (for cloning and version control).
 
 **Platform notes**:
 - **Linux/macOS**: `./scripts/serve` is the supported preview path. A local Ruby 3.3.4 install (rbenv, rvm, asdf, mise) skips the container; otherwise Docker or Podman is enough.
-- **Windows**: Use WSL2 (recommended), then the same `./scripts/serve` command.
+- **Windows**: use WSL2 (recommended), then the same `./scripts/serve` command.
 
 ## Installation / Setup
 
@@ -25,7 +25,7 @@ cd jahnog.github.io
 ```
 
 **Notes**:
-- `Gemfile.lock` is intentionally ignored by `.gitignore` (common for Jekyll + GitHub Pages setups to avoid platform-specific lockfile issues).
+- `Gemfile.lock` is listed in `.gitignore`, and `./scripts/serve` deletes and regenerates it on every run so Bundler always resolves against the pinned `github-pages` gemset. A copy is still tracked in git; do not commit the regenerated file.
 - If you see permission or path issues with gems, run:
   ```bash
   bundle config set --local path 'vendor/bundle'
@@ -43,9 +43,9 @@ Preview with the same Ruby and `github-pages` versions GitHub Pages uses:
 
 Extra Jekyll flags are passed through (`./scripts/serve --drafts --future`). Use `PORT=4001 ./scripts/serve` if 4000 is taken.
 
-- Site will be available at **http://localhost:4000** (or `PORT`).
+- The site will be available at **http://localhost:4000** (or `PORT`).
 - Changes to Markdown, layouts, includes, and CSS trigger an automatic rebuild.
-- **Important**: After editing `_config.yml`, restart the server.
+- **Important**: after editing `_config.yml`, restart the server.
 
 ## Building the Static Site
 
@@ -112,7 +112,7 @@ bundle list
    - Restart the `jekyll serve` process. Some settings are only read at startup.
 
 3. **A layout or include is missing**
-   - There is no theme fallback any more: every layout named in front matter must exist under `_layouts/`. A missing one fails the build outright.
+   - There is no theme fallback: every layout named in front matter must exist under `_layouts/`. A missing one fails the build outright.
 
 4. **"Liquid Exception" or template errors**
    - Use `--trace` to see the full backtrace.
@@ -147,12 +147,15 @@ git push
 ├── _config.yml           # Jekyll configuration and site metadata
 ├── Gemfile               # Pins github-pages 232
 ├── index.html            # Home page (layout: home)
+├── 404.md                # Not-found page
+├── writing/index.html    # Paginated post feed (layout: writing)
 ├── _posts/               # Blog posts (Markdown with YAML front matter)
 ├── _pages/               # Standalone pages (about, projects)
 ├── _data/navigation.yml  # Main nav links
 ├── _layouts/
 │   ├── default.html      # Shell: head, header, main, footer
-│   ├── home.html         # Paginated post feed
+│   ├── home.html         # Landing: hero, featured posts, latest write-ups
+│   ├── writing.html      # Paginated post list
 │   ├── post.html         # Article page
 │   ├── page.html         # Plain content page
 │   └── archive.html      # Card grid of all posts (projects)
@@ -170,6 +173,7 @@ git push
 ├── scripts/
 │   ├── serve             # Local preview on the GitHub Pages toolchain
 │   └── test-theme.mjs    # Reskin regression guard
+├── openspec/             # Change proposals and specs (not published)
 ├── _site/                # Generated output (git-ignored)
 └── README.md             # This file
 ```
@@ -178,19 +182,18 @@ Excluded from the published site (see `_config.yml` `exclude`): `vendor/`, `Gemf
 
 ## Updating the shared template
 
-`assets/css/weblab.css` is a vendored copy. Do not edit it here — change it in the WebLook repo, run its `./scripts/check.sh`, then copy the file across (or use WebLook's `scripts/sync.sh`, which only writes to consumers sitting on the `feature/apply-weblab` branch). Re-run `node scripts/test-theme.mjs` afterwards.
+`assets/css/weblab.css` is a vendored copy of the WebLook template. Do not edit it here — make the change upstream, copy the new file across, and re-run `node scripts/test-theme.mjs`. The version banner on the first line of the file (`/*! weblab x.y.z */`) records which release is vendored.
 
 ## Additional Notes
 
 - Post permalinks are `/:categories/:title/`, and no post declares categories, so posts live at `/<Title-Slug>/`. Changing the permalink setting would break every existing URL.
-- Analytics use a cookieless Matomo tracker (site id 4, `https://contentlabstudy.com/Mat0mo/`). The snippet ships only in `JEKYLL_ENV=production` builds and initializes only on `jahnog.github.io`.
-- Campaign URLs Matomo already understands, for example `https://jahnog.github.io/?mtm_campaign=linkedin-profile` when sharing from LinkedIn.
-- After deploy, confirm a `matomo.php` pageview (`send_image=1`, HTTP 200 GIF) and a later `ping=1` heartbeat in the browser network tab; LinkedIn **profile** clicks should convert, LinkedIn **share** buttons should not. Firefox must not show `NS_ERROR_DOM_NETWORK_ERR` on that URL.
+- The home page is a landing (hero, posts marked `featured: true`, and the five latest write-ups). The full paginated feed lives at `/writing/`.
+- Analytics use a cookieless Matomo tracker (see `_includes/analytics.html`). The snippet ships only in `JEKYLL_ENV=production` builds and initializes only on `jahnog.github.io`, so local previews send nothing.
 - Comments are not implemented.
 
 ## License
 
-MIT for the site code. Content (posts, pages, images) is © Javier unless otherwise noted.
+The repository [LICENSE](LICENSE) covers this site's own content and code (MIT). Posts, pages, and original images are © Javier Nogueira unless otherwise noted. Vendored third-party files keep their own licences.
 
 ---
 

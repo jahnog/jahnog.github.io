@@ -22,15 +22,22 @@ context: |
 
   ## Tech stack
 
-  - Static site built with Jekyll ~3.7 (GitHub Pages compatible).
-  - Theme: Minimal Mistakes (remote_theme "mmistakes/minimal-mistakes"),
-    "dark" skin. Prefer theme features and includes over custom code.
-  - Content: Markdown posts in `_posts/`, layouts in `_layouts/`, partials in
-    `_includes/`, data in `_data/`, styles in `_sass/`, site config in
-    `_config.yml`. JS is bundled/uglified via the npm scripts in package.json.
+  - Static site built with Jekyll via the `github-pages` gem (pinned in the
+    Gemfile to the version GitHub Pages runs).
+  - No theme gem and no remote theme. Layouts live in `_layouts/`, partials in
+    `_includes/`, styled by the vendored `assets/css/weblab.css` (the shared
+    WebLook template; do not edit it here) plus a small `assets/css/site.css`.
+  - Content: Markdown posts in `_posts/`, standalone pages in `_pages/`, nav in
+    `_data/navigation.yml`, site config in `_config.yml`. The home page is a
+    landing; the paginated feed is at `/writing/`.
+  - No JavaScript apart from the cookieless Matomo snippet in
+    `_includes/analytics.html`, which only runs on the production host.
+  - Local preview with `./scripts/serve`; `node scripts/test-theme.mjs` guards
+    the template bindings.
   - Showcased works are technical projects (AI/ML, simulations, data analysis,
-    e.g. neural style transfer, Barnes-Hut N-body in ScalaJS, economic and
-    climate data analysis), often linking to live demos or external hosts.
+    e.g. cited RAG, neural style transfer, Barnes-Hut N-body in ScalaJS,
+    economic and climate data analysis), often linking to live demos or
+    external hosts.
 
   ## Principles
 
@@ -43,8 +50,9 @@ context: |
      headings, descriptive alt text and link text.
   4. Stay GitHub-Pages-safe: only use plugins/features supported by the
      `github-pages` gem; don't break the build.
-  5. Minimal, theme-aligned customization: extend the Minimal Mistakes theme
-     rather than fighting it; keep custom CSS/JS small and justified.
+  5. Minimal, template-aligned customization: use the `wl-*` classes from
+     weblab.css rather than fighting them; keep custom CSS/JS small and
+     justified.
   6. SEO and shareability: meaningful titles, descriptions, and preview images
      so the work surfaces and looks good when shared.
 
@@ -55,8 +63,8 @@ rules:
       software-engineering recruiters.
     - Include a short "Non-goals" section to keep scope tight.
   design:
-    - Prefer Minimal Mistakes theme features/includes over bespoke code; call
-      out any GitHub-Pages compatibility concerns.
+    - Prefer the existing layouts, includes, and weblab.css classes over
+      bespoke code; call out any GitHub-Pages compatibility concerns.
     - Note impact on page load performance, responsiveness, and accessibility.
   tasks:
     - Break work into small, verifiable steps; include a step to preview the
